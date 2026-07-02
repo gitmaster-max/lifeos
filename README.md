@@ -18,7 +18,8 @@ Partner config lives in `assets/app.js` (`PARTNER_LINKS` + `AFFILIATES`) — one
 
 ## What's inside
 
-Pure static site — no build step, no backend, no dependencies to install.
+The frontend is a static site — no build step, no dependencies to install, and it works
+fully offline (all data in `localStorage`) with zero backend running.
 
 - `index.html` — landing page (entry point)
 - `onboarding-1-city.html` → `onboarding-4-metrics.html` — 4-step onboarding (choices persist)
@@ -29,6 +30,10 @@ Pure static site — no build step, no backend, no dependencies to install.
 - `plate.html` — Design Your Plate (DAREBEETS formula)
 - `serve.py` / `start-lifeos.bat` — one-click localhost server
 - `assets/` — shared styles, runtime JS, favicon
+- `server/` — optional Node/Express API for real accounts and cross-device family sync
+  (see `server/README.md`). The frontend progressively enhances: sign in from the
+  "Sign in to sync" control in the sidebar and your data starts following your family
+  account instead of staying on one device; skip it and the app behaves exactly as before.
 
 ## Features
 

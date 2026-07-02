@@ -5,7 +5,10 @@
   // ---------- store ----------
   const store = {
     get(k, d) { try { const v = JSON.parse(localStorage.getItem("lifeos." + k)); return v === null || v === undefined ? d : v; } catch (_) { return d; } },
-    set(k, v) { localStorage.setItem("lifeos." + k, JSON.stringify(v)); },
+    set(k, v) {
+      localStorage.setItem("lifeos." + k, JSON.stringify(v));
+      document.dispatchEvent(new CustomEvent("lifeos:store-set", { detail: { key: k, value: v } }));
+    },
   };
 
   // ---------- INR formatter ----------
