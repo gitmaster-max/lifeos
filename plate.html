@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LifeOS | Design Your Plate</title>
+<meta name="description" content="Design your ideal breakfast, lunch, dinner and snack plates from your daily calorie budget — the DAREBEETS formula, visualized."/>
+<meta name="theme-color" content="#002D40"/>
+<link href="assets/favicon.svg" rel="icon" type="image/svg+xml"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = { theme: { extend: { colors: {
+    surface: "#f9f9f9", "surface-container-lowest": "#ffffff", "surface-container-low": "#f3f3f4",
+    "surface-container-high": "#e8e8e9", primary: "#002D40", "on-primary": "#ffffff",
+    secondary: "#3dcc60", "on-secondary": "#002D40", "outline-variant": "#e2e2e3",
+    "on-surface": "#1a1c1e", "on-surface-variant": "#44474e", error: "#ba1a1a"
+  } } } }
+</script>
+<style>
+  body { font-family: 'Inter', sans-serif; background: #f9f9f9; color: #1a1c1e; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .plate-card { background:#fff; border:1px solid #e2e2e3; border-radius:16px; transition: box-shadow .2s ease, border-color .2s ease; }
+  .plate-card:hover { box-shadow: 0 8px 28px rgba(0,45,64,.08); }
+  .seg-btn { transition: all .15s ease; }
+  .seg-btn.active { background:#002D40; color:#fff; }
+  .seg-btn:not(.active) { color:#44474e; }
+  .seg-btn:not(.active):hover { color:#002D40; }
+</style>
+<link href="assets/app.css" rel="stylesheet"/>
+</head>
+<body class="bg-surface text-on-surface">
+<aside id="lifeos-nav" class="fixed left-0 top-0 h-screen w-[240px] bg-white border-r border-outline-variant flex flex-col py-6 px-4 z-50" style="font-family:'Inter',sans-serif">
+<a href="index.html" class="block mb-7 px-3">
+<h1 class="text-2xl font-bold text-primary tracking-tight">LifeOS</h1>
+<p class="text-[9px] font-semibold text-on-surface-variant tracking-[0.2em] mt-1">PRECISION LIFE MANAGEMENT</p>
+</a>
+<nav class="flex-grow space-y-0.5 overflow-y-auto">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="dashboard.html"><span class="material-symbols-outlined text-[19px]">dashboard</span><span class="text-[13.5px]">Dashboard</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="health.html"><span class="material-symbols-outlined text-[19px]">monitor_heart</span><span class="text-[13.5px]">Health</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="finance.html"><span class="material-symbols-outlined text-[19px]">payments</span><span class="text-[13.5px]">Finance</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="liabilities.html"><span class="material-symbols-outlined text-[19px]">request_quote</span><span class="text-[13.5px]">Liabilities</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-primary font-semibold bg-surface-container-low rounded-lg" href="nutrition.html"><span class="material-symbols-outlined text-[19px]" style="font-variation-settings: 'FILL' 1;">restaurant</span><span class="text-[13.5px]">Nutrition</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="calendar.html"><span class="material-symbols-outlined text-[19px]">calendar_today</span><span class="text-[13.5px]">Calendar</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="insurance.html"><span class="material-symbols-outlined text-[19px]">verified_user</span><span class="text-[13.5px]">Insurance</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="mental.html"><span class="material-symbols-outlined text-[19px]">psychology</span><span class="text-[13.5px]">Mind</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="nominees.html"><span class="material-symbols-outlined text-[19px]">family_restroom</span><span class="text-[13.5px]">Nominees</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="vault.html"><span class="material-symbols-outlined text-[19px]">folder_shared</span><span class="text-[13.5px]">Vault</span></a>
+</nav>
+<div class="pt-4 border-t border-outline-variant space-y-0.5">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[19px]">settings</span><span class="text-[13.5px]">Settings</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[19px]">help</span><span class="text-[13.5px]">Support</span></a>
+</div>
+</aside>
+
+<div class="ml-[240px] min-h-screen">
+  <header class="sticky top-0 z-40 h-16 px-10 bg-white border-b border-outline-variant flex justify-between items-center">
+    <div class="flex items-center gap-2 text-[13px]">
+      <a href="nutrition.html" class="text-on-surface-variant hover:text-primary transition-colors">Nutrition</a>
+      <span class="material-symbols-outlined text-[16px] text-on-surface-variant">chevron_right</span>
+      <span class="text-primary font-semibold">Design Your Plate</span>
+    </div>
+    <button class="flex items-center gap-2 px-5 py-2 bg-secondary text-on-secondary text-[11px] font-bold tracking-wider rounded-lg hover:brightness-95 transition-all">
+      <span class="material-symbols-outlined text-[16px]">add</span> QUICK ENTRY
+    </button>
+  </header>
+
+  <main class="px-10 py-10 max-w-[1280px]">
+    <div class="mb-10">
+      <h1 class="text-4xl font-bold text-primary tracking-tight mb-2">Design Your Plate</h1>
+      <p class="text-[15px] text-on-surface-variant max-w-2xl">Your entire day of eating, drawn on four plates — portions computed live from your calorie budget using the DAREBEETS formula.</p>
+    </div>
+
+    <!-- Calculator -->
+    <section id="formula" class="plate-card p-7 mb-10">
+      <div class="flex flex-wrap items-end gap-8">
+        <div>
+          <label class="block text-[10px] font-bold tracking-[.15em] text-on-surface-variant uppercase mb-2">Your weight</label>
+          <div class="flex items-center gap-2">
+            <input id="pw" type="number" value="70" min="30" max="220" class="w-24 rounded-lg border border-outline-variant px-3 py-2.5 text-[15px] mono focus:border-primary focus:ring-0"/>
+            <div class="flex rounded-lg border border-outline-variant overflow-hidden">
+              <button data-wired="1" id="unit-kg" class="seg-btn active px-3 py-2.5 text-[11px] font-bold">KG</button>
+              <button data-wired="1" id="unit-lb" class="seg-btn px-3 py-2.5 text-[11px] font-bold">LB</button>
+            </div>
+          </div>
+        </div>
+        <div>
+          <label class="block text-[10px] font-bold tracking-[.15em] text-on-surface-variant uppercase mb-2">Your goal</label>
+          <div class="flex rounded-lg border border-outline-variant overflow-hidden">
+            <button data-wired="1" data-goal="loss" class="seg-btn px-4 py-2.5 text-[11px] font-bold">FAT LOSS −10%</button>
+            <button data-wired="1" data-goal="maintain" class="seg-btn active px-4 py-2.5 text-[11px] font-bold">MAINTAIN</button>
+            <button data-wired="1" data-goal="gain" class="seg-btn px-4 py-2.5 text-[11px] font-bold">MUSCLE +10%</button>
+          </div>
+        </div>
+        <div class="flex-1 min-w-[220px] text-right">
+          <p class="text-[10px] font-bold tracking-[.15em] text-on-surface-variant uppercase mb-1">Daily Calorie Budget</p>
+          <p class="mono text-4xl font-bold text-primary"><span id="budget">2,800</span> <span class="text-[15px] text-on-surface-variant">kcal</span></p>
+          <p class="text-[11px] text-on-surface-variant mt-1" id="budget-note">weight × 40 · maintenance</p>
+        </div>
+      </div>
+      <div class="mt-6 pt-5 border-t border-outline-variant/60 grid grid-cols-3 gap-4 max-w-md">
+        <div><p class="text-[10px] font-bold tracking-[.12em] text-on-surface-variant uppercase">Protein 25%</p><p class="mono text-[17px] font-bold text-primary"><span id="m-p">175</span> g</p></div>
+        <div><p class="text-[10px] font-bold tracking-[.12em] text-on-surface-variant uppercase">Fat 25%</p><p class="mono text-[17px] font-bold text-primary"><span id="m-f">78</span> g</p></div>
+        <div><p class="text-[10px] font-bold tracking-[.12em] text-on-surface-variant uppercase">Carbs 50%</p><p class="mono text-[17px] font-bold text-primary"><span id="m-c">350</span> g</p></div>
+      </div>
+    </section>
+
+    <!-- Plates -->
+    <div id="plates" class="grid grid-cols-1 xl:grid-cols-2 gap-8 mb-12"></div>
+
+    <!-- Micronutrients -->
+    <section class="mb-12">
+      <h2 class="text-[12px] font-bold tracking-[.18em] text-primary uppercase mb-2">Colour your plate — micronutrients</h2>
+      <p class="text-[13px] text-on-surface-variant mb-5 max-w-2xl">Macros fill the plate; micros decide how you feel. Rotate these through the week and your plates cover nearly everything.</p>
+      <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3" id="micros"></div>
+    </section>
+
+    <!-- Supplements -->
+    <section id="supplements" class="mb-12">
+      <h2 class="text-[12px] font-bold tracking-[.18em] text-primary uppercase mb-5">What the plate can't carry — supplements</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+        <div class="plate-card p-6 border-l-4" style="border-left-color:#3dcc60">
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="font-bold text-primary text-[15px]">Vitamin B12</h3>
+            <span class="text-[9px] font-bold tracking-[.12em] px-3 py-1 rounded-full" style="background:rgba(61,204,96,.15);color:#1d9c40;border:1px solid rgba(61,204,96,.35)">MANDATORY</span>
+          </div>
+          <p class="text-[13px] text-on-surface-variant leading-relaxed">No plate can carry it. <span class="font-semibold text-primary">50 mcg daily</span> or 1,000 mcg twice a week (cyanocobalamin). Your health module already flags yours at 42%.</p>
+        </div>
+        <div class="plate-card p-6 border-l-4" style="border-left-color:#3dcc60">
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="font-bold text-primary text-[15px]">Vitamin D</h3>
+            <span class="text-[9px] font-bold tracking-[.12em] px-3 py-1 rounded-full" style="background:rgba(61,204,96,.15);color:#1d9c40;border:1px solid rgba(61,204,96,.35)">MANDATORY*</span>
+          </div>
+          <p class="text-[13px] text-on-surface-variant leading-relaxed"><span class="font-semibold text-primary">2,000 IU daily</span> with a fat-containing meal — or 10 minutes of sun with 60% skin exposed. *Skip only if you truly get daily sun.</p>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div class="plate-card p-6">
+          <h3 class="font-bold text-primary text-[15px] mb-2">Protein powder <span class="text-[10px] font-bold tracking-[.1em] text-on-surface-variant">· FITNESS</span></h3>
+          <p class="text-[13px] text-on-surface-variant leading-relaxed">Tops up your <span class="mono font-bold text-primary" id="prot-target">175 g</span> daily target when plates fall short. Max 30 g per shake, within 30–60 min post-workout. Pea + rice blend gives a complete amino profile.</p>
+        </div>
+        <div class="plate-card p-6">
+          <h3 class="font-bold text-primary text-[15px] mb-2">Creatine <span class="text-[10px] font-bold tracking-[.1em] text-on-surface-variant">· FITNESS</span></h3>
+          <p class="text-[13px] text-on-surface-variant leading-relaxed"><span class="font-semibold text-primary">3–5 g daily</span>, any time — consistency beats timing. Strength, recovery and cognition; especially useful on plant-based diets. Not a steroid, no cycling needed.</p>
+        </div>
+      </div>
+      <p class="text-[12px] text-on-surface-variant mt-4">Supplement minerals only when bloodwork shows a deficiency — <a href="health.html" class="underline underline-offset-2 hover:text-primary">upload your lab report in Health</a> and LifeOS will flag what's low.</p>
+    </section>
+
+    <p class="text-[11px] text-on-surface-variant border-t border-outline-variant pt-5">
+      Formula &amp; nutrition guidance adapted from <a href="https://darebeets.com" target="_blank" rel="noopener" class="underline underline-offset-2 hover:text-primary">DAREBEETS</a> —
+      <a href="https://darebeets.com/calorie-guide.html" target="_blank" rel="noopener" class="underline underline-offset-2 hover:text-primary">Calorie Guide</a> ·
+      <a href="https://darebeets.com/macronutrients.html" target="_blank" rel="noopener" class="underline underline-offset-2 hover:text-primary">Macronutrients</a> ·
+      <a href="https://darebeets.com/micronutrients.html" target="_blank" rel="noopener" class="underline underline-offset-2 hover:text-primary">Micronutrients</a> ·
+      <a href="https://darebeets.com/supplements.html" target="_blank" rel="noopener" class="underline underline-offset-2 hover:text-primary">Supplements</a> ·
+      <a href="https://darebeets.com/fitness-supplements.html" target="_blank" rel="noopener" class="underline underline-offset-2 hover:text-primary">Fitness Supplements</a>.
+      Not medical advice.
+    </p>
+  </main>
+</div>
+
+<script src="assets/app.js"></script>
+<script>
+(function () {
+  "use strict";
+  var SVGNS = "http://www.w3.org/2000/svg";
+
+  // ---------- seeded rng ----------
+  function rng(seed) {
+    var a = seed >>> 0;
+    return function () { a |= 0; a = a + 0x6D2B79F5 | 0; var t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+  }
+  function polar(cx, cy, r, deg) { var a = (deg - 90) * Math.PI / 180; return [cx + r * Math.cos(a), cy + r * Math.sin(a)]; }
+  function sectorPath(cx, cy, r, a0, a1) {
+    var p0 = polar(cx, cy, r, a0), p1 = polar(cx, cy, r, a1);
+    var large = (a1 - a0) > 180 ? 1 : 0;
+    return "M " + cx + " " + cy + " L " + p0[0].toFixed(1) + " " + p0[1].toFixed(1) +
+      " A " + r + " " + r + " 0 " + large + " 1 " + p1[0].toFixed(1) + " " + p1[1].toFixed(1) + " Z";
+  }
+  function el(name, attrs, kids) {
+    var e = document.createElementNS(SVGNS, name);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    (kids || []).forEach(function (c) { e.appendChild(c); });
+    return e;
+  }
+
+  // ---------- food glyph painters ----------
+  var GLYPHS = {
+    broccoli: function (g, x, y, R) {
+      [[0,-3,6],[-5,2,5],[5,2,5]].forEach(function (c) {
+        g.appendChild(el("circle", { cx: x + c[0], cy: y + c[1], r: c[2], fill: "#4d8a5c" }));
+      });
+      g.appendChild(el("circle", { cx: x - 2, cy: y - 3, r: 2, fill: "#639e72" }));
+      g.appendChild(el("circle", { cx: x + 4, cy: y + 1, r: 1.8, fill: "#639e72" }));
+    },
+    leaf: function (g, x, y, R) {
+      var rot = Math.floor(R() * 360);
+      g.appendChild(el("ellipse", { cx: x, cy: y, rx: 9, ry: 4.5, fill: "#7fb289", transform: "rotate(" + rot + " " + x + " " + y + ")" }));
+      g.appendChild(el("line", { x1: x - 6, y1: y, x2: x + 6, y2: y, stroke: "#5c9468", "stroke-width": 1, transform: "rotate(" + rot + " " + x + " " + y + ")" }));
+    },
+    grain: function (g, x, y, R) {
+      for (var i = 0; i < 3; i++) {
+        var dx = (R() - .5) * 10, dy = (R() - .5) * 10, rot = Math.floor(R() * 180);
+        g.appendChild(el("rect", { x: x + dx - 3.5, y: y + dy - 1.5, width: 7, height: 3, rx: 1.5, fill: "#e9d8ab", stroke: "#d6c088", "stroke-width": .6, transform: "rotate(" + rot + " " + (x + dx) + " " + (y + dy) + ")" }));
+      }
+    },
+    tofu: function (g, x, y, R) {
+      var rot = Math.floor((R() - .5) * 40);
+      g.appendChild(el("rect", { x: x - 6, y: y - 6, width: 12, height: 12, rx: 2, fill: "#f4ecd4", stroke: "#dccfa6", "stroke-width": 1, transform: "rotate(" + rot + " " + x + " " + y + ")" }));
+      g.appendChild(el("rect", { x: x - 3, y: y - 3, width: 5, height: 2, rx: 1, fill: "#e8dcb8", transform: "rotate(" + rot + " " + x + " " + y + ")" }));
+    },
+    lentil: function (g, x, y, R) {
+      for (var i = 0; i < 4; i++) {
+        var dx = (R() - .5) * 12, dy = (R() - .5) * 12;
+        g.appendChild(el("circle", { cx: x + dx, cy: y + dy, r: 3.4, fill: i % 2 ? "#b5713f" : "#a0663a" }));
+        g.appendChild(el("circle", { cx: x + dx - 1, cy: y + dy - 1, r: .9, fill: "#d19867" }));
+      }
+    },
+    berry: function (g, x, y, R) {
+      var cols = ["#7b4b94", "#9c4a70", "#5a3d8a"];
+      for (var i = 0; i < 3; i++) {
+        var dx = (R() - .5) * 12, dy = (R() - .5) * 12;
+        g.appendChild(el("circle", { cx: x + dx, cy: y + dy, r: 4.4, fill: cols[Math.floor(R() * 3)] }));
+        g.appendChild(el("circle", { cx: x + dx - 1.4, cy: y + dy - 1.4, r: 1.1, fill: "rgba(255,255,255,.55)" }));
+      }
+    },
+    orange: function (g, x, y, R) {
+      g.appendChild(el("circle", { cx: x, cy: y, r: 7.5, fill: "#ef9a4d" }));
+      g.appendChild(el("circle", { cx: x, cy: y, r: 5.5, fill: "#f7b877" }));
+      for (var i = 0; i < 4; i++) {
+        var a = i * 45;
+        var p = polar(x, y, 5, a), q = polar(x, y, 5, a + 180);
+        g.appendChild(el("line", { x1: p[0], y1: p[1], x2: q[0], y2: q[1], stroke: "#ef9a4d", "stroke-width": 1 }));
+      }
+    },
+    nut: function (g, x, y, R) {
+      for (var i = 0; i < 2; i++) {
+        var dx = (R() - .5) * 10, dy = (R() - .5) * 10, rot = Math.floor(R() * 180);
+        g.appendChild(el("ellipse", { cx: x + dx, cy: y + dy, rx: 5.5, ry: 3.6, fill: "#b98a53", transform: "rotate(" + rot + " " + (x + dx) + " " + (y + dy) + ")" }));
+        g.appendChild(el("line", { x1: x + dx - 3, y1: y + dy, x2: x + dx + 3, y2: y + dy, stroke: "#9a6f3e", "stroke-width": 1, transform: "rotate(" + rot + " " + (x + dx) + " " + (y + dy) + ")" }));
+      }
+    },
+    avocado: function (g, x, y, R) {
+      var rot = Math.floor(R() * 360);
+      g.appendChild(el("ellipse", { cx: x, cy: y, rx: 8, ry: 5.5, fill: "#a8c97d", transform: "rotate(" + rot + " " + x + " " + y + ")" }));
+      g.appendChild(el("ellipse", { cx: x, cy: y, rx: 5, ry: 3.2, fill: "#d7e6ae", transform: "rotate(" + rot + " " + x + " " + y + ")" }));
+    },
+    chickpea: function (g, x, y, R) {
+      for (var i = 0; i < 3; i++) {
+        var dx = (R() - .5) * 11, dy = (R() - .5) * 11;
+        g.appendChild(el("circle", { cx: x + dx, cy: y + dy, r: 4.2, fill: "#e6cd93" }));
+        g.appendChild(el("circle", { cx: x + dx + 1, cy: y + dy - 1.2, r: 1.2, fill: "#f2e3b8" }));
+      }
+    },
+    potato: function (g, x, y, R) {
+      var rot = Math.floor(R() * 360);
+      g.appendChild(el("ellipse", { cx: x, cy: y, rx: 8.5, ry: 6, fill: "#dfb98a", transform: "rotate(" + rot + " " + x + " " + y + ")" }));
+      g.appendChild(el("circle", { cx: x - 2, cy: y - 1, r: .8, fill: "#c49a63" }));
+      g.appendChild(el("circle", { cx: x + 3, cy: y + 2, r: .8, fill: "#c49a63" }));
+    },
+  };
+
+  // ---------- plate renderer ----------
+  function drawPlate(container, segments, seed, scale) {
+    var size = 320, cx = 160, cy = 160;
+    var svg = el("svg", { viewBox: "0 0 320 320", width: "100%", style: "max-width:" + Math.round(320 * (scale || 1)) + "px;display:block" });
+    var defs = el("defs");
+    var filt = el("filter", { id: "psh" + seed, x: "-30%", y: "-30%", width: "160%", height: "160%" });
+    filt.appendChild(el("feDropShadow", { dx: 0, dy: 8, stdDeviation: 12, "flood-color": "#002D40", "flood-opacity": ".14" }));
+    defs.appendChild(filt);
+    var clip = el("clipPath", { id: "pcl" + seed });
+    clip.appendChild(el("circle", { cx: cx, cy: cy, r: 108 }));
+    defs.appendChild(clip);
+    svg.appendChild(defs);
+
+    // plate body
+    svg.appendChild(el("circle", { cx: cx, cy: cy, r: 148, fill: "#ffffff", stroke: "#e3e3e4", "stroke-width": 1.5, filter: "url(#psh" + seed + ")" }));
+    svg.appendChild(el("circle", { cx: cx, cy: cy, r: 130, fill: "none", stroke: "#f1f1f2", "stroke-width": 9 }));
+    svg.appendChild(el("circle", { cx: cx, cy: cy, r: 112, fill: "#fcfcfb", stroke: "#ececec", "stroke-width": 1 }));
+
+    var food = el("g", { "clip-path": "url(#pcl" + seed + ")" });
+    svg.appendChild(food);
+
+    var R = rng(seed);
+    var a0 = 0;
+    var boundaries = [];
+    segments.forEach(function (s) {
+      var a1 = a0 + s.pct * 3.6;
+      // base tint
+      food.appendChild(el("path", { d: sectorPath(cx, cy, 110, a0, a1), fill: s.tint }));
+      boundaries.push(a0);
+      // scatter glyphs
+      var placed = [];
+      var target = Math.max(3, Math.round(s.pct * 0.42));
+      var margin = Math.min(10, (a1 - a0) * 0.16);
+      var tries = 0;
+      while (placed.length < target && tries < 300) {
+        tries++;
+        var ang = a0 + margin + R() * (a1 - a0 - margin * 2);
+        var rad = 28 + R() * 68;
+        var p = polar(cx, cy, rad, ang);
+        var ok = true;
+        for (var i = 0; i < placed.length; i++) {
+          var dx = placed[i][0] - p[0], dy = placed[i][1] - p[1];
+          if (dx * dx + dy * dy < 340) { ok = false; break; }
+        }
+        if (!ok) continue;
+        placed.push(p);
+        GLYPHS[s.food](food, p[0], p[1], R);
+      }
+      a0 = a1;
+    });
+    // separators
+    boundaries.forEach(function (b) {
+      var p = polar(cx, cy, 111, b);
+      svg.appendChild(el("line", { x1: cx, y1: cy, x2: p[0], y2: p[1], stroke: "#ffffff", "stroke-width": 5, "stroke-linecap": "round" }));
+    });
+    svg.appendChild(el("circle", { cx: cx, cy: cy, r: 7, fill: "#ffffff", stroke: "#ececec", "stroke-width": 1 }));
+    // pct chips
+    a0 = 0;
+    segments.forEach(function (s) {
+      var a1 = a0 + s.pct * 3.6, mid = (a0 + a1) / 2;
+      var p = polar(cx, cy, 72, mid);
+      var chip = el("g");
+      chip.appendChild(el("rect", { x: p[0] - 17, y: p[1] - 10, width: 34, height: 20, rx: 10, fill: "rgba(255,255,255,.92)", stroke: "#e2e2e3", "stroke-width": .8 }));
+      var t = el("text", { x: p[0], y: p[1] + 3.5, "text-anchor": "middle", "font-size": 10.5, "font-weight": 700, fill: "#002D40", "font-family": "Inter,sans-serif" });
+      t.textContent = s.pct + "%";
+      chip.appendChild(t);
+      svg.appendChild(chip);
+      a0 = a1;
+    });
+    container.appendChild(svg);
+  }
+
+  // ---------- meal configs ----------
+  var MEALS = [
+    { name: "Breakfast", time: "8:00 AM", share: 0.25, icon: "wb_twilight", seed: 11,
+      note: "Slow carbs to start the engine; protein keeps you full till lunch.",
+      segments: [
+        { label: "Oats & whole grains", pct: 40, food: "grain", tint: "rgba(217,179,130,.14)", eg: "oats, poha, whole-wheat toast" },
+        { label: "Fruit", pct: 25, food: "berry", tint: "rgba(123,75,148,.10)", eg: "banana, berries, papaya" },
+        { label: "Protein", pct: 25, food: "tofu", tint: "rgba(220,207,166,.18)", eg: "tofu bhurji, soy yogurt, sprouts" },
+        { label: "Nuts & seeds", pct: 10, food: "nut", tint: "rgba(185,138,83,.12)", eg: "almonds, chia, flax" } ] },
+    { name: "Lunch", time: "1:00 PM", share: 0.35, icon: "light_mode", seed: 22,
+      note: "Your biggest plate — half of it vegetables and grains, a quarter protein.",
+      segments: [
+        { label: "Vegetables", pct: 40, food: "broccoli", tint: "rgba(77,138,92,.10)", eg: "sabzi, salad, stir-fry" },
+        { label: "Whole grains", pct: 30, food: "grain", tint: "rgba(217,179,130,.14)", eg: "brown rice, roti, quinoa" },
+        { label: "Protein", pct: 25, food: "lentil", tint: "rgba(160,102,58,.10)", eg: "dal, rajma, chana" },
+        { label: "Healthy fats", pct: 5, food: "avocado", tint: "rgba(168,201,125,.14)", eg: "ghee-free tadka, tahini" } ] },
+    { name: "Dinner", time: "7:30 PM", share: 0.30, icon: "dark_mode", seed: 33,
+      note: "Lighter on starch, heavier on vegetables — you sleep better and recover more.",
+      segments: [
+        { label: "Vegetables", pct: 45, food: "leaf", tint: "rgba(127,178,137,.10)", eg: "palak, mixed veg, soup" },
+        { label: "Protein", pct: 30, food: "tofu", tint: "rgba(220,207,166,.18)", eg: "paneer-style tofu, dal" },
+        { label: "Starches", pct: 20, food: "potato", tint: "rgba(223,185,138,.13)", eg: "sweet potato, millet" },
+        { label: "Healthy fats", pct: 5, food: "avocado", tint: "rgba(168,201,125,.14)", eg: "seeds, cold-pressed oil" } ] },
+    { name: "Snacks", time: "11 AM · 4:30 PM", share: 0.10, icon: "cookie", seed: 44, small: true,
+      note: "Only if your budget allows it — below ~2,200 kcal, fold these into main meals.",
+      segments: [
+        { label: "Fruit", pct: 40, food: "orange", tint: "rgba(239,154,77,.10)", eg: "orange, guava, apple" },
+        { label: "Nuts", pct: 30, food: "nut", tint: "rgba(185,138,83,.12)", eg: "5–7 walnuts, 1 brazil nut" },
+        { label: "Hummus & chickpeas", pct: 30, food: "chickpea", tint: "rgba(230,205,147,.16)", eg: "roasted chana, hummus + veg" } ] },
+  ];
+
+  var MICROS = [
+    ["Iron", "lentils · beans · pumpkin seeds", "pair with vitamin C"],
+    ["Calcium", "tofu · almonds · tahini", "700 mg / day"],
+    ["Vitamin C", "citrus · peppers · amla", "boosts iron uptake"],
+    ["Omega-3", "flax · chia · walnuts", "20 g seeds + 5-7 walnuts"],
+    ["Zinc", "pumpkin seeds · chana", "9.5 mg (men) / 7 mg"],
+    ["Magnesium", "whole grains · nuts", "270–400 mg / day"],
+    ["Folate", "spinach · beans · peanuts", "400 mcg / day"],
+    ["Selenium", "1 Brazil nut daily", "that's genuinely it"],
+    ["Iodine", "nori / seaweed", "once a week only"],
+    ["B12", "supplement only", "no plate carries it"],
+  ];
+
+  // ---------- state & render ----------
+  var state = LifeOS.store.get("plate", { w: 70, unit: "kg", goal: "maintain" });
+
+  function budget() {
+    var kg = state.unit === "kg" ? state.w : state.w / 2.2046;
+    var b = kg * 40;
+    if (state.goal === "loss") b *= 0.9;
+    if (state.goal === "gain") b *= 1.1;
+    return Math.round(b / 10) * 10;
+  }
+  function fmt(n) { return n.toLocaleString("en-IN"); }
+
+  function renderNumbers() {
+    var b = budget();
+    document.getElementById("budget").textContent = fmt(b);
+    document.getElementById("budget-note").textContent = "weight × " + (state.unit === "kg" ? "40" : "18") +
+      (state.goal === "maintain" ? " · maintenance" : state.goal === "loss" ? " − 10% for fat loss" : " + 10% for muscle gain");
+    var pg = Math.round(b * 0.25 / 4), fg = Math.round(b * 0.25 / 9), cg = Math.round(b * 0.5 / 4);
+    document.getElementById("m-p").textContent = fmt(pg);
+    document.getElementById("m-f").textContent = fmt(fg);
+    document.getElementById("m-c").textContent = fmt(cg);
+    document.getElementById("prot-target").textContent = fmt(pg) + " g";
+    MEALS.forEach(function (m, i) {
+      var kcal = Math.round(b * m.share / 10) * 10;
+      document.getElementById("mk-" + i).textContent = fmt(kcal);
+      document.getElementById("mp-" + i).textContent = Math.round(kcal * 0.25 / 4);
+      document.getElementById("mf-" + i).textContent = Math.round(kcal * 0.25 / 9);
+      document.getElementById("mc-" + i).textContent = Math.round(kcal * 0.5 / 4);
+    });
+    var snackNote = document.getElementById("snack-note");
+    if (snackNote) snackNote.style.display = b < 2200 ? "block" : "none";
+  }
+
+  function renderPlates() {
+    var wrap = document.getElementById("plates");
+    wrap.innerHTML = "";
+    MEALS.forEach(function (m, i) {
+      var card = document.createElement("section");
+      card.className = "plate-card p-7";
+      card.innerHTML =
+        '<div class="flex items-center justify-between mb-1">' +
+        '<div class="flex items-center gap-3"><span class="material-symbols-outlined text-primary bg-surface-container-low p-2 rounded-lg">' + m.icon + '</span>' +
+        '<div><h3 class="font-bold text-primary text-[17px]">' + m.name + '</h3>' +
+        '<p class="text-[11px] text-on-surface-variant mono">' + m.time + " · " + Math.round(m.share * 100) + '% of budget</p></div></div>' +
+        '<div class="text-right"><p class="mono text-2xl font-bold text-primary"><span id="mk-' + i + '">0</span></p>' +
+        '<p class="text-[10px] font-bold tracking-[.12em] text-on-surface-variant uppercase">kcal</p></div></div>' +
+        '<div class="flex flex-wrap items-center gap-6 mt-4">' +
+        '<div class="flex-1 min-w-[240px]" id="pl-' + i + '"></div>' +
+        '<div class="flex-1 min-w-[210px]">' +
+        '<div class="space-y-2.5 mb-4">' + m.segments.map(function (s) {
+          return '<div class="flex items-start gap-2.5"><span style="width:10px;height:10px;border-radius:3px;background:' +
+            s.tint.replace(/[\d.]+\)$/, "0.9)") + ';margin-top:4px;flex:none"></span>' +
+            '<div><p class="text-[12.5px] font-semibold text-primary leading-tight">' + s.label + ' <span class="text-on-surface-variant font-normal">· ' + s.pct + '%</span></p>' +
+            '<p class="text-[11px] text-on-surface-variant">' + s.eg + '</p></div></div>';
+        }).join("") + "</div>" +
+        '<div class="flex gap-4 pt-3 border-t border-outline-variant/60 mono text-[12px] text-on-surface-variant">' +
+        '<span>P <b class="text-primary" id="mp-' + i + '">0</b>g</span>' +
+        '<span>F <b class="text-primary" id="mf-' + i + '">0</b>g</span>' +
+        '<span>C <b class="text-primary" id="mc-' + i + '">0</b>g</span></div>' +
+        '</div></div>' +
+        '<p class="text-[12px] text-on-surface-variant mt-4">' + m.note + "</p>" +
+        (m.small ? '<p id="snack-note" class="text-[12px] font-semibold mt-2" style="color:#8a6d00;display:none">Your current budget is under 2,200 kcal — skip this plate and fold snacks into meals.</p>' : "");
+      wrap.appendChild(card);
+      drawPlate(card.querySelector("#pl-" + i), m.segments, m.seed, m.small ? 0.82 : 1);
+    });
+  }
+
+  function renderMicros() {
+    document.getElementById("micros").innerHTML = MICROS.map(function (m) {
+      return '<div class="plate-card p-4"><p class="text-[12px] font-bold text-primary mb-0.5">' + m[0] + '</p>' +
+        '<p class="text-[11px] text-on-surface-variant leading-snug">' + m[1] + '</p>' +
+        '<p class="text-[10px] mono mt-1" style="color:#1d9c40">' + m[2] + "</p></div>";
+    }).join("");
+  }
+
+  // ---------- controls ----------
+  function bind() {
+    var pw = document.getElementById("pw");
+    pw.value = state.w;
+    pw.addEventListener("input", function () {
+      var v = parseFloat(pw.value);
+      if (v > 0) { state.w = v; save(); renderNumbers(); }
+    });
+    document.getElementById("unit-kg").addEventListener("click", function () { setUnit("kg", this); });
+    document.getElementById("unit-lb").addEventListener("click", function () { setUnit("lb", this); });
+    function setUnit(u, btn) {
+      if (state.unit === u) return;
+      state.w = Math.round(u === "lb" ? state.w * 2.2046 : state.w / 2.2046);
+      state.unit = u; pw.value = state.w; save();
+      document.getElementById("unit-kg").classList.toggle("active", u === "kg");
+      document.getElementById("unit-lb").classList.toggle("active", u === "lb");
+      renderNumbers();
+    }
+    document.querySelectorAll("[data-goal]").forEach(function (b) {
+      if (b.dataset.goal === state.goal) { document.querySelectorAll("[data-goal]").forEach(function (x) { x.classList.remove("active"); }); b.classList.add("active"); }
+      b.addEventListener("click", function () {
+        state.goal = b.dataset.goal; save();
+        document.querySelectorAll("[data-goal]").forEach(function (x) { x.classList.toggle("active", x === b); });
+        renderNumbers();
+        LifeOS.toast("Plates recalculated for " + (state.goal === "loss" ? "fat loss" : state.goal === "gain" ? "muscle gain" : "maintenance"));
+      });
+    });
+    // sync unit buttons with restored state
+    document.getElementById("unit-kg").classList.toggle("active", state.unit === "kg");
+    document.getElementById("unit-lb").classList.toggle("active", state.unit === "lb");
+  }
+  function save() { LifeOS.store.set("plate", state); }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    renderPlates(); renderMicros(); bind(); renderNumbers();
+  });
+})();
+</script>
+</body>
+</html>

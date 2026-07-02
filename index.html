@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LifeOS | Your Life, Managed</title>
+<meta name="description" content="LifeOS is India's life management app — it runs your family's health, money, insurance, nutrition, mind and legacy, and acts before anything slips."/>
+<meta property="og:title" content="LifeOS | Your Life, Managed"/>
+<meta property="og:description" content="Not a document locker — a life management app. Health, money, insurance, food, mind and legacy: tracked, reminded, acted on."/>
+<meta name="theme-color" content="#002D40"/>
+<link href="assets/favicon.svg" rel="icon" type="image/svg+xml"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = { theme: { extend: { colors: {
+    surface: "#f9f9f9", "surface-container-lowest": "#ffffff", "surface-container-low": "#f3f3f4",
+    "surface-container-high": "#e8e8e9", primary: "#002D40", "on-primary": "#ffffff",
+    secondary: "#3dcc60", "on-secondary": "#002D40", "outline-variant": "#e2e2e3",
+    "on-surface": "#1a1c1e", "on-surface-variant": "#44474e"
+  } } } }
+</script>
+<style>
+  body { font-family: 'Inter', sans-serif; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-color: #002D40; }
+  /* question cloud */
+  #qcloud { position: relative; height: 460px; overflow: hidden; }
+  .q {
+    position: absolute; font-weight: 700; letter-spacing: .02em; white-space: nowrap;
+    color: #002D40; cursor: pointer; text-decoration: none;
+    padding: 8px 16px; border-radius: 999px; background: #ffffff; border: 1px solid #e2e2e3;
+    box-shadow: 0 2px 10px rgba(0,45,64,.05);
+    animation: qfloat var(--dur,7s) ease-in-out var(--del,0s) infinite alternate;
+    transition: all .2s ease;
+  }
+  .q:hover { background:#002D40; color:#fff; border-color:#002D40; z-index: 20; box-shadow: 0 10px 30px rgba(0,45,64,.25); }
+  @keyframes qfloat { from { transform: translateY(-6px) rotate(var(--rot,0deg)); } to { transform: translateY(8px) rotate(var(--rot,0deg)); } }
+  #qcloud::after { content:''; position:absolute; inset:0; pointer-events:none;
+    background: radial-gradient(ellipse at center, transparent 45%, #f9f9f9 96%); }
+  @media (max-width: 767px) { #qcloud { height: 560px; } .q { font-size: 11px !important; } }
+</style>
+<link href="assets/app.css" rel="stylesheet"/>
+</head>
+<body class="bg-surface text-on-surface min-h-screen">
+
+<header class="border-b border-outline-variant bg-surface-container-lowest sticky top-0 z-40">
+  <div class="max-w-6xl mx-auto px-8 h-16 flex items-center justify-between">
+    <div>
+      <span class="text-2xl font-bold text-primary tracking-tight">LifeOS</span>
+      <span class="ml-3 text-[10px] font-semibold tracking-[0.2em] text-on-surface-variant uppercase hidden sm:inline">Precision Life Management</span>
+    </div>
+    <div class="flex items-center gap-3">
+      <a href="dashboard.html" class="px-5 py-2 border border-primary text-primary text-[12px] font-semibold tracking-wider rounded-lg hover:bg-surface-container-low transition-colors">OPEN DASHBOARD</a>
+      <a href="onboarding-1-city.html" class="px-5 py-2 bg-secondary text-on-secondary text-[12px] font-semibold tracking-wider rounded-lg hover:brightness-95 transition-all">ENROLL NOW</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- Question cloud hero -->
+  <section class="relative">
+    <div id="qcloud" class="max-w-6xl mx-auto"></div>
+    <div class="text-center -mt-6 relative z-10 px-8 pb-16">
+      <h1 class="text-4xl md:text-5xl font-semibold text-primary tracking-tight leading-tight mb-4">Every Indian family asks these questions.<br/>LifeOS answers them — then manages what comes next.</h1>
+      <p class="text-lg text-on-surface-variant max-w-2xl mx-auto mb-8">LifeOS is not a document repository — it's a <span class="text-primary font-semibold">life management app</span>. It tracks your family's health, money, insurance, food, mind and legacy, reminds you before deadlines, and acts on what it finds.</p>
+      <a href="onboarding-1-city.html" class="inline-flex items-center gap-2 px-8 py-3.5 bg-primary text-on-primary text-[13px] font-semibold tracking-widest rounded-lg hover:brightness-110 active:scale-[0.98] transition-all shadow-md">
+        ENROLL YOUR FAMILY <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+      </a>
+      <div class="mt-5"><a href="audit.html" class="text-[13px] text-on-surface-variant underline underline-offset-4 hover:text-primary transition-colors">See a sample Life Audit report →</a></div>
+    </div>
+  </section>
+
+  <!-- Scattered story -->
+  <section class="bg-primary py-20">
+    <div class="max-w-6xl mx-auto px-8">
+      <p class="text-[10px] font-semibold tracking-[0.25em] uppercase mb-3" style="color:#3dcc60">The problem</p>
+      <h2 class="text-3xl md:text-4xl font-semibold text-white tracking-tight mb-10 max-w-3xl">Life today is scattered across a dozen places — LifeOS pulls it together, then manages it for you.</h2>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
+        <div class="p-6 rounded-xl" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)">
+          <span class="material-symbols-outlined mb-3 block" style="color:#3dcc60">inventory_2</span>
+          <h3 class="font-semibold text-white mb-1 text-[15px]">Paper in cupboards</h3>
+          <p class="text-[13px] text-white/60">Policies, deeds and FD receipts in files only one person can locate.</p>
+        </div>
+        <div class="p-6 rounded-xl" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)">
+          <span class="material-symbols-outlined mb-3 block" style="color:#3dcc60">forum</span>
+          <h3 class="font-semibold text-white mb-1 text-[15px]">Lost in WhatsApp</h3>
+          <p class="text-[13px] text-white/60">Lab reports and premium reminders buried under 4,000 forwards.</p>
+        </div>
+        <div class="p-6 rounded-xl" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)">
+          <span class="material-symbols-outlined mb-3 block" style="color:#3dcc60">apps</span>
+          <h3 class="font-semibold text-white mb-1 text-[15px]">Split across 12 apps</h3>
+          <p class="text-[13px] text-white/60">One app per bank, insurer, hospital and fund house — none talk to each other.</p>
+        </div>
+        <div class="p-6 rounded-xl" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)">
+          <span class="material-symbols-outlined mb-3 block" style="color:#3dcc60">person_off</span>
+          <h3 class="font-semibold text-white mb-1 text-[15px]">Nominees in the dark</h3>
+          <p class="text-[13px] text-white/60">Over ₹1 lakh crore lies unclaimed in India because families never knew.</p>
+        </div>
+      </div>
+      <div class="mt-10 p-6 rounded-xl flex items-center justify-between flex-wrap gap-4" style="background:rgba(61,204,96,.1);border:1px solid rgba(61,204,96,.3)">
+        <div class="flex items-center gap-4">
+          <span class="material-symbols-outlined" style="color:#3dcc60">account_balance</span>
+          <div>
+            <h3 class="font-semibold text-white text-[15px]">Even your papers stay managed — DigiLocker connected</h3>
+            <p class="text-[13px] text-white/60">The Vault is one module of ten — Aadhaar, PAN and issued documents sync via Govt. of India's DigiLocker.</p>
+          </div>
+        </div>
+        <a href="vault.html" class="px-6 py-2.5 text-[11px] font-bold tracking-widest rounded-lg transition-all" style="background:#3dcc60;color:#002D40">OPEN THE VAULT</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Managed, not stored -->
+  <section class="max-w-6xl mx-auto px-8 pt-20">
+    <p class="text-[10px] font-semibold tracking-[0.25em] uppercase mb-3" style="color:#1d9c40">The difference</p>
+    <h2 class="text-3xl md:text-4xl font-semibold text-primary tracking-tight mb-3 max-w-3xl">A repository stores. LifeOS manages.</h2>
+    <p class="text-[14px] text-on-surface-variant mb-10 max-w-2xl">Every module watches your data and does something with it — reminds, computes, flags, and suggests the next move.</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <a href="dashboard.html" class="card block p-6 bg-surface-container-lowest border border-outline-variant rounded-xl transition-all">
+        <span class="material-symbols-outlined text-primary mb-3 block">speed</span>
+        <h3 class="font-semibold text-primary mb-1">Scores your life weekly</h3>
+        <p class="text-[13px] text-on-surface-variant">A live Life Score built from your entries, habits, premiums and profile — with a full audit a click away.</p>
+      </a>
+      <a href="insurance.html" class="card block p-6 bg-surface-container-lowest border border-outline-variant rounded-xl transition-all">
+        <span class="material-symbols-outlined text-primary mb-3 block">notifications_active</span>
+        <h3 class="font-semibold text-primary mb-1">Reminds before deadlines</h3>
+        <p class="text-[13px] text-on-surface-variant">Premium due in 13 days? LifeOS counts down, flags urgency, and rolls the date when you pay.</p>
+      </a>
+      <a href="liabilities.html" class="card block p-6 bg-surface-container-lowest border border-outline-variant rounded-xl transition-all">
+        <span class="material-symbols-outlined text-primary mb-3 block">trending_down</span>
+        <h3 class="font-semibold text-primary mb-1">Plans your debt exit</h3>
+        <p class="text-[13px] text-on-surface-variant">Full amortization for every loan, plus a simulator that shows how small prepayments finish loans years earlier.</p>
+      </a>
+      <a href="plate.html" class="card block p-6 bg-surface-container-lowest border border-outline-variant rounded-xl transition-all">
+        <span class="material-symbols-outlined text-primary mb-3 block">pie_chart</span>
+        <h3 class="font-semibold text-primary mb-1">Designs your meals</h3>
+        <p class="text-[13px] text-on-surface-variant">Your calorie budget drawn onto real plates — breakfast to dinner, portions computed for your goal.</p>
+      </a>
+      <a href="mental.html" class="card block p-6 bg-surface-container-lowest border border-outline-variant rounded-xl transition-all">
+        <span class="material-symbols-outlined text-primary mb-3 block">self_improvement</span>
+        <h3 class="font-semibold text-primary mb-1">Coaches your mind</h3>
+        <p class="text-[13px] text-on-surface-variant">Mood check-ins, guided breathing sessions, and a nudge toward help when the trend dips.</p>
+      </a>
+      <a href="nominees.html" class="card block p-6 bg-surface-container-lowest border border-outline-variant rounded-xl transition-all">
+        <span class="material-symbols-outlined text-primary mb-3 block">diversity_1</span>
+        <h3 class="font-semibold text-primary mb-1">Keeps the family informed</h3>
+        <p class="text-[13px] text-on-surface-variant">Nominees, documents and reminders visible to everyone in the family account — no single point of failure.</p>
+      </a>
+    </div>
+  </section>
+
+  <div class="max-w-6xl mx-auto px-8">
+  <!-- Partners -->
+  <section class="pt-16 pb-16 text-center">
+    <p class="text-[10px] font-semibold tracking-[0.25em] text-on-surface-variant uppercase mb-5">Powered by India's best partners</p>
+    <div class="flex flex-wrap justify-center gap-x-8 gap-y-3 text-on-surface-variant font-semibold text-[15px] opacity-70">
+      <span>Manipal Hospitals</span><span>Dezerv</span><span>INDmoney</span><span>Ditto Insurance</span><span>Eat Fit</span><span>Cult.fit</span><span>Practo</span><span>FreshToHome</span>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="pb-20">
+    <h2 class="text-[11px] font-semibold tracking-[0.2em] text-on-surface-variant uppercase mb-6">How it works</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <div class="p-6 bg-surface-container-lowest border border-outline-variant rounded-xl">
+        <div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-[13px] mb-4">1</div>
+        <h3 class="font-semibold text-primary mb-1">Enroll your family</h3>
+        <p class="text-[13px] text-on-surface-variant">City, family or individual account, roles and metrics — 4 steps, two minutes.</p>
+      </div>
+      <div class="p-6 bg-surface-container-lowest border border-outline-variant rounded-xl">
+        <div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-[13px] mb-4">2</div>
+        <h3 class="font-semibold text-primary mb-1">Bring everything in</h3>
+        <p class="text-[13px] text-on-surface-variant">Policies, loans, nominees, documents (via DigiLocker), health data, your personal calendar — everything gets one home.</p>
+      </div>
+      <div class="p-6 bg-surface-container-lowest border border-outline-variant rounded-xl">
+        <div class="w-8 h-8 rounded-full bg-secondary text-on-secondary flex items-center justify-center font-bold text-[13px] mb-4">3</div>
+        <h3 class="font-semibold text-primary mb-1">Never be caught unaware</h3>
+        <p class="text-[13px] text-on-surface-variant">Premium reminders, coverage gaps, loan payoff plans, health flags — plus trusted partner offers when they genuinely help.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modules -->
+  <section class="pb-24">
+    <h2 class="text-[11px] font-semibold tracking-[0.2em] text-on-surface-variant uppercase mb-6">Modules</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
+      <a href="dashboard.html" class="card block p-6 bg-surface-container-lowest border border-outline-variant rounded-xl transition-all">
+        <span class="material-symbols-outlined text-primary mb-4 block" style="font-variation-settings:'FILL' 1;">dashboard</span>
+        <h3 class="font-semibold text-primary mb-1">Dashboard</h3>
+        <p class="text-[13px] text-on-surface-variant">Life Score and systems overview.</p>
+      </a>
+      <a href="health.html" class="card block p-6 bg-surface-container-lowest border border-outline-variant rounded-xl transition-all">
+        <span class="material-symbols-outlined text-primary mb-4 block">monitor_heart</span>
+        <h3 class="font-semibold text-primary mb-1">Health</h3>
+        <p class="text-[13px] text-on-surface-variant">Vitals, labs, and recovery.</p>
+      </a>
+      <a href="finance.html" class="card block p-6 bg-surface-container-lowest border border-outline-variant rounded-xl transition-all">
+        <span class="material-symbols-outlined text-primary mb-4 block">payments</span>
+        <h3 class="font-semibold text-primary mb-1">Finance</h3>
+        <p class="text-[13px] text-on-surface-variant">Net worth and allocation.</p>
+      </a>
+      <a href="liabilities.html" class="card block p-6 bg-surface-container-lowest border border-outline-variant rounded-xl transition-all">
+        <span class="material-symbols-outlined text-primary mb-4 block">request_quote</span>
+        <h3 class="font-semibold text-primary mb-1">Liabilities</h3>
+        <p class="text-[13px] text-on-surface-variant">Loans, EMIs, and faster payoff plans.</p>
+      </a>
+      <a href="nutrition.html" class="card block p-6 bg-surface-container-lowest border border-outline-variant rounded-xl transition-all">
+        <span class="material-symbols-outlined text-primary mb-4 block">restaurant</span>
+        <h3 class="font-semibold text-primary mb-1">Nutrition</h3>
+        <p class="text-[13px] text-on-surface-variant">Design your plate, meal by meal.</p>
+      </a>
+      <a href="calendar.html" class="card block p-6 bg-surface-container-lowest border border-outline-variant rounded-xl transition-all">
+        <span class="material-symbols-outlined text-primary mb-4 block">calendar_today</span>
+        <h3 class="font-semibold text-primary mb-1">Calendar</h3>
+        <p class="text-[13px] text-on-surface-variant">Day, week, month & year — personal only.</p>
+      </a>
+      <a href="mental.html" class="card block p-6 bg-surface-container-lowest border border-outline-variant rounded-xl transition-all">
+        <span class="material-symbols-outlined text-primary mb-4 block">psychology</span>
+        <h3 class="font-semibold text-primary mb-1">Mind</h3>
+        <p class="text-[13px] text-on-surface-variant">Focus, mood, and recovery sessions.</p>
+      </a>
+      <a href="insurance.html" class="card block p-6 bg-surface-container-lowest border border-outline-variant rounded-xl transition-all">
+        <span class="material-symbols-outlined text-primary mb-4 block">verified_user</span>
+        <h3 class="font-semibold text-primary mb-1">Insurance</h3>
+        <p class="text-[13px] text-on-surface-variant">Every policy, every premium, on time.</p>
+      </a>
+      <a href="nominees.html" class="card block p-6 bg-surface-container-lowest border border-outline-variant rounded-xl transition-all">
+        <span class="material-symbols-outlined text-primary mb-4 block">family_restroom</span>
+        <h3 class="font-semibold text-primary mb-1">Nominees</h3>
+        <p class="text-[13px] text-on-surface-variant">Family-visible — no one left in the dark.</p>
+      </a>
+      <a href="vault.html" class="card block p-6 bg-surface-container-lowest border border-outline-variant rounded-xl transition-all">
+        <span class="material-symbols-outlined text-primary mb-4 block">folder_shared</span>
+        <h3 class="font-semibold text-primary mb-1">Vault</h3>
+        <p class="text-[13px] text-on-surface-variant">Every document's location + DigiLocker.</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="pb-20 max-w-2xl mx-auto">
+    <h2 class="text-[11px] font-semibold tracking-[0.2em] text-on-surface-variant uppercase mb-6">Questions</h2>
+    <div class="space-y-3">
+      <details class="p-5 bg-surface-container-lowest border border-outline-variant rounded-xl">
+        <summary class="font-semibold text-primary cursor-pointer text-[14px]">How does LifeOS make money?</summary>
+        <p class="text-[13px] text-on-surface-variant mt-3">Through partner referrals — when a suggestion genuinely fits your situation and you take it, the partner pays us a fee. No ads, and your data is never sold or shared with partners.</p>
+      </details>
+      <details class="p-5 bg-surface-container-lowest border border-outline-variant rounded-xl">
+        <summary class="font-semibold text-primary cursor-pointer text-[14px]">What is a family account?</summary>
+        <p class="text-[13px] text-on-surface-variant mt-3">Up to 6 members share one LifeOS. Nominee assignments, document locations, premium reminders and health schedules are visible to the family — so nothing important stays unknown.</p>
+      </details>
+      <details class="p-5 bg-surface-container-lowest border border-outline-variant rounded-xl">
+        <summary class="font-semibold text-primary cursor-pointer text-[14px]">What does the DigiLocker connection do?</summary>
+        <p class="text-[13px] text-on-surface-variant mt-3">DigiLocker is the Government of India's document locker. LifeOS links to it so Aadhaar, PAN, licences and issued certificates appear in your family vault — LifeOS stores references, never the documents themselves.</p>
+      </details>
+      <details class="p-5 bg-surface-container-lowest border border-outline-variant rounded-xl">
+        <summary class="font-semibold text-primary cursor-pointer text-[14px]">Is my data safe?</summary>
+        <p class="text-[13px] text-on-surface-variant mt-3">In this preview, everything stays in your browser — nothing leaves your device. The product version will be encrypted and DPDP-compliant from day one.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- Waitlist -->
+  <section class="pb-24 text-center">
+    <div class="max-w-xl mx-auto p-10 bg-primary rounded-2xl">
+      <h2 class="text-2xl font-semibold text-on-primary mb-2">Get early access</h2>
+      <p class="text-[13px] text-white/70 mb-6">Launching first in Bangalore, Mumbai and Delhi.</p>
+      <div class="flex gap-3 max-w-md mx-auto">
+        <input id="wl-email" type="email" placeholder="you@example.com" class="flex-1 rounded-lg border-none px-4 py-3 text-[14px] text-on-surface focus:ring-2 focus:ring-secondary"/>
+        <button id="wl-btn" data-wired="1" class="px-6 py-3 bg-secondary text-on-secondary text-[12px] font-bold tracking-wider rounded-lg hover:brightness-95 transition-all">JOIN</button>
+      </div>
+    </div>
+  </section>
+  </div>
+</main>
+
+<footer class="border-t border-outline-variant py-8">
+  <div class="max-w-6xl mx-auto px-8 flex justify-between items-center">
+    <span class="mono text-[12px] text-on-surface-variant">LIFEOS v2.1</span>
+    <span class="mono text-[12px] text-on-surface-variant">YOUR LIFE, MANAGED</span>
+  </div>
+</footer>
+
+<script src="assets/app.js"></script>
+<script>
+(function () {
+  // ---------- question cloud ----------
+  var QS = [
+    ["WHERE ARE MY INSURANCE DETAILS?", "insurance.html", 17],
+    ["WHERE ALL HAVE PAPA & MAMA PUT US AS NOMINEES?", "nominees.html", 15],
+    ["WHAT IS MY PF STATUS?", "vault.html", 14],
+    ["WHERE ARE DADI JI'S PENSION DETAILS?", "vault.html", 16],
+    ["AM I INVESTING CORRECTLY?", "finance.html", 18],
+    ["WHY AM I FEELING WEAK AT TIMES?", "health.html", 15],
+    ["HOW MUCH LOAN IS ACTUALLY LEFT?", "liabilities.html", 16],
+    ["WHEN IS THE HEALTH POLICY PREMIUM DUE?", "insurance.html", 13],
+    ["WHICH LOCKER HAS THE PROPERTY PAPERS?", "vault.html", 14],
+    ["DID WE RENEW THE CAR INSURANCE?", "insurance.html", 12],
+    ["WHAT DID THE LAST BLOOD TEST SAY?", "health.html", 13],
+    ["WHO KNOWS THE FD MATURITY DATES?", "finance.html", 12],
+    ["WHERE IS THE WILL KEPT?", "nominees.html", 15],
+    ["CAN I FINISH MY HOME LOAN 5 YEARS EARLY?", "liabilities.html", 13],
+    ["WHEN WAS MOM'S LAST CHECK-UP?", "calendar.html", 12],
+    ["IS MY AADHAAR LINKED EVERYWHERE?", "vault.html", 11],
+  ];
+  // hand-placed layout: [left%, top%, rotation]
+  var POS = [
+    [6, 8, -3], [30, 4, 2], [64, 9, -2], [4, 26, 2], [40, 22, -1], [70, 27, 3],
+    [10, 44, -2], [42, 40, 1], [68, 45, -3], [4, 62, 1], [34, 58, -2], [63, 62, 2],
+    [12, 78, 2], [40, 75, -1], [68, 80, 1], [30, 90, -2],
+  ];
+  var cloud = document.getElementById("qcloud");
+  QS.forEach(function (q, i) {
+    var a = document.createElement("a");
+    a.className = "q";
+    a.href = q[1];
+    a.textContent = q[0];
+    var p = POS[i % POS.length];
+    a.style.left = p[0] + "%";
+    a.style.top = p[1] + "%";
+    a.style.fontSize = q[2] + "px";
+    a.style.opacity = 0.55 + (q[2] - 11) * 0.06;
+    a.style.setProperty("--rot", p[2] + "deg");
+    a.style.setProperty("--dur", (6 + (i % 5)) + "s");
+    a.style.setProperty("--del", (-(i % 7)) + "s");
+    cloud.appendChild(a);
+  });
+
+  // ---------- waitlist ----------
+  document.addEventListener("DOMContentLoaded", function () {
+    var btn = document.getElementById("wl-btn"), inp = document.getElementById("wl-email");
+    if (!btn) return;
+    btn.addEventListener("click", function () {
+      var v = (inp.value || "").trim();
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)) { LifeOS.toast("Enter a valid email"); inp.focus(); return; }
+      var wl = LifeOS.store.get("waitlist", []);
+      wl.push({ email: v, ts: Date.now() });
+      LifeOS.store.set("waitlist", wl);
+      inp.value = "";
+      LifeOS.toast("You're on the list — see you at launch");
+    });
+  });
+})();
+</script>
+</body>
+</html>

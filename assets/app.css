@@ -1,0 +1,171 @@
+/* LifeOS shared UI — toasts, modals, palette, affiliates, breathing, mobile */
+#lifeos-toast-wrap {
+  position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+  display: flex; flex-direction: column; gap: 8px; pointer-events: none;
+}
+.lifeos-toast {
+  background: #002D40; color: #fff; font-family: 'Inter', sans-serif;
+  font-size: 13px; font-weight: 500; letter-spacing: .02em;
+  padding: 12px 18px; border-radius: 8px; display: flex; align-items: center; gap: 10px;
+  box-shadow: 0 8px 24px rgba(0,45,64,.25);
+  opacity: 0; transform: translateY(8px); transition: all .25s ease;
+}
+.lifeos-toast.show { opacity: 1; transform: translateY(0); }
+.lifeos-toast .dot { width: 8px; height: 8px; border-radius: 99px; background: #3dcc60; flex: none; }
+
+#lifeos-modal-overlay {
+  position: fixed; inset: 0; z-index: 9998; background: rgba(0,45,64,.45);
+  display: flex; align-items: center; justify-content: center; padding: 24px;
+  opacity: 0; transition: opacity .2s ease;
+}
+#lifeos-modal-overlay.show { opacity: 1; }
+.lifeos-modal {
+  background: #fff; border-radius: 12px; width: 100%; max-width: 440px;
+  font-family: 'Inter', sans-serif; color: #1a1c1e;
+  box-shadow: 0 24px 64px rgba(0,45,64,.3);
+  transform: translateY(12px) scale(.98); transition: transform .2s ease;
+  overflow: hidden;
+}
+#lifeos-modal-overlay.show .lifeos-modal { transform: translateY(0) scale(1); }
+.lifeos-modal-head {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 24px; border-bottom: 1px solid #e2e2e3;
+}
+.lifeos-modal-head h3 {
+  font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: #002D40;
+}
+.lifeos-modal-close { cursor: pointer; color: #44474e; background: none; border: none; font-size: 18px; line-height: 1; }
+.lifeos-modal-body { padding: 24px; }
+.lifeos-field { margin-bottom: 16px; }
+.lifeos-field label {
+  display: block; font-size: 10px; font-weight: 700; letter-spacing: .15em;
+  text-transform: uppercase; color: #44474e; margin-bottom: 6px;
+}
+.lifeos-field input, .lifeos-field select, .lifeos-field textarea {
+  width: 100%; border: 1px solid #d1d1d1; border-radius: 8px; padding: 10px 12px;
+  font-size: 14px; font-family: 'Inter', sans-serif; color: #1a1c1e; background: #f9f9f9;
+}
+.lifeos-field input:focus, .lifeos-field select:focus, .lifeos-field textarea:focus {
+  outline: none; border-color: #002D40; background: #fff;
+}
+.lifeos-btn-primary {
+  width: 100%; background: #002D40; color: #fff; border: none; border-radius: 8px;
+  padding: 12px; font-size: 11px; font-weight: 700; letter-spacing: .15em;
+  text-transform: uppercase; cursor: pointer; transition: filter .15s ease, transform .1s ease;
+}
+.lifeos-btn-primary:hover { filter: brightness(1.15); }
+.lifeos-btn-primary:active { transform: scale(.98); }
+
+/* notifications panel */
+#lifeos-notif {
+  position: fixed; top: 68px; right: 24px; z-index: 9997; width: 320px;
+  background: #fff; border: 1px solid #e2e2e3; border-radius: 12px;
+  box-shadow: 0 16px 48px rgba(0,45,64,.18); font-family: 'Inter', sans-serif; overflow: hidden;
+}
+#lifeos-notif .n-item { display: flex; gap: 12px; padding: 14px 16px; border-bottom: 1px solid #f3f3f4; }
+#lifeos-notif .n-item:last-child { border-bottom: none; }
+#lifeos-notif .n-item .t { font-size: 13px; font-weight: 600; color: #002D40; }
+#lifeos-notif .n-item .s { font-size: 12px; color: #44474e; margin-top: 2px; }
+
+/* breathing session */
+.lifeos-breathe-wrap { display: flex; flex-direction: column; align-items: center; padding: 12px 0 4px; }
+.lifeos-breathe-circle {
+  width: 140px; height: 140px; border-radius: 999px;
+  background: radial-gradient(circle at 50% 40%, #3dcc60 0%, #002D40 85%);
+  animation: lifeos-breathe 8s ease-in-out infinite;
+  margin-bottom: 20px; box-shadow: 0 0 60px rgba(61,204,96,.35);
+}
+@keyframes lifeos-breathe {
+  0%, 100% { transform: scale(.72); }
+  50% { transform: scale(1); }
+}
+.lifeos-breathe-phase {
+  font-size: 11px; font-weight: 700; letter-spacing: .25em; text-transform: uppercase; color: #002D40;
+}
+.lifeos-breathe-timer {
+  font-family: 'JetBrains Mono', monospace; font-size: 32px; color: #002D40; margin: 8px 0 16px;
+}
+
+/* page entrance */
+body { animation: lifeos-fade .35s ease; }
+@keyframes lifeos-fade { from { opacity: 0; } to { opacity: 1; } }
+
+/* command palette */
+#lifeos-palette {
+  position: fixed; inset: 0; z-index: 10000; background: rgba(0,45,64,.5);
+  display: flex; align-items: flex-start; justify-content: center; padding: 12vh 24px 24px;
+  opacity: 0; transition: opacity .15s ease;
+}
+#lifeos-palette.show { opacity: 1; }
+#lifeos-palette .lp-box {
+  width: 100%; max-width: 520px; background: #fff; border-radius: 14px; overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0,45,64,.4); font-family: 'Inter', sans-serif;
+}
+#lifeos-palette input {
+  width: 100%; border: none; border-bottom: 1px solid #e2e2e3; padding: 18px 22px;
+  font-size: 15px; font-family: 'Inter', sans-serif; outline: none; color: #1a1c1e;
+}
+#lifeos-palette .lp-list { max-height: 46vh; overflow-y: auto; padding: 8px; }
+#lifeos-palette .lp-item {
+  display: flex; align-items: center; gap: 14px; padding: 10px 14px; border-radius: 10px; cursor: pointer;
+}
+#lifeos-palette .lp-item.sel { background: #f3f3f4; }
+#lifeos-palette .lp-item .material-symbols-outlined { color: #002D40; font-size: 20px; }
+#lifeos-palette .lp-t { font-size: 14px; font-weight: 600; color: #002D40; }
+#lifeos-palette .lp-s { font-size: 12px; color: #44474e; }
+#lifeos-palette .lp-empty { padding: 24px; text-align: center; font-size: 13px; color: #44474e; }
+#lifeos-palette .lp-hint {
+  padding: 10px 22px; border-top: 1px solid #f3f3f4; font-size: 11px; color: #44474e;
+  letter-spacing: .04em; background: #fafafa;
+}
+
+/* affiliate suggestions */
+#lifeos-affiliates { margin: 40px 40px 56px; font-family: 'Inter', sans-serif; max-width: 1280px; }
+.lifeos-aff-titlerow { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; border-top: 1px solid #e2e2e3; padding-top: 28px; }
+.lifeos-aff-titlerow h3 { font-size: 12px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: #002D40; }
+.lifeos-aff-titlerow span { font-size: 11px; color: #44474e; }
+.lifeos-aff-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+.lifeos-aff-card {
+  background: #fff; border: 1px solid #e2e2e3; border-radius: 12px; padding: 20px;
+  display: flex; flex-direction: column; transition: box-shadow .2s ease, border-color .2s ease;
+}
+.lifeos-aff-card:hover { border-color: #002D40; box-shadow: 0 4px 16px rgba(0,45,64,.08); }
+.lifeos-aff-head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.lifeos-aff-head .material-symbols-outlined { color: #002D40; background: #f3f3f4; padding: 7px; border-radius: 8px; font-size: 18px; }
+.lifeos-aff-name { font-size: 14px; font-weight: 700; color: #002D40; flex: 1; }
+.lifeos-aff-chip {
+  font-size: 9px; font-weight: 700; letter-spacing: .12em; color: #002D40;
+  background: rgba(61,204,96,.18); border: 1px solid rgba(61,204,96,.4); padding: 3px 8px; border-radius: 99px;
+}
+.lifeos-aff-why { font-size: 13px; color: #1a1c1e; line-height: 1.5; margin-bottom: 8px; }
+.lifeos-aff-benefit { font-size: 12px; font-weight: 600; color: #1d9c40; margin-bottom: 16px; }
+.lifeos-aff-cta {
+  margin-top: auto; align-self: flex-start; display: inline-flex; align-items: center; gap: 6px;
+  background: #002D40; color: #fff; border: none; border-radius: 8px; padding: 9px 16px;
+  font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; cursor: pointer;
+  transition: filter .15s ease, transform .1s ease;
+}
+.lifeos-aff-cta:hover { filter: brightness(1.2); }
+.lifeos-aff-cta:active { transform: scale(.97); }
+
+/* mobile navigation */
+#lifeos-menu-btn {
+  display: none; position: fixed; bottom: 24px; left: 24px; z-index: 10001;
+  width: 52px; height: 52px; border-radius: 999px; border: none; cursor: pointer;
+  background: #002D40; color: #fff; align-items: center; justify-content: center;
+  box-shadow: 0 8px 24px rgba(0,45,64,.35);
+}
+#lifeos-nav-backdrop {
+  display: none; position: fixed; inset: 0; z-index: 49; background: rgba(0,45,64,.4);
+  opacity: 0; transition: opacity .25s ease;
+}
+@media (max-width: 1023px) {
+  #lifeos-nav { transform: translateX(-100%); transition: transform .25s ease; }
+  #lifeos-nav.open { transform: none; box-shadow: 24px 0 64px rgba(0,45,64,.2); }
+  #lifeos-menu-btn { display: flex; }
+  #lifeos-nav-backdrop.show { display: block; opacity: 1; }
+  [class*="ml-[240px]"] { margin-left: 0 !important; }
+  [class*="left-[240px]"] { left: 0 !important; }
+  [class*="w-[calc(100%-240px)]"] { width: 100% !important; }
+  #lifeos-affiliates { margin: 24px 16px 80px; }
+}

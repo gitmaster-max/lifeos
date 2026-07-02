@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LifeOS | Onboarding · Roles</title>
+<meta name="description" content="LifeOS — one precision operating system for health, finance, nutrition, mind and legacy. Built for India, designed for the world."/>
+<meta property="og:title" content="LifeOS | Onboarding · Roles"/>
+<meta property="og:description" content="Health, finance, nutrition, mind and legacy — unified into a single precision dashboard."/>
+<meta name="theme-color" content="#002D40"/>
+<link href="assets/favicon.svg" rel="icon" type="image/svg+xml"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#002d40",
+                    "on-primary": "#ffffff",
+                    "surface": "#f9f9f9",
+                    "surface-dim": "#dadada",
+                    "surface-bright": "#f9f9f9",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-low": "#f3f3f4",
+                    "surface-container": "#eeeeef",
+                    "surface-container-high": "#e8e8e9",
+                    "surface-container-highest": "#e2e2e3",
+                    "on-surface": "#1a1c1e",
+                    "on-surface-variant": "#44474e",
+                    "outline": "#74777f",
+                    "outline-variant": "#c4c6cf",
+                    "secondary": "#002d40",
+                    "on-secondary": "#ffffff",
+                    "secondary-container": "#d3e4ff",
+                    "on-secondary-container": "#001d36",
+                    "tertiary": "#002d40",
+                    "on-tertiary": "#ffffff",
+                    "background": "#ffffff",
+                    "on-background": "#1a1c1e",
+                    "error": "#ba1a1a",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "8px",
+                    "lg": "12px",
+                    "xl": "16px",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "max-width-content": "1280px",
+                    "stack-sm": "8px",
+                    "gutter": "24px",
+                    "stack-lg": "32px",
+                    "stack-md": "16px",
+                    "container-padding": "40px",
+                    "unit": "4px"
+            },
+            "fontFamily": {
+                    "mono-data": ["JetBrains Mono"],
+                    "body-md": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-sm": ["Inter"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "mono-data": ["13px", {"lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "400"}],
+                    "body-md": ["14px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+                    "label-caps": ["11px", {"lineHeight": "1", "letterSpacing": "0.08em", "fontWeight": "700"}],
+                    "display-lg": ["40px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["22px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-sm": ["16px", {"lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #ffffff;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+        }
+        .selection-card {
+            transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 8px;
+        }
+        .selection-card:hover {
+            border-color: #002d40;
+            background-color: #f3f3f4;
+            transform: translateY(-2px);
+        }
+        .selection-card.active {
+            border-color: #002d40;
+            background-color: #e8e8e9;
+            box-shadow: 0 4px 12px rgba(0, 45, 64, 0.08);
+        }
+        .selection-card.active .check-mark {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .btn-precision {
+            transition: all 200ms ease;
+            border-radius: 8px;
+            letter-spacing: 0.05em;
+        }
+        .btn-precision:hover:not(:disabled) {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 45, 64, 0.1);
+        }
+        .btn-precision:active:not(:disabled) {
+            transform: translateY(0);
+        }
+    </style>
+<link href="assets/app.css" rel="stylesheet"/>
+</head>
+<body class="font-body-md text-on-surface bg-background">
+<!-- Top AppBar (Supprx Identity) -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-gutter h-16 bg-white border-b border-surface-container">
+<div class="font-headline-md text-primary tracking-tight">LifeOS</div>
+<div class="flex items-center gap-stack-md">
+<span class="font-label-caps text-label-caps text-on-surface-variant">STEP 03 / 04</span>
+<div class="w-32 h-1 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary transition-all duration-700" style="width: 75%;"></div>
+</div>
+</div>
+<div class="flex items-center">
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-full hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-primary">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-32 pb-16 px-container-padding max-w-5xl mx-auto">
+<!-- Header Section -->
+<section class="mb-stack-lg animate-fade-in">
+<h1 class="font-display-lg text-display-lg text-primary mb-stack-sm">Whom are you enrolling as?</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">Please select your primary role within the household to personalize your experience.</p>
+</section>
+<!-- Selection Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-stack-md">
+<!-- Card: Husband -->
+<button class="selection-card flex flex-col items-start p-6 bg-surface-container-lowest border border-outline-variant text-left group relative" onclick="selectRole(this)">
+<div class="flex justify-between w-full mb-6">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+<span class="material-symbols-outlined text-2xl">person</span>
+</div>
+<span class="check-mark opacity-0 scale-75 material-symbols-outlined text-primary transition-all" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm mb-1 text-primary">Husband</h3>
+<p class="font-mono-data text-[12px] uppercase tracking-wider text-on-surface-variant">Family Partner</p>
+</button>
+<!-- Card: Wife -->
+<button class="selection-card flex flex-col items-start p-6 bg-surface-container-lowest border border-outline-variant text-left group relative" onclick="selectRole(this)">
+<div class="flex justify-between w-full mb-6">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+<span class="material-symbols-outlined text-2xl">person_2</span>
+</div>
+<span class="check-mark opacity-0 scale-75 material-symbols-outlined text-primary transition-all" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm mb-1 text-primary">Wife</h3>
+<p class="font-mono-data text-[12px] uppercase tracking-wider text-on-surface-variant">Family Partner</p>
+</button>
+<!-- Card: Father -->
+<button class="selection-card flex flex-col items-start p-6 bg-surface-container-lowest border border-outline-variant text-left group relative" onclick="selectRole(this)">
+<div class="flex justify-between w-full mb-6">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+<span class="material-symbols-outlined text-2xl">elderly</span>
+</div>
+<span class="check-mark opacity-0 scale-75 material-symbols-outlined text-primary transition-all" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm mb-1 text-primary">Father</h3>
+<p class="font-mono-data text-[12px] uppercase tracking-wider text-on-surface-variant">Parent / Guardian</p>
+</button>
+<!-- Card: Mother -->
+<button class="selection-card flex flex-col items-start p-6 bg-surface-container-lowest border border-outline-variant text-left group relative" onclick="selectRole(this)">
+<div class="flex justify-between w-full mb-6">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+<span class="material-symbols-outlined text-2xl">elderly_woman</span>
+</div>
+<span class="check-mark opacity-0 scale-75 material-symbols-outlined text-primary transition-all" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm mb-1 text-primary">Mother</h3>
+<p class="font-mono-data text-[12px] uppercase tracking-wider text-on-surface-variant">Parent / Guardian</p>
+</button>
+<!-- Card: Daughter -->
+<button class="selection-card flex flex-col items-start p-6 bg-surface-container-lowest border border-outline-variant text-left group relative" onclick="selectRole(this)">
+<div class="flex justify-between w-full mb-6">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+<span class="material-symbols-outlined text-2xl">child_care</span>
+</div>
+<span class="check-mark opacity-0 scale-75 material-symbols-outlined text-primary transition-all" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm mb-1 text-primary">Daughter</h3>
+<p class="font-mono-data text-[12px] uppercase tracking-wider text-on-surface-variant">Dependent</p>
+</button>
+<!-- Card: Son -->
+<button class="selection-card flex flex-col items-start p-6 bg-surface-container-lowest border border-outline-variant text-left group relative" onclick="selectRole(this)">
+<div class="flex justify-between w-full mb-6">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+<span class="material-symbols-outlined text-2xl">child_friendly</span>
+</div>
+<span class="check-mark opacity-0 scale-75 material-symbols-outlined text-primary transition-all" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm mb-1 text-primary">Son</h3>
+<p class="font-mono-data text-[12px] uppercase tracking-wider text-on-surface-variant">Dependent</p>
+</button>
+</section>
+<!-- Action Footer -->
+<footer class="mt-16 pt-8 border-t border-surface-container flex flex-col md:flex-row justify-between items-center gap-6">
+<button class="btn-precision group w-full md:w-auto px-6 py-3 font-label-caps text-on-surface-variant hover:text-primary flex items-center justify-center gap-2" onclick="window.location.href='onboarding-2-enrollment.html'">
+<span class="material-symbols-outlined text-[18px] transition-transform group-hover:-translate-x-1">west</span>
+            BACK
+        </button>
+<div class="flex flex-col md:flex-row gap-4 w-full md:w-auto">
+<button class="btn-precision w-full md:w-auto px-8 py-3 font-label-caps border border-outline-variant text-primary hover:bg-surface-container" onclick="window.location.href='onboarding-4-metrics.html'">
+                SKIP STEP
+            </button>
+<button class="btn-precision w-full md:w-auto px-8 py-3 font-label-caps bg-primary text-on-primary disabled:opacity-20 disabled:cursor-not-allowed" disabled="" id="continue-btn" onclick="window.location.href='onboarding-4-metrics.html'">
+                CONTINUE PHASE 04
+            </button>
+</div>
+</footer>
+</main>
+<!-- Side Decoration -->
+<div class="hidden xl:block fixed right-0 top-0 h-full w-px bg-surface-container opacity-50"></div>
+<div class="hidden xl:block fixed right-0 top-1/4 h-32 w-1 bg-primary"></div>
+<script>
+    function selectRole(element) {
+        // Remove active class from all cards
+        const cards = document.querySelectorAll('.selection-card');
+        cards.forEach(card => card.classList.remove('active'));
+        
+        // Add active class to clicked card
+        element.classList.add('active');
+        
+        // Enable continue button
+        const continueBtn = document.getElementById('continue-btn');
+        continueBtn.disabled = false;
+        
+        // Visual feedback
+        element.style.transform = 'scale(0.98)';
+        setTimeout(() => {
+            element.style.transform = 'scale(1)';
+        }, 100);
+    }
+</script>
+<script src="assets/app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.selection-card').forEach(c => c.addEventListener('click', () => {
+    let t = c.textContent.replace(/\s+/g, ' ').trim();
+    c.querySelectorAll('.material-symbols-outlined').forEach(s => { t = t.replace(s.textContent.trim(), '').trim(); });
+    const p = LifeOS.store.get('profile', {}); p.role = t; LifeOS.store.set('profile', p);
+  }));
+});
+</script>
+</body></html>

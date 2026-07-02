@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LifeOS | Health</title>
+<meta name="description" content="LifeOS — one precision operating system for health, finance, nutrition, mind and legacy. Built for India, designed for the world."/>
+<meta property="og:title" content="LifeOS | Health"/>
+<meta property="og:description" content="Health, finance, nutrition, mind and legacy — unified into a single precision dashboard."/>
+<meta name="theme-color" content="#002D40"/>
+<link href="assets/favicon.svg" rel="icon" type="image/svg+xml"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9f9f9;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .flat-shadow {
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.03);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#002d40", // Deep Navy from Design System
+                        "accent-lime": "#3dcc60", // Supprx Lime Green
+                        "surface": "#f9f9f9", // Clean off-white
+                        "surface-dim": "#dadada",
+                        "surface-bright": "#f9f9f9",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f3f3f4",
+                        "surface-container": "#eeeeee",
+                        "surface-container-high": "#e5e5e5",
+                        "surface-container-highest": "#dbdbdb",
+                        "on-surface": "#002d40",
+                        "on-surface-variant": "#5a5a5a",
+                        "outline": "#747878",
+                        "outline-variant": "#d1d5db"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.5rem", // ROUND_EIGHT
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "unit": "4px",
+                        "stack-lg": "32px",
+                        "container-padding": "40px",
+                        "stack-md": "16px",
+                        "max-width-content": "1280px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "mono-data": ["JetBrains Mono"],
+                        "label-caps": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "mono-data": ["13px", {"lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-sm": ["18px", {"lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "800"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-lg": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                        "body-md": ["14px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<link href="assets/app.css" rel="stylesheet"/>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- Fixed Side Navigation -->
+<aside id="lifeos-nav" class="fixed left-0 top-0 h-screen w-[240px] bg-white border-r border-outline-variant flex flex-col py-6 px-4 z-50" style="font-family:'Inter',sans-serif">
+<a href="index.html" class="block mb-7 px-3">
+<h1 class="text-2xl font-bold text-primary tracking-tight">LifeOS</h1>
+<p class="text-[9px] font-semibold text-on-surface-variant tracking-[0.2em] mt-1">PRECISION LIFE MANAGEMENT</p>
+</a>
+<nav class="flex-grow space-y-0.5 overflow-y-auto">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="dashboard.html"><span class="material-symbols-outlined text-[19px]">dashboard</span><span class="text-[13.5px]">Dashboard</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-primary font-semibold bg-surface-container-low rounded-lg" href="health.html"><span class="material-symbols-outlined text-[19px]" style="font-variation-settings: 'FILL' 1;">monitor_heart</span><span class="text-[13.5px]">Health</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="finance.html"><span class="material-symbols-outlined text-[19px]">payments</span><span class="text-[13.5px]">Finance</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="liabilities.html"><span class="material-symbols-outlined text-[19px]">request_quote</span><span class="text-[13.5px]">Liabilities</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="nutrition.html"><span class="material-symbols-outlined text-[19px]">restaurant</span><span class="text-[13.5px]">Nutrition</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="calendar.html"><span class="material-symbols-outlined text-[19px]">calendar_today</span><span class="text-[13.5px]">Calendar</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="insurance.html"><span class="material-symbols-outlined text-[19px]">verified_user</span><span class="text-[13.5px]">Insurance</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="mental.html"><span class="material-symbols-outlined text-[19px]">psychology</span><span class="text-[13.5px]">Mind</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="nominees.html"><span class="material-symbols-outlined text-[19px]">family_restroom</span><span class="text-[13.5px]">Nominees</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="vault.html"><span class="material-symbols-outlined text-[19px]">folder_shared</span><span class="text-[13.5px]">Vault</span></a>
+</nav>
+<div class="pt-4 border-t border-outline-variant space-y-0.5">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[19px]">settings</span><span class="text-[13.5px]">Settings</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[19px]">help</span><span class="text-[13.5px]">Support</span></a>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="ml-[240px] min-h-screen bg-surface">
+<!-- Top App Bar -->
+<header class="sticky top-0 z-40 w-full h-16 px-gutter flex justify-between items-center bg-white border-b border-outline-variant">
+<div class="flex items-center flex-1 max-w-xl">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border-none focus:ring-1 focus:ring-primary text-body-md rounded-lg" placeholder="Search health metrics..." type="text"/>
+</div>
+</div>
+<div class="flex items-center space-x-stack-md ml-gutter">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">notifications</button>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-outline-variant">
+<img class="h-full w-full object-cover" data-alt="Professional headshot" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAS9SvfTLqrJXJX1mNgtwks03GMRGy3K8iLjS0l8GTBk_zDGq6ctpb8nijNkmlGuWx7oUwwEcHN0KIOa9Cviq36Tqv5JUkdUqCT37O0bhkyeEgKiCqiOF0ac_VYfIImbKB-wnpFS_tBxW6zv7IyAzczsZoGTdexOCj68JctJj23Gyb5pBHp8TuljOkMjrTCXxMkxP-oZvLXBo9zbXMtgc0QXyW49Ju2S5ggbrzCtWTsBMsmDpR47WnbrU2zIQPOPGkZHiaSOIe0Vr8"/>
+</div>
+<button class="bg-accent-lime text-primary px-4 py-1.5 rounded font-label-caps text-label-caps font-bold active:scale-95 transition-all hover:shadow-lg">Quick Entry</button>
+</div>
+</header>
+<!-- Content -->
+<div class="p-container-padding max-w-max-width-content mx-auto">
+<!-- Page Header -->
+<div class="mb-stack-lg flex justify-between items-end">
+<div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Cockpit / Health</span>
+<h2 class="font-display-lg text-display-lg mt-unit text-primary">Systems Overview</h2>
+</div>
+<div class="flex space-x-stack-sm text-mono-data">
+<span class="px-3 py-1 bg-surface-container-high rounded-full border border-outline-variant">Last Sync: 12:44 PM</span>
+<span class="px-3 py-1 bg-accent-lime text-primary rounded-full font-bold border border-primary/10">Optimal</span>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="bento-grid">
+<!-- Physical Readiness Section (8 Columns) -->
+<section class="col-span-12 lg:col-span-8 bg-white border border-outline-variant p-gutter rounded-lg shadow-sm">
+<div class="flex justify-between items-center mb-stack-lg">
+<h3 class="font-headline-sm text-headline-sm text-primary">Physical Readiness</h3>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Steps -->
+<div class="space-y-stack-md">
+<div class="flex justify-between items-baseline">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Step Count</span>
+<span class="font-mono-data text-primary font-bold">82%</span>
+</div>
+<div class="text-headline-md font-bold text-primary">12,482 <span class="text-body-md font-normal text-on-surface-variant">/ 15k</span></div>
+<div class="h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-accent-lime w-[82%] transition-all duration-1000"></div>
+</div>
+</div>
+<!-- Sleep Quality -->
+<div class="space-y-stack-md">
+<div class="flex justify-between items-baseline">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Sleep Quality</span>
+<span class="font-mono-data text-primary font-bold">Excellent</span>
+</div>
+<div class="text-headline-md font-bold text-primary">8h 12m <span class="text-body-md font-normal text-on-surface-variant">Score: 92</span></div>
+<div class="h-32 flex items-end space-x-1">
+<!-- Chart using palette: navy, green, gray -->
+<div class="flex-1 bg-surface-container-highest h-[40%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary/20 h-[60%] rounded-t-sm"></div>
+<div class="flex-1 bg-surface-container-highest h-[30%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary/40 h-[85%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary/60 h-[70%] rounded-t-sm"></div>
+<div class="flex-1 bg-accent-lime h-[95%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary/30 h-[65%] rounded-t-sm"></div>
+</div>
+</div>
+<!-- HRV -->
+<div class="space-y-stack-md">
+<div class="flex justify-between items-baseline">
+<span class="font-label-caps text-label-caps text-on-surface-variant">HRV Baseline</span>
+<span class="material-symbols-outlined text-primary text-sm">trending_up</span>
+</div>
+<div class="text-headline-md font-bold text-primary">78 <span class="text-body-md font-normal text-on-surface-variant">ms</span></div>
+<div class="pt-4">
+<canvas class="w-full h-24" id="hrvChart"></canvas>
+</div>
+</div>
+</div>
+</section>
+<!-- Nutrition Snapshot (4 Columns) -->
+<section class="col-span-12 lg:col-span-4 bg-white border border-outline-variant p-gutter rounded-lg shadow-sm flex flex-col">
+<div class="flex justify-between items-center mb-stack-lg">
+<h3 class="font-headline-sm text-headline-sm text-primary">Nutrition</h3>
+<span class="font-mono-data text-on-surface-variant text-[11px]">Day 14</span>
+</div>
+<div class="flex-1 space-y-gutter">
+<!-- Calorie Dial -->
+<div class="relative w-40 h-40 mx-auto flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-surface-container-highest" cx="80" cy="80" fill="transparent" r="70" stroke="currentColor" stroke-width="10"></circle>
+<circle class="text-accent-lime transition-all duration-1000" cx="80" cy="80" fill="transparent" r="70" stroke="currentColor" stroke-dasharray="440" stroke-dashoffset="110" stroke-linecap="round" stroke-width="10"></circle>
+</svg>
+<div class="absolute text-center">
+<div class="text-headline-md font-extrabold text-primary">1,840</div>
+<div class="font-label-caps text-[10px] text-on-surface-variant uppercase font-bold">Kcal Left</div>
+</div>
+</div>
+<!-- Macro Breakdown -->
+<div class="space-y-stack-sm">
+<div class="flex justify-between text-mono-data text-[12px]">
+<span class="text-primary font-bold">Protein</span>
+<span class="text-on-surface-variant">142g / 180g</span>
+</div>
+<div class="h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[78%]"></div>
+</div>
+<div class="flex justify-between text-mono-data text-[12px] pt-2">
+<span class="text-primary font-bold">Carbohydrates</span>
+<span class="text-on-surface-variant">210g / 250g</span>
+</div>
+<div class="h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary/60 w-[84%]"></div>
+</div>
+<div class="flex justify-between text-mono-data text-[12px] pt-2">
+<span class="text-primary font-bold">Fats</span>
+<span class="text-on-surface-variant">58g / 70g</span>
+</div>
+<div class="h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary/40 w-[82%]"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Mental Performance (Large CTA Module - 12 Columns) -->
+<section class="col-span-12 relative overflow-hidden rounded-lg border border-primary h-[340px] group cursor-pointer shadow-xl">
+<div class="absolute inset-0 bg-primary">
+<!-- Subtle gradient mesh for precision feel -->
+<div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_50%_50%,#3dcc60,transparent_70%)]"></div>
+</div>
+<div class="relative h-full z-10 flex flex-col justify-between p-container-padding text-white">
+<div class="max-w-2xl">
+<span class="font-label-caps text-label-caps uppercase tracking-widest text-accent-lime mb-unit block font-bold">High Cognitive Load Detected</span>
+<h2 class="font-display-lg text-display-lg text-white mb-stack-md">Mental Performance</h2>
+<p class="font-body-lg text-body-lg text-white/80 max-w-lg">
+                                HRV and focus logs suggest a 15% dip in executive function. Run a neuro-recovery session to reset baseline performance levels.
+                            </p>
+</div>
+<div class="flex items-center space-x-gutter">
+<button class="bg-accent-lime text-primary px-8 py-3 rounded-lg font-label-caps text-label-caps font-extrabold hover:bg-white transition-all transform hover:scale-105">
+                                Enter Subpage
+                            </button>
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-primary bg-accent-lime flex items-center justify-center text-primary text-[10px] font-extrabold">M1</div>
+<div class="w-8 h-8 rounded-full border-2 border-primary bg-white flex items-center justify-center text-primary text-[10px] font-extrabold">M2</div>
+<div class="w-8 h-8 rounded-full border-2 border-primary bg-white/50 flex items-center justify-center text-primary text-[10px] font-extrabold">M3</div>
+</div>
+<span class="text-mono-data text-[12px] text-white/60">3 Recovery Protocols Ready</span>
+</div>
+</div>
+</section>
+<!-- Secondary Insight Cards -->
+<div class="col-span-12 md:col-span-4 bg-white border border-outline-variant p-gutter rounded-lg shadow-sm">
+<h4 class="font-label-caps text-label-caps text-primary uppercase mb-stack-md font-extrabold">Vitals Log</h4>
+<ul class="space-y-stack-md">
+<li class="flex justify-between items-center py-2.5 border-b border-surface-container">
+<span class="text-body-md font-medium text-on-surface-variant">Blood Oxygen</span>
+<span class="font-mono-data font-bold text-primary">99%</span>
+</li>
+<li class="flex justify-between items-center py-2.5 border-b border-surface-container">
+<span class="text-body-md font-medium text-on-surface-variant">Body Temp</span>
+<span class="font-mono-data font-bold text-primary">98.2 °F</span>
+</li>
+<li class="flex justify-between items-center py-2.5">
+<span class="text-body-md font-medium text-on-surface-variant">Resp Rate</span>
+<span class="font-mono-data font-bold text-primary">14 bpm</span>
+</li>
+</ul>
+</div>
+<div class="col-span-12 md:col-span-4 bg-white border border-outline-variant p-gutter rounded-lg shadow-sm">
+<h4 class="font-label-caps text-label-caps text-primary uppercase mb-stack-md font-extrabold">Supplements</h4>
+<div class="space-y-stack-sm">
+<div class="flex items-center justify-between bg-surface-container-low p-3 rounded border border-outline-variant/30">
+<div class="flex items-center space-x-stack-sm">
+<span class="material-symbols-outlined text-[18px] text-primary font-bold">check_circle</span>
+<span class="text-body-md font-medium">Omega-3 Complex</span>
+</div>
+<span class="text-[10px] font-mono-data text-on-surface-variant uppercase">Done</span>
+</div>
+<div class="flex items-center justify-between bg-surface-container-low p-3 rounded border border-outline-variant/30">
+<div class="flex items-center space-x-stack-sm">
+<span class="material-symbols-outlined text-[18px] text-primary font-bold">check_circle</span>
+<span class="text-body-md font-medium">Vitamin D3 + K2</span>
+</div>
+<span class="text-[10px] font-mono-data text-on-surface-variant uppercase">Done</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded border border-dashed border-outline-variant">
+<div class="flex items-center space-x-stack-sm">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">radio_button_unchecked</span>
+<span class="text-body-md text-on-surface-variant">Magnesium Glycinate (PM)</span>
+</div>
+<span class="text-[10px] font-mono-data text-on-surface-variant uppercase">Pending</span>
+</div>
+</div>
+</div>
+<div class="col-span-12 md:col-span-4 bg-white border border-outline-variant p-gutter rounded-lg overflow-hidden shadow-sm">
+<h4 class="font-label-caps text-label-caps text-primary uppercase mb-stack-md font-extrabold">Physical Location</h4>
+<div class="h-32 w-full rounded grayscale border border-outline-variant">
+<img class="w-full h-full object-cover rounded" data-alt="Minimal map" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWZ5RfkyZ73d95excJ7b-XGFM8RhZXzAOuTuuMW-_CJWfCH8FvZWSWa5eORd_CVBpV5SFdFhdiq4k_DWTq8RYAjvF6gxsmvwqDeESmqJO6vAFDlDgzorxvL9HomgQyBu3IoJrMxASkiqsIGLpAdocP-s4wvVJchMB-TWG7fLTiUUmrHbNwHEwZQUjbP71vp0OI_8-92n6pGFNghp9hKjrjnXG11GgUGRlOqxDOkuxiogBo52dQzLvnjWhM5e8L6hhlHKtyXSU37TQ"/>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Micro-interaction for HRV Chart Simulation using Navy/Green/Gray palette
+        const canvas = document.getElementById('hrvChart');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            const drawHRV = () => {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // Draw path
+                ctx.beginPath();
+                ctx.strokeStyle = '#002d40'; // Navy
+                ctx.lineWidth = 2;
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+                
+                ctx.moveTo(0, canvas.height * 0.5);
+                
+                for (let i = 0; i < canvas.width; i += 2) {
+                    const y = (canvas.height * 0.5) + Math.sin(i * 0.1) * 15 + (Math.random() * 8);
+                    ctx.lineTo(i, y);
+                }
+                ctx.stroke();
+
+                // Draw end point indicator
+                const lastY = (canvas.height * 0.5) + Math.sin(canvas.width * 0.1) * 15;
+                ctx.beginPath();
+                ctx.fillStyle = '#3dcc60'; // Lime Green accent
+                ctx.arc(canvas.width - 2, lastY, 4, 0, Math.PI * 2);
+                ctx.fill();
+            };
+            
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = 96;
+            drawHRV();
+            
+            // Re-draw on window resize
+            window.addEventListener('resize', () => {
+                canvas.width = canvas.parentElement.clientWidth;
+                drawHRV();
+            });
+        }
+    </script>
+<script src="assets/app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('button').forEach(b => {
+    if (/enter subpage/i.test(b.textContent)) {
+      b.dataset.wired = 1;
+      b.addEventListener('click', () => location.href = 'mental.html');
+    }
+  });
+});
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const main = document.querySelector('main');
+  const sec = document.createElement('section');
+  sec.style.cssText = 'margin:40px 40px 8px;font-family:Inter,sans-serif;max-width:1280px';
+  main.insertBefore(sec, document.getElementById('lifeos-affiliates'));
+  function render() {
+    const vit = LifeOS.store.get('vitals', []);
+    sec.innerHTML =
+      '<div style="display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid #e2e2e3;padding-top:28px;margin-bottom:18px;flex-wrap:wrap;gap:6px">' +
+      '<h3 style="font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#002D40">Your vitals log</h3>' +
+      '<button data-wired="1" id="v-add" style="background:#3dcc60;color:#002D40;border:none;border-radius:8px;padding:8px 16px;font-size:10px;font-weight:700;letter-spacing:.12em;cursor:pointer">LOG A READING</button></div>' +
+      (vit.length ?
+        '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px">' +
+        vit.slice(-8).reverse().map((v, ri) =>
+          '<div style="background:#fff;border:1px solid #e2e2e3;border-radius:12px;padding:16px;position:relative">' +
+          '<button data-wired="1" data-del="' + (vit.length - 1 - ri) + '" style="position:absolute;top:10px;right:10px;background:none;border:none;color:#9aa0a6;cursor:pointer;font-size:14px">✕</button>' +
+          '<p style="font-size:10px;font-weight:700;letter-spacing:.12em;color:#44474e;text-transform:uppercase">' + v.metric + '</p>' +
+          '<p style="font-family:JetBrains Mono,monospace;font-size:20px;font-weight:700;color:#002D40;margin:4px 0 2px">' + v.value + '</p>' +
+          '<p style="font-size:11px;color:#44474e">' + new Date(v.ts).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' }) + '</p></div>').join('') + '</div>'
+        : '<p style="font-size:13px;color:#44474e">No readings yet — log resting HR, sleep hours, weight or BP, and trends build up here.</p>');
+    sec.querySelector('#v-add').addEventListener('click', () => LifeOS.form('Log a Reading', [
+      ['Metric', 'select', ['Resting HR (bpm)', 'Sleep (hours)', 'Weight (kg)', 'BP (sys/dia)', 'SpO2 (%)', 'Blood sugar (mg/dL)']],
+      ['Value', 'text', 'e.g. 58'],
+    ], (v) => {
+      if (!v.value) { LifeOS.toast('Enter a value'); return; }
+      const a = LifeOS.store.get('vitals', []); a.push({ metric: v.metric, value: v.value, ts: Date.now() });
+      LifeOS.store.set('vitals', a); render();
+      LifeOS.toast(v.metric.split(' (')[0] + ' logged');
+    }, 'Save Reading'));
+    sec.querySelectorAll('[data-del]').forEach(b => b.addEventListener('click', () => {
+      const a = LifeOS.store.get('vitals', []); a.splice(+b.dataset.del, 1);
+      LifeOS.store.set('vitals', a); render(); LifeOS.toast('Reading removed');
+    }));
+  }
+  render();
+});
+</script>
+</body></html>

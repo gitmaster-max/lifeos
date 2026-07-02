@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LifeOS | Finance</title>
+<meta name="description" content="LifeOS — one precision operating system for health, finance, nutrition, mind and legacy. Built for India, designed for the world."/>
+<meta property="og:title" content="LifeOS | Finance"/>
+<meta property="og:description" content="Health, finance, nutrition, mind and legacy — unified into a single precision dashboard."/>
+<meta name="theme-color" content="#002D40"/>
+<link href="assets/favicon.svg" rel="icon" type="image/svg+xml"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#002d40", // Navy
+                    "on-primary": "#ffffff",
+                    "accent": "#3dcc60", // Lime Green
+                    "on-accent": "#002d40",
+                    "surface": "#f9f9f9",
+                    "surface-dim": "#dadada",
+                    "surface-bright": "#f9f9f9",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-low": "#f3f3f4",
+                    "surface-container-high": "#ebe7e6",
+                    "background": "#ffffff",
+                    "on-background": "#002d40",
+                    "on-surface": "#002d40",
+                    "on-surface-variant": "#64748b",
+                    "outline-variant": "#e2e8f0",
+                    "error": "#ba1a1a",
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.5rem", // ROUND_EIGHT
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-sm": "8px",
+                    "unit": "4px",
+                    "stack-lg": "32px",
+                    "container-padding": "40px",
+                    "stack-md": "16px",
+                    "max-width-content": "1280px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "mono-data": ["JetBrains Mono"],
+                    "body": ["Inter"],
+                    "headline": ["Inter"]
+            },
+            "fontSize": {
+                    "mono-data": ["13px", {"lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-sm": ["18px", {"lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                    "body-md": ["14px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      body {
+        background-color: #ffffff;
+        -webkit-font-smoothing: antialiased;
+      }
+      .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+      .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+      .custom-scrollbar::-webkit-scrollbar-thumb { background: #E5E5E5; border-radius: 10px; }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+      }
+      .chart-container { position: relative; width: 100%; height: 200px; }
+      .grid-bg {
+        background-image: linear-gradient(#f1f5f9 1px, transparent 1px), linear-gradient(90deg, #f1f5f9 1px, transparent 1px);
+        background-size: 40px 40px;
+      }
+    </style>
+<link href="assets/app.css" rel="stylesheet"/>
+</head>
+<body class="font-body text-on-background">
+<!-- Sidebar -->
+<aside id="lifeos-nav" class="fixed left-0 top-0 h-screen w-[240px] bg-white border-r border-outline-variant flex flex-col py-6 px-4 z-50" style="font-family:'Inter',sans-serif">
+<a href="index.html" class="block mb-7 px-3">
+<h1 class="text-2xl font-bold text-primary tracking-tight">LifeOS</h1>
+<p class="text-[9px] font-semibold text-on-surface-variant tracking-[0.2em] mt-1">PRECISION LIFE MANAGEMENT</p>
+</a>
+<nav class="flex-grow space-y-0.5 overflow-y-auto">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="dashboard.html"><span class="material-symbols-outlined text-[19px]">dashboard</span><span class="text-[13.5px]">Dashboard</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="health.html"><span class="material-symbols-outlined text-[19px]">monitor_heart</span><span class="text-[13.5px]">Health</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-primary font-semibold bg-surface-container-low rounded-lg" href="finance.html"><span class="material-symbols-outlined text-[19px]" style="font-variation-settings: 'FILL' 1;">payments</span><span class="text-[13.5px]">Finance</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="liabilities.html"><span class="material-symbols-outlined text-[19px]">request_quote</span><span class="text-[13.5px]">Liabilities</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="nutrition.html"><span class="material-symbols-outlined text-[19px]">restaurant</span><span class="text-[13.5px]">Nutrition</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="calendar.html"><span class="material-symbols-outlined text-[19px]">calendar_today</span><span class="text-[13.5px]">Calendar</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="insurance.html"><span class="material-symbols-outlined text-[19px]">verified_user</span><span class="text-[13.5px]">Insurance</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="mental.html"><span class="material-symbols-outlined text-[19px]">psychology</span><span class="text-[13.5px]">Mind</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="nominees.html"><span class="material-symbols-outlined text-[19px]">family_restroom</span><span class="text-[13.5px]">Nominees</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="vault.html"><span class="material-symbols-outlined text-[19px]">folder_shared</span><span class="text-[13.5px]">Vault</span></a>
+</nav>
+<div class="pt-4 border-t border-outline-variant space-y-0.5">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[19px]">settings</span><span class="text-[13.5px]">Settings</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[19px]">help</span><span class="text-[13.5px]">Support</span></a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-[240px] min-h-screen bg-background">
+<header class="sticky top-0 z-40 w-full flex justify-between items-center h-16 px-gutter bg-white border-b border-outline-variant">
+<div class="flex items-center space-x-gutter">
+<h2 class="text-headline-sm font-bold text-primary">Finance Overview</h2>
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]" data-icon="search">search</span>
+<input class="w-full bg-surface-container-low border-transparent rounded-lg pl-10 pr-4 py-1.5 text-body-md focus:ring-1 focus:ring-primary focus:bg-white transition-all" placeholder="Search assets..." type="text"/>
+</div>
+</div>
+<div class="flex items-center space-x-gutter">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="bg-primary text-on-primary px-gutter py-2 rounded-lg font-label-caps text-[11px] font-bold uppercase transition-all active:scale-95">
+                Quick Entry
+            </button>
+<img class="w-8 h-8 rounded-full border border-outline-variant bg-surface-container-high object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAV_qkH_IOIiemBL3011h4Ev1pIjQRbPB9DoTEUN52U9s7AS7vSxO9VDkcGJe5zmSqmUVWtFM8iMAwul8vL3LedejXHtr1Mb1QdHosWYlhIxsYoR2OVB2zNcUJf1zogp8fpYPwJhmqwU7cDcx6RKn92C5HyArIEukSGfqbMtAbY18c0Q63OQ6U8rKxw5Zi0nPXHNB-t9qdC2rFlrG-uT6JMLQmfCd5YUUDIlhlqlbzF1feILqAYnl3qXVb6koGDbYdbBu-xOx4lwys"/>
+</div>
+</header>
+<div class="max-w-max-width-content mx-auto p-gutter space-y-stack-lg">
+<!-- Portfolio Section -->
+<section>
+<div class="flex items-baseline justify-between mb-stack-md">
+<h3 class="text-headline-md font-bold text-primary">Net Worth Portfolio</h3>
+<p class="font-mono-data text-on-surface-variant">Last updated: Today, 08:42 AM</p>
+</div>
+<div class="grid grid-cols-12 gap-gutter">
+<div class="col-span-12 lg:col-span-8 bg-white border border-outline-variant rounded-lg p-gutter shadow-sm">
+<div class="flex justify-between items-start mb-gutter">
+<div>
+<p class="text-label-caps text-on-surface-variant mb-unit uppercase font-bold text-[10px]">Total Net Worth</p>
+<h4 class="text-display-lg text-primary tracking-tighter">₹10.4 Cr</h4>
+<div class="flex items-center text-primary mt-unit font-bold">
+<span class="material-symbols-outlined text-[16px] mr-1 text-accent" data-icon="trending_up" style="font-variation-settings: 'FILL' 1;">trending_up</span>
+<span class="font-mono-data text-mono-data">+4.2% (+₹41,59,960) this month</span>
+</div>
+</div>
+<div class="flex space-x-1">
+<button class="px-3 py-1 font-bold text-[10px] rounded border border-outline-variant hover:bg-surface-container-low transition-colors">1W</button>
+<button class="px-3 py-1 font-bold text-[10px] rounded bg-primary text-white">1M</button>
+<button class="px-3 py-1 font-bold text-[10px] rounded border border-outline-variant hover:bg-surface-container-low transition-colors">1Y</button>
+</div>
+</div>
+<div class="chart-container grid-bg border-t border-outline-variant pt-gutter flex items-end overflow-hidden">
+<svg class="w-full h-full" viewbox="0 0 800 200">
+<path d="M0,180 L50,170 L100,175 L150,150 L200,155 L250,130 L300,120 L350,110 L400,90 L450,95 L500,70 L550,60 L600,65 L650,45 L700,30 L750,35 L800,20" fill="none" stroke="#3dcc60" stroke-width="3" vector-effect="non-scaling-stroke"></path>
+<circle cx="800" cy="20" fill="#3dcc60" r="4"></circle>
+</svg>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-4 flex flex-col space-y-gutter">
+<div class="bg-white border border-outline-variant rounded-lg p-gutter shadow-sm flex-1">
+<h5 class="text-label-caps text-on-surface-variant mb-stack-md uppercase font-bold text-[10px]">Assets vs Liabilities</h5>
+<div class="space-y-stack-md">
+<div>
+<div class="flex justify-between mb-unit">
+<span class="text-body-md font-semibold">Assets</span>
+<span class="font-mono-data">₹12.6 Cr</span>
+</div>
+<div class="w-full h-2 bg-surface-container-low rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[82%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-unit">
+<span class="text-body-md font-semibold">Liabilities</span>
+<span class="font-mono-data">₹2,25,34,500</span>
+</div>
+<div class="w-full h-2 bg-surface-container-low rounded-full overflow-hidden">
+<div class="h-full bg-error w-[18%]"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-primary text-white border border-primary rounded-lg p-gutter shadow-sm">
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<h5 class="text-label-caps text-surface-dim mb-unit uppercase font-bold text-[10px]">Liquidity Ratio</h5>
+<span class="text-headline-sm font-bold">Excellent (4.2x)</span>
+</div>
+<span class="material-symbols-outlined text-accent text-[32px]" data-icon="account_balance_wallet">account_balance_wallet</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Investments -->
+<section class="grid grid-cols-12 gap-gutter">
+<div class="col-span-12">
+<h3 class="text-headline-md font-bold text-primary mb-stack-md">Investment Performance</h3>
+</div>
+<div class="col-span-12 lg:col-span-8 bg-white border border-outline-variant rounded-lg overflow-hidden shadow-sm">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low border-b border-outline-variant">
+<tr>
+<th class="px-gutter py-4 text-label-caps uppercase font-bold text-[10px] text-on-surface-variant">Asset Type</th>
+<th class="px-gutter py-4 text-label-caps uppercase font-bold text-[10px] text-on-surface-variant">Value</th>
+<th class="px-gutter py-4 text-label-caps uppercase font-bold text-[10px] text-on-surface-variant">24H Change</th>
+<th class="px-gutter py-4 text-label-caps uppercase font-bold text-[10px] text-on-surface-variant">Alloc.</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-gutter py-4 flex items-center">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center mr-stack-md group-hover:bg-primary group-hover:text-white transition-all">
+<span class="material-symbols-outlined text-[20px]" data-icon="trending_up">trending_up</span>
+</div>
+<div>
+<div class="font-bold text-primary">Equities</div>
+<div class="text-[11px] text-on-surface-variant">Global Markets</div>
+</div>
+</td>
+<td class="px-gutter py-4 font-mono-data">₹5,33,10,900</td>
+<td class="px-gutter py-4 text-primary font-bold font-mono-data">+1.24%</td>
+<td class="px-gutter py-4 font-mono-data">51.4%</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-gutter py-4 flex items-center">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center mr-stack-md group-hover:bg-primary group-hover:text-white transition-all">
+<span class="material-symbols-outlined text-[20px]" data-icon="currency_bitcoin">currency_bitcoin</span>
+</div>
+<div>
+<div class="font-bold text-primary">Digital Assets</div>
+<div class="text-[11px] text-on-surface-variant">BTC, ETH, Altcoins</div>
+</div>
+</td>
+<td class="px-gutter py-4 font-mono-data">₹1,52,88,600</td>
+<td class="px-gutter py-4 text-error font-bold font-mono-data">-3.82%</td>
+<td class="px-gutter py-4 font-mono-data">14.7%</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-gutter py-4 flex items-center">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center mr-stack-md group-hover:bg-primary group-hover:text-white transition-all">
+<span class="material-symbols-outlined text-[20px]" data-icon="home_work">home_work</span>
+</div>
+<div>
+<div class="font-bold text-primary">Real Estate</div>
+<div class="text-[11px] text-on-surface-variant">Property Portfolio</div>
+</div>
+</td>
+<td class="px-gutter py-4 font-mono-data">₹3,50,26,000</td>
+<td class="px-gutter py-4 text-on-surface-variant font-bold font-mono-data">0.00%</td>
+<td class="px-gutter py-4 font-mono-data">33.8%</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Insights Card -->
+<div class="col-span-12 lg:col-span-4 bg-white border-2 border-accent rounded-lg p-gutter flex flex-col justify-between shadow-sm">
+<div>
+<h5 class="text-label-caps text-on-surface-variant mb-stack-md uppercase font-bold text-[10px]">Portfolio AI Analytics</h5>
+<p class="text-body-lg font-bold leading-tight text-primary">"Your portfolio has a high concentration in tech equities. Rebalancing could reduce risk by 12%."</p>
+</div>
+<div class="mt-stack-lg">
+<button class="w-full bg-accent text-on-accent py-3 rounded-lg font-bold uppercase text-[11px] flex items-center justify-center space-x-2 group hover:opacity-90 transition-all">
+<span>Optimize Now</span>
+<span class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Local Management -->
+<section class="grid grid-cols-12 gap-gutter">
+<div class="col-span-12">
+<h3 class="text-headline-md font-bold text-primary mb-stack-md">Local Management</h3>
+</div>
+<!-- Dezerv Partner -->
+<div class="col-span-12 md:col-span-7 bg-white border border-outline-variant rounded-lg overflow-hidden flex flex-col sm:row shadow-sm">
+<div class="sm:w-2/5 relative min-h-[160px]">
+<img class="absolute inset-0 w-full h-full object-cover grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVliI_BJHFMrwi9GmKjWv9savCJwduQCmRA7WGfhOq7VSeRKM6fIAYXBwqW9jLcWn6136D96oI4OuKKyjN8xCXnHPY3jjQxtrRHQzfRUtZuHexu4gkswuk2UdbueQD7NAypPPAFRSjvu0ZVEtgLd0d1HJ0L63ZiqV104EaOOTFIV6bVvpZ15zy3J6RaSA8eslG6y_4ObllAtJd2y8tRR3jyu5w92h9FnYwRPpw4IXCucIq1j-naDY1gRsUM6N65KUZJsijnyMUSMc"/>
+<div class="absolute inset-0 bg-primary/20 mix-blend-multiply"></div>
+</div>
+<div class="p-gutter flex-1 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-center mb-unit">
+<h4 class="text-headline-sm font-bold text-primary">Dezerv</h4>
+<span class="bg-accent text-on-accent px-2 py-0.5 rounded-full font-bold text-[9px] uppercase">Premium Partner</span>
+</div>
+<p class="text-body-md text-on-surface-variant">Institutional wealth management for modern investors. Access curated portfolios.</p>
+</div>
+<div class="mt-stack-md flex items-center justify-between border-t border-outline-variant pt-4">
+<div class="flex flex-col">
+<span class="text-[9px] font-bold uppercase text-on-surface-variant">Managed Assets</span>
+<span class="font-mono-data font-bold text-primary">₹99,93,200</span>
+</div>
+<button class="bg-primary text-white px-4 py-2 rounded-lg font-bold uppercase text-[10px] hover:bg-opacity-90 transition-all">View Dashboard</button>
+</div>
+</div>
+</div>
+<!-- Action Grid -->
+<div class="col-span-12 md:col-span-5 grid grid-cols-2 gap-stack-md">
+<div class="bg-white border border-outline-variant rounded-lg p-4 flex flex-col items-center justify-center text-center hover:border-accent transition-all cursor-pointer shadow-sm group">
+<span class="material-symbols-outlined text-[28px] mb-2 text-primary group-hover:text-accent transition-colors" data-icon="account_balance">account_balance</span>
+<h6 class="font-bold text-[11px] uppercase">Banking</h6>
+</div>
+<div class="bg-white border border-outline-variant rounded-lg p-4 flex flex-col items-center justify-center text-center hover:border-accent transition-all cursor-pointer shadow-sm group">
+<span class="material-symbols-outlined text-[28px] mb-2 text-primary group-hover:text-accent transition-colors" data-icon="receipt_long">receipt_long</span>
+<h6 class="font-bold text-[11px] uppercase">Tax Strategy</h6>
+</div>
+<div class="bg-white border border-outline-variant rounded-lg p-4 flex flex-col items-center justify-center text-center hover:border-accent transition-all cursor-pointer shadow-sm group">
+<span class="material-symbols-outlined text-[28px] mb-2 text-primary group-hover:text-accent transition-colors" data-icon="shield_with_heart">shield_with_heart</span>
+<h6 class="font-bold text-[11px] uppercase">Insurance</h6>
+</div>
+<div class="bg-white border border-outline-variant rounded-lg p-4 flex flex-col items-center justify-center text-center hover:border-accent transition-all cursor-pointer shadow-sm group">
+<span class="material-symbols-outlined text-[28px] mb-2 text-primary group-hover:text-accent transition-colors" data-icon="add_circle">add_circle</span>
+<h6 class="font-bold text-[11px] uppercase">Add Partner</h6>
+</div>
+</div>
+</section>
+</div>
+<!-- Quick Action -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-primary text-white rounded-full shadow-xl flex items-center justify-center hover:bg-accent hover:text-on-accent transition-all z-50 group" id="quickActionBtn">
+<span class="material-symbols-outlined text-[28px] group-hover:rotate-90 transition-transform duration-300" data-icon="add">add</span>
+</button>
+</main>
+<script>
+    const fab = document.getElementById('quickActionBtn');
+    fab.addEventListener('click', () => {
+        fab.classList.add('scale-90');
+        setTimeout(() => fab.classList.remove('scale-90'), 150);
+    });
+
+    const cards = document.querySelectorAll('.bg-white');
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            if (!card.classList.contains('border-accent')) {
+                card.style.borderColor = '#002d40';
+            }
+        });
+        card.addEventListener('mouseleave', () => {
+            if (!card.classList.contains('border-accent')) {
+                card.style.borderColor = '#e2e8f0';
+            }
+        });
+    });
+</script>
+<script src="assets/app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const ACT = 'px-3 py-1 font-bold text-[10px] rounded bg-primary text-white';
+  const INACT = 'px-3 py-1 font-bold text-[10px] rounded border border-outline-variant hover:bg-surface-container-low transition-colors';
+  const seg = [...document.querySelectorAll('button')].filter(b => /^1[WMY]$/.test(b.textContent.trim()));
+  seg.forEach(b => {
+    b.dataset.wired = 1;
+    b.addEventListener('click', () => {
+      seg.forEach(x => x.className = (x === b ? ACT : INACT));
+      LifeOS.toast('Chart range: ' + b.textContent.trim());
+    });
+  });
+  const fab = document.getElementById('quickActionBtn');
+  if (fab) { fab.dataset.wired = 1; fab.addEventListener('click', () => LifeOS.quickEntry('Expense')); }
+});
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const main = document.querySelector('main');
+  const sec = document.createElement('section');
+  sec.style.cssText = 'margin:40px 40px 8px;font-family:Inter,sans-serif;max-width:1280px';
+  main.insertBefore(sec, document.getElementById('lifeos-affiliates'));
+  const inr = n => '₹' + Math.round(n).toLocaleString('en-IN');
+  function render() {
+    const h = LifeOS.store.get('holdings', []);
+    const total = h.reduce((s, x) => s + (parseFloat(x.current_value) || 0), 0);
+    sec.innerHTML =
+      '<div style="display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid #e2e2e3;padding-top:28px;margin-bottom:18px;flex-wrap:wrap;gap:6px">' +
+      '<h3 style="font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#002D40">Your holdings' + (h.length ? ' · ' + inr(total) : '') + '</h3>' +
+      '<button data-wired="1" id="h-add" style="background:#3dcc60;color:#002D40;border:none;border-radius:8px;padding:8px 16px;font-size:10px;font-weight:700;letter-spacing:.12em;cursor:pointer">ADD HOLDING</button></div>' +
+      (h.length ?
+        '<div style="background:#fff;border:1px solid #e2e2e3;border-radius:12px;overflow:hidden"><table style="width:100%;font-family:JetBrains Mono,monospace;font-size:12px;border-collapse:collapse">' +
+        '<thead><tr style="text-align:left;color:#44474e;text-transform:uppercase;font-size:10px;letter-spacing:.1em;border-bottom:1px solid #e2e2e3">' +
+        '<th style="padding:12px 16px">Holding</th><th>Class</th><th style="text-align:right">Value</th><th style="text-align:right;padding-right:16px">Share</th><th></th></tr></thead><tbody>' +
+        h.map((x, i) => {
+          const val = parseFloat(x.current_value) || 0;
+          return '<tr style="border-bottom:1px solid #f3f3f4"><td style="padding:11px 16px;font-weight:700;color:#002D40">' + x.holding_name + '</td>' +
+            '<td style="color:#44474e">' + x.asset_class + '</td>' +
+            '<td style="text-align:right;font-weight:700;color:#002D40">' + inr(val) + '</td>' +
+            '<td style="text-align:right;padding-right:16px;color:#1d9c40;font-weight:700">' + (total ? Math.round(val / total * 100) : 0) + '%</td>' +
+            '<td style="width:36px;text-align:center"><button data-wired="1" data-del="' + i + '" style="background:none;border:none;color:#9aa0a6;cursor:pointer">✕</button></td></tr>';
+        }).join('') + '</tbody></table></div>'
+        : '<p style="font-size:13px;color:#44474e">Add your MFs, stocks, FDs, EPF and gold — your real allocation replaces the sample view above as you go.</p>');
+    sec.querySelector('#h-add').addEventListener('click', () => LifeOS.form('Add Holding', [
+      ['Holding name', 'text', 'e.g. UTI Nifty 50 Index Fund'],
+      ['Asset class', 'select', ['Equity MF', 'Direct stocks', 'FD / Cash', 'EPF / PPF', 'Gold', 'Real estate', 'Other']],
+      ['Current value (₹)', 'number', 'e.g. 250000'],
+    ], (v) => {
+      if (!v.holding_name || !(parseFloat(v.current_value) > 0)) { LifeOS.toast('Enter a name and value'); return; }
+      const a = LifeOS.store.get('holdings', []); a.push(v);
+      LifeOS.store.set('holdings', a); render();
+      LifeOS.toast(v.holding_name + ' added');
+    }, 'Add Holding'));
+    sec.querySelectorAll('[data-del]').forEach(b => b.addEventListener('click', () => {
+      const a = LifeOS.store.get('holdings', []); a.splice(+b.dataset.del, 1);
+      LifeOS.store.set('holdings', a); render(); LifeOS.toast('Holding removed');
+    }));
+  }
+  render();
+});
+</script>
+</body></html>

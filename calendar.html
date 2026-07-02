@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LifeOS | Calendar</title>
+<meta name="description" content="Your personal life calendar — day, week, month and year views."/>
+<meta name="theme-color" content="#002D40"/>
+<link href="assets/favicon.svg" rel="icon" type="image/svg+xml"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = { theme: { extend: { colors: {
+    surface: "#f9f9f9", "surface-container-lowest": "#ffffff", "surface-container-low": "#f3f3f4",
+    "surface-container-high": "#e8e8e9", primary: "#002D40", "on-primary": "#ffffff",
+    secondary: "#3dcc60", "on-secondary": "#002D40", "outline-variant": "#e2e2e3",
+    "on-surface": "#1a1c1e", "on-surface-variant": "#44474e", error: "#ba1a1a"
+  } } } }
+</script>
+<style>
+  body { font-family: 'Inter', sans-serif; background:#f9f9f9; color:#1a1c1e; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .cal-btn { transition: all .15s ease; }
+  .cal-btn.active { background:#fff; box-shadow:0 1px 3px rgba(0,45,64,.12); color:#002D40; border-radius:8px; }
+  .cal-btn:not(.active) { color:#44474e; }
+  .cal-btn:not(.active):hover { color:#002D40; }
+  .ev { cursor:pointer; transition: filter .12s ease, transform .12s ease; }
+  .ev:hover { filter: brightness(1.06); transform: translateY(-1px); }
+  .daycell { transition: background .12s ease; }
+  .daycell:hover { background:#f3f3f4; }
+  .mini-day.has-ev::after { content:''; display:block; width:4px; height:4px; border-radius:99px; background:#3dcc60; margin:1px auto 0; }
+</style>
+<link href="assets/app.css" rel="stylesheet"/>
+</head>
+<body class="bg-surface text-on-surface">
+<aside id="lifeos-nav" class="fixed left-0 top-0 h-screen w-[240px] bg-white border-r border-outline-variant flex flex-col py-6 px-4 z-50" style="font-family:'Inter',sans-serif">
+<a href="index.html" class="block mb-7 px-3">
+<h1 class="text-2xl font-bold text-primary tracking-tight">LifeOS</h1>
+<p class="text-[9px] font-semibold text-on-surface-variant tracking-[0.2em] mt-1">PRECISION LIFE MANAGEMENT</p>
+</a>
+<nav class="flex-grow space-y-0.5 overflow-y-auto">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="dashboard.html"><span class="material-symbols-outlined text-[19px]">dashboard</span><span class="text-[13.5px]">Dashboard</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="health.html"><span class="material-symbols-outlined text-[19px]">monitor_heart</span><span class="text-[13.5px]">Health</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="finance.html"><span class="material-symbols-outlined text-[19px]">payments</span><span class="text-[13.5px]">Finance</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="liabilities.html"><span class="material-symbols-outlined text-[19px]">request_quote</span><span class="text-[13.5px]">Liabilities</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="nutrition.html"><span class="material-symbols-outlined text-[19px]">restaurant</span><span class="text-[13.5px]">Nutrition</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-primary font-semibold bg-surface-container-low rounded-lg" href="calendar.html"><span class="material-symbols-outlined text-[19px]" style="font-variation-settings: 'FILL' 1;">calendar_today</span><span class="text-[13.5px]">Calendar</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="insurance.html"><span class="material-symbols-outlined text-[19px]">verified_user</span><span class="text-[13.5px]">Insurance</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="mental.html"><span class="material-symbols-outlined text-[19px]">psychology</span><span class="text-[13.5px]">Mind</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="nominees.html"><span class="material-symbols-outlined text-[19px]">family_restroom</span><span class="text-[13.5px]">Nominees</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="vault.html"><span class="material-symbols-outlined text-[19px]">folder_shared</span><span class="text-[13.5px]">Vault</span></a>
+</nav>
+<div class="pt-4 border-t border-outline-variant space-y-0.5">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[19px]">settings</span><span class="text-[13.5px]">Settings</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[19px]">help</span><span class="text-[13.5px]">Support</span></a>
+</div>
+</aside>
+
+<div class="ml-[240px] min-h-screen flex flex-col">
+  <header class="sticky top-0 z-40 h-16 px-8 bg-white border-b border-outline-variant flex justify-between items-center gap-4">
+    <div class="flex items-center gap-3 min-w-0">
+      <h1 id="cal-title" class="text-[19px] font-bold text-primary tracking-tight whitespace-nowrap">July 2026</h1>
+      <div class="flex items-center gap-1">
+        <button data-wired="1" id="cal-prev" class="p-1.5 rounded-lg hover:bg-surface-container-low text-primary"><span class="material-symbols-outlined text-[20px]">chevron_left</span></button>
+        <button data-wired="1" id="cal-today" class="px-3 py-1.5 text-[11px] font-bold tracking-wider text-primary border border-outline-variant rounded-lg hover:bg-surface-container-low">TODAY</button>
+        <button data-wired="1" id="cal-next" class="p-1.5 rounded-lg hover:bg-surface-container-low text-primary"><span class="material-symbols-outlined text-[20px]">chevron_right</span></button>
+      </div>
+    </div>
+    <div class="flex items-center gap-4">
+      <div class="flex bg-surface-container-low p-1 rounded-lg" id="cal-views">
+        <button data-wired="1" data-view="day" class="cal-btn px-4 py-1.5 text-[11px] font-bold tracking-wider">DAY</button>
+        <button data-wired="1" data-view="week" class="cal-btn active px-4 py-1.5 text-[11px] font-bold tracking-wider">WEEK</button>
+        <button data-wired="1" data-view="month" class="cal-btn px-4 py-1.5 text-[11px] font-bold tracking-wider">MONTH</button>
+        <button data-wired="1" data-view="year" class="cal-btn px-4 py-1.5 text-[11px] font-bold tracking-wider">YEAR</button>
+      </div>
+      <button data-wired="1" id="cal-add" class="flex items-center gap-2 px-5 py-2 bg-secondary text-on-secondary text-[11px] font-bold tracking-wider rounded-lg hover:brightness-95 transition-all">
+        <span class="material-symbols-outlined text-[16px]">add</span> ADD EVENT
+      </button>
+    </div>
+  </header>
+
+  <main class="flex-1 p-6 max-w-[1280px] w-full">
+    <div id="cal-body" class="bg-white border border-outline-variant rounded-xl overflow-hidden"></div>
+    <p class="text-[11px] text-on-surface-variant mt-4">Personal only — vacations, dates, family visits, health appointments. Click any event to edit or remove it; click any empty slot to add one.</p>
+  </main>
+</div>
+
+<script src="assets/app.js"></script>
+<script>
+(function () {
+  "use strict";
+  var HOUR0 = 6, HOUR1 = 23, HPX = 52;
+  var COLORS = { personal: "#002D40", health: "#1d9c40", family: "#7b4b94", travel: "#e8945a", fitness: "#3573b9" };
+  var TYPE_NAMES = { personal: "Personal", health: "Health", family: "Family", travel: "Travel", fitness: "Fitness" };
+
+  function iso(d) { return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); }
+  function today0() { var d = new Date(); d.setHours(0, 0, 0, 0); return d; }
+  function parseISO(s) { var p = s.split("-"); return new Date(+p[0], +p[1] - 1, +p[2]); }
+  function mins(t) { var p = t.split(":"); return (+p[0]) * 60 + (+p[1]); }
+  function fmtT(t) { var m = mins(t), h = Math.floor(m / 60), mm = m % 60; var ap = h >= 12 ? "PM" : "AM"; var hh = h % 12 || 12; return hh + (mm ? ":" + String(mm).padStart(2, "0") : "") + " " + ap; }
+
+  // ---------- events store (seed once, migrate old) ----------
+  function seed() {
+    var now = today0(), y = now.getFullYear(), m = now.getMonth();
+    function d(offset) { var x = new Date(now); x.setDate(x.getDate() + offset); return iso(x); }
+    return [
+      { id: 1, title: "Dentist — Dr. Rao, Indiranagar", date: d(3), start: "09:00", end: "10:00", type: "health", note: "Leave by 8:20 to beat traffic" },
+      { id: 2, title: "Date night — Toit", date: d(2), start: "20:00", end: "22:30", type: "family", note: "Table for two, 8 PM" },
+      { id: 3, title: "HIIT session", date: d(1), start: "07:00", end: "07:45", type: "fitness", note: "" },
+      { id: 4, title: "Sunday meal prep", date: d(4), start: "11:00", end: "12:30", type: "personal", note: "Keto week" },
+      { id: 5, title: "Mom's birthday", date: iso(new Date(y, 7, 24)), start: "00:00", end: "23:59", type: "family", note: "Order cake + flowers" },
+      { id: 6, title: "Goa vacation", date: iso(new Date(y, 7, 12)), start: "00:00", end: "23:59", type: "travel", note: "12–18 Aug, flights booked", days: 7 },
+    ];
+  }
+  var events = LifeOS.store.get("events2", null);
+  if (!events) {
+    events = seed();
+    (LifeOS.store.get("events", []) || []).forEach(function (e, i) {
+      if (e && e.title && e.date) events.push({ id: 100 + i, title: e.title, date: e.date, start: "10:00", end: "11:00", type: "personal", note: e.note || "" });
+    });
+    LifeOS.store.set("events2", events);
+  }
+  function save() { LifeOS.store.set("events2", events); }
+  function eventsOn(dISO) {
+    return events.filter(function (e) {
+      if (e.date === dISO) return true;
+      if (e.days && e.days > 1) {
+        var s = parseISO(e.date), x = parseISO(dISO);
+        return x >= s && x < new Date(s.getTime() + e.days * 864e5);
+      }
+      return false;
+    }).sort(function (a, b) { return mins(a.start) - mins(b.start); });
+  }
+
+  // ---------- state ----------
+  var view = LifeOS.store.get("calview", "week");
+  var cursor = today0();
+
+  // ---------- renderers ----------
+  var body = document.getElementById("cal-body");
+  var title = document.getElementById("cal-title");
+  var MN = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  var DN = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+
+  function weekStart(d) { var x = new Date(d); x.setDate(x.getDate() - ((x.getDay() + 6) % 7)); return x; }
+
+  function hourCol(dayISO, showLabels) {
+    var h = '<div class="relative" style="height:' + ((HOUR1 - HOUR0 + 1) * HPX) + 'px">';
+    for (var hr = HOUR0; hr <= HOUR1; hr++) {
+      h += '<div class="absolute left-0 right-0 border-t border-outline-variant/50" style="top:' + ((hr - HOUR0) * HPX) + 'px"></div>';
+    }
+    // events
+    eventsOn(dayISO).forEach(function (e) {
+      if (e.days && e.days > 1) return; // all-day handled separately
+      var t0 = Math.max(mins(e.start), HOUR0 * 60), t1 = Math.min(mins(e.end), (HOUR1 + 1) * 60);
+      if (t1 <= HOUR0 * 60 || t0 >= (HOUR1 + 1) * 60) return;
+      var top = (t0 - HOUR0 * 60) / 60 * HPX, ht = Math.max(24, (t1 - t0) / 60 * HPX - 3);
+      var c = COLORS[e.type] || COLORS.personal;
+      h += '<div class="ev absolute rounded-lg px-2 py-1 overflow-hidden" data-ev="' + e.id + '" style="top:' + top + 'px;height:' + ht + 'px;left:3%;width:94%;background:' + c + ';color:#fff">' +
+        '<p class="text-[11px] font-bold leading-tight truncate">' + e.title + '</p>' +
+        (ht > 34 ? '<p class="text-[10px] opacity-75 mono">' + fmtT(e.start) + " – " + fmtT(e.end) + "</p>" : "") + "</div>";
+    });
+    // now line
+    var now = new Date();
+    if (iso(now) === dayISO) {
+      var nm = now.getHours() * 60 + now.getMinutes();
+      if (nm >= HOUR0 * 60 && nm <= (HOUR1 + 1) * 60) {
+        h += '<div class="absolute left-0 right-0 z-10 pointer-events-none" style="top:' + ((nm - HOUR0 * 60) / 60 * HPX) + 'px"><div style="border-top:2px solid #3dcc60"></div><div style="width:8px;height:8px;border-radius:99px;background:#3dcc60;margin-top:-5px"></div></div>';
+      }
+    }
+    h += '<div class="absolute inset-0" data-slot="' + dayISO + '" style="z-index:0"></div></div>';
+    return h;
+  }
+  function gutter() {
+    var h = '<div style="height:' + ((HOUR1 - HOUR0 + 1) * HPX) + 'px" class="relative">';
+    for (var hr = HOUR0; hr <= HOUR1; hr++) {
+      h += '<div class="absolute right-2 mono text-[10px] text-on-surface-variant" style="top:' + ((hr - HOUR0) * HPX - 6) + 'px">' + (hr % 12 || 12) + (hr >= 12 ? " PM" : " AM") + "</div>";
+    }
+    return h + "</div>";
+  }
+  function allDayRow(days) {
+    var chips = "";
+    days.forEach(function (dISO, i) {
+      eventsOn(dISO).forEach(function (e) {
+        if (!(e.days && e.days > 1) && e.start !== "00:00") return;
+        if (e.days && e.days > 1 && dISO !== e.date && i !== 0) return; // draw once at start (or week start)
+        var c = COLORS[e.type] || COLORS.personal;
+        chips += '<span class="ev inline-block text-[10px] font-bold px-2 py-1 rounded mr-1 mb-1" data-ev="' + e.id + '" style="background:' + c + '1a;color:' + c + ';border:1px solid ' + c + '55">' + e.title + "</span>";
+      });
+    });
+    return chips ? '<div class="px-3 py-2 border-b border-outline-variant/60 bg-surface-container-low/40">' + chips + "</div>" : "";
+  }
+
+  function renderDay() {
+    var dISO = iso(cursor);
+    title.textContent = DN[(cursor.getDay() + 6) % 7] + ", " + cursor.getDate() + " " + MN[cursor.getMonth()] + " " + cursor.getFullYear();
+    body.innerHTML = allDayRow([dISO]) +
+      '<div class="grid" style="grid-template-columns:64px 1fr;max-height:66vh;overflow-y:auto">' +
+      "<div>" + gutter() + "</div><div class='border-l border-outline-variant/60'>" + hourCol(dISO) + "</div></div>";
+  }
+  function renderWeek() {
+    var ws = weekStart(cursor), days = [];
+    for (var i = 0; i < 7; i++) { var d = new Date(ws); d.setDate(d.getDate() + i); days.push(d); }
+    var we = days[6];
+    title.textContent = ws.getDate() + " " + MN[ws.getMonth()].slice(0, 3) + " – " + we.getDate() + " " + MN[we.getMonth()].slice(0, 3) + " " + we.getFullYear();
+    var head = '<div class="grid border-b border-outline-variant" style="grid-template-columns:64px repeat(7,1fr)"><div></div>' +
+      days.map(function (d) {
+        var isT = iso(d) === iso(today0());
+        return '<div class="py-2 text-center border-l border-outline-variant/60"><p class="text-[10px] font-bold tracking-wider text-on-surface-variant">' + DN[(d.getDay() + 6) % 7].toUpperCase() + '</p>' +
+          '<p class="mono text-[15px] font-bold ' + (isT ? "text-white bg-primary rounded-full w-7 h-7 leading-7 mx-auto" : "text-primary") + '">' + d.getDate() + "</p></div>";
+      }).join("") + "</div>";
+    body.innerHTML = head + allDayRow(days.map(iso)) +
+      '<div class="grid" style="grid-template-columns:64px repeat(7,1fr);max-height:62vh;overflow-y:auto"><div>' + gutter() + "</div>" +
+      days.map(function (d) { return "<div class='border-l border-outline-variant/60'>" + hourCol(iso(d)) + "</div>"; }).join("") + "</div>";
+  }
+  function renderMonth() {
+    title.textContent = MN[cursor.getMonth()] + " " + cursor.getFullYear();
+    var first = new Date(cursor.getFullYear(), cursor.getMonth(), 1);
+    var start = weekStart(first), cells = "";
+    for (var i = 0; i < 42; i++) {
+      var d = new Date(start); d.setDate(d.getDate() + i);
+      var inM = d.getMonth() === cursor.getMonth(), dISO = iso(d);
+      var evs = eventsOn(dISO), isT = dISO === iso(today0());
+      cells += '<div class="daycell border-b border-l border-outline-variant/60 p-1.5 align-top cursor-pointer" data-day="' + dISO + '" style="min-height:92px' + (inM ? "" : ";background:#fafafa") + '">' +
+        '<p class="mono text-[11px] font-bold mb-1 ' + (isT ? "text-white bg-primary rounded-full w-6 h-6 leading-6 text-center" : inM ? "text-primary" : "text-on-surface-variant/50") + '">' + d.getDate() + "</p>" +
+        evs.slice(0, 3).map(function (e) {
+          var c = COLORS[e.type] || COLORS.personal;
+          return '<div class="ev text-[10px] font-semibold px-1.5 py-0.5 rounded mb-0.5 truncate" data-ev="' + e.id + '" style="background:' + c + '1a;color:' + c + '">' + e.title + "</div>";
+        }).join("") +
+        (evs.length > 3 ? '<p class="text-[9px] text-on-surface-variant font-bold">+' + (evs.length - 3) + " more</p>" : "") + "</div>";
+    }
+    body.innerHTML = '<div class="grid grid-cols-7 border-b border-outline-variant bg-surface-container-low/50">' +
+      DN.map(function (n) { return '<div class="py-2 text-center text-[10px] font-bold tracking-wider text-on-surface-variant border-l border-outline-variant/60">' + n.toUpperCase() + "</div>"; }).join("") +
+      '</div><div class="grid grid-cols-7">' + cells + "</div>";
+  }
+  function renderYear() {
+    title.textContent = String(cursor.getFullYear());
+    var y = cursor.getFullYear(), html = '<div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 p-6">';
+    for (var m = 0; m < 12; m++) {
+      var first = new Date(y, m, 1), start = weekStart(first);
+      var mini = "";
+      for (var i = 0; i < 42; i++) {
+        var d = new Date(start); d.setDate(d.getDate() + i);
+        var inM = d.getMonth() === m;
+        var has = inM && eventsOn(iso(d)).length > 0;
+        mini += '<div class="mini-day text-center mono text-[9px] leading-4 ' + (inM ? "text-primary" : "text-transparent") + (has ? " has-ev font-bold" : "") + '">' + d.getDate() + "</div>";
+      }
+      html += '<div class="cursor-pointer hover:bg-surface-container-low rounded-lg p-3 transition-colors" data-month="' + m + '">' +
+        '<p class="text-[11px] font-bold text-primary mb-2">' + MN[m].toUpperCase() + '</p>' +
+        '<div class="grid grid-cols-7 gap-y-0.5">' + mini + "</div></div>";
+    }
+    body.innerHTML = html + "</div>";
+  }
+
+  function render() {
+    document.querySelectorAll("#cal-views .cal-btn").forEach(function (b) { b.classList.toggle("active", b.dataset.view === view); });
+    ({ day: renderDay, week: renderWeek, month: renderMonth, year: renderYear })[view]();
+  }
+
+  // ---------- event form ----------
+  function eventForm(ev, presetDate) {
+    LifeOS.form(ev ? "Edit Event" : "Add Event", [
+      ["Title", "text", "e.g. Dadi's pension office visit"],
+      ["Date", "date"],
+      ["Start", "time"],
+      ["End", "time"],
+      ["Type", "select", ["Personal", "Health", "Family", "Travel", "Fitness"]],
+      ["Note", "text", "optional"],
+    ], function (v) {
+      if (!v.title || !v.date) { LifeOS.toast("Title and date are required"); return; }
+      var rec = {
+        id: ev ? ev.id : Date.now(),
+        title: v.title, date: v.date,
+        start: v.start || "10:00", end: v.end || (v.start ? v.start : "11:00"),
+        type: (v.type || "Personal").toLowerCase(), note: v.note || "",
+      };
+      if (mins(rec.end) <= mins(rec.start)) rec.end = String(Math.min(23, Math.floor(mins(rec.start) / 60) + 1)).padStart(2, "0") + ":" + String(mins(rec.start) % 60).padStart(2, "0");
+      if (ev) { events = events.map(function (x) { return x.id === ev.id ? rec : x; }); }
+      else events.push(rec);
+      save(); render();
+      LifeOS.toast((ev ? "Updated" : "Added") + ' "' + rec.title + '"');
+    }, ev ? "Save Changes" : "Add Event");
+    setTimeout(function () {
+      var ov = document.getElementById("lifeos-modal-overlay");
+      if (!ov) return;
+      var ins = ov.querySelectorAll("input,select");
+      if (ev) { ins[0].value = ev.title; ins[1].value = ev.date; ins[2].value = ev.start; ins[3].value = ev.end; ov.querySelector("select").value = TYPE_NAMES[ev.type] || "Personal"; ins[ins.length - 1].value = ev.note; }
+      else { ins[1].value = presetDate || iso(cursor); ins[2].value = "10:00"; ins[3].value = "11:00"; }
+      if (ev) {
+        var del = document.createElement("button");
+        del.textContent = "Delete event";
+        del.style.cssText = "width:100%;margin-top:10px;background:none;border:1px solid rgba(186,26,26,.4);color:#ba1a1a;border-radius:8px;padding:10px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer";
+        del.addEventListener("click", function () {
+          events = events.filter(function (x) { return x.id !== ev.id; });
+          save(); render();
+          document.getElementById("lifeos-modal-overlay").remove();
+          LifeOS.toast("Event deleted");
+        });
+        ov.querySelector(".lifeos-modal-body").appendChild(del);
+      }
+    }, 30);
+  }
+
+  // ---------- wiring ----------
+  document.getElementById("cal-add").addEventListener("click", function () { eventForm(null); });
+  document.getElementById("cal-today").addEventListener("click", function () { cursor = today0(); render(); });
+  function step(dir) {
+    if (view === "day") cursor.setDate(cursor.getDate() + dir);
+    if (view === "week") cursor.setDate(cursor.getDate() + 7 * dir);
+    if (view === "month") cursor.setMonth(cursor.getMonth() + dir);
+    if (view === "year") cursor.setFullYear(cursor.getFullYear() + dir);
+    render();
+  }
+  document.getElementById("cal-prev").addEventListener("click", function () { step(-1); });
+  document.getElementById("cal-next").addEventListener("click", function () { step(1); });
+  document.querySelectorAll("#cal-views .cal-btn").forEach(function (b) {
+    b.addEventListener("click", function () { view = b.dataset.view; LifeOS.store.set("calview", view); render(); });
+  });
+  body.addEventListener("click", function (e) {
+    var evEl = e.target.closest("[data-ev]");
+    if (evEl) { var ev = events.find(function (x) { return String(x.id) === evEl.dataset.ev; }); if (ev) eventForm(ev); return; }
+    var mEl = e.target.closest("[data-month]");
+    if (mEl) { cursor = new Date(cursor.getFullYear(), +mEl.dataset.month, 1); view = "month"; LifeOS.store.set("calview", view); render(); return; }
+    var dEl = e.target.closest("[data-day]");
+    if (dEl) { eventForm(null, dEl.dataset.day); return; }
+    var sEl = e.target.closest("[data-slot]");
+    if (sEl) { eventForm(null, sEl.dataset.slot); return; }
+  });
+
+  document.addEventListener("DOMContentLoaded", render);
+  render();
+})();
+</script>
+</body>
+</html>

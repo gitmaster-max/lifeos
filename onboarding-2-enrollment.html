@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LifeOS | Onboarding · Enrollment</title>
+<meta name="description" content="LifeOS — one precision operating system for health, finance, nutrition, mind and legacy. Built for India, designed for the world."/>
+<meta property="og:title" content="LifeOS | Onboarding · Enrollment"/>
+<meta property="og:description" content="Health, finance, nutrition, mind and legacy — unified into a single precision dashboard."/>
+<meta name="theme-color" content="#002D40"/>
+<link href="assets/favicon.svg" rel="icon" type="image/svg+xml"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+              // Supprx-Inspired Precision Palette
+              "primary": "#002d40", // Navy
+              "on-primary": "#ffffff",
+              "secondary": "#3dcc60", // Lime Green
+              "on-secondary": "#002d40",
+              "background": "#f9f9f9",
+              "on-background": "#002d40",
+              "surface": "#ffffff",
+              "on-surface": "#002d40",
+              "surface-variant": "#e1e4e6",
+              "on-surface-variant": "#444748",
+              "outline": "#747878",
+              "outline-variant": "#c4c7c7",
+              "surface-container-low": "#f3f3f4",
+              "surface-container": "#f1edec",
+              "surface-container-high": "#ebe7e6"
+            },
+            "borderRadius": {
+              "DEFAULT": "0.5rem",
+              "lg": "0.5rem",
+              "xl": "1rem",
+              "full": "9999px"
+            },
+            "spacing": {
+              "max-width-content": "1280px",
+              "stack-sm": "8px",
+              "gutter": "24px",
+              "stack-lg": "32px",
+              "stack-md": "16px",
+              "container-padding": "40px",
+              "unit": "4px"
+            },
+            "fontFamily": {
+              "mono-data": ["JetBrains Mono"],
+              "body-md": ["Inter"],
+              "label-caps": ["Inter"],
+              "display-lg": ["Inter"],
+              "headline-md": ["Inter"],
+              "headline-sm": ["Inter"],
+              "body-lg": ["Inter"]
+            },
+            "fontSize": {
+              "mono-data": ["13px", {"lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "400"}],
+              "body-md": ["14px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+              "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+              "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+              "headline-md": ["24px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+              "headline-sm": ["18px", {"lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+              "body-lg": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+        }
+        .selection-card:hover .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .step-transition {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .selection-card.selected {
+            border-color: #002d40;
+            background-color: #f3f3f4;
+            box-shadow: 0 4px 12px rgba(0, 45, 64, 0.08);
+        }
+    </style>
+<link href="assets/app.css" rel="stylesheet"/>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-secondary selection:text-on-secondary">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-gutter h-16 bg-surface border-b border-surface-variant">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm font-bold text-primary">LifeOS</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:bg-surface-container-low transition-colors duration-200 p-2 rounded-full">account_circle</span>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="min-h-screen pt-16 flex flex-col items-center justify-center px-gutter md:px-container-padding">
+<div class="w-full max-w-4xl space-y-stack-lg">
+<!-- Progress Section -->
+<div class="w-full space-y-2">
+<div class="flex justify-between items-end">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Step 02 of 04</span>
+<span class="font-mono-data text-mono-data text-on-surface-variant">50% Complete</span>
+</div>
+<div class="h-1 w-full bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-primary w-1/2 step-transition"></div>
+</div>
+</div>
+<!-- Intro Header -->
+<div class="space-y-stack-sm text-center md:text-left">
+<h1 class="font-display-lg text-display-lg text-primary tracking-tight">How will you use LifeOS?</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">Choose your enrollment type to tailor your experience. This optimizes your dashboard hierarchy and collaborative tools.</p>
+</div>
+<!-- Bento Grid Options -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter pt-stack-md">
+<!-- Individual Selection Card -->
+<button class="selection-card group relative text-left bg-surface border border-outline-variant rounded-lg p-stack-lg transition-all duration-200 ease-in-out hover:border-primary hover:shadow-md active:scale-[0.98] outline-none" id="card-individual" onclick="selectType('individual')">
+<div class="flex flex-col h-full gap-stack-lg">
+<div class="w-12 h-12 flex items-center justify-center rounded-lg bg-surface-container-low text-primary group-hover:bg-primary group-hover:text-secondary transition-colors">
+<span class="material-symbols-outlined text-3xl" data-icon="person">person</span>
+</div>
+<div class="space-y-2">
+<h2 class="font-headline-md text-headline-md text-primary">Individual</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">A focused workspace designed for personal high-performance, private strategy boards, and individual metric tracking.</p>
+</div>
+<div class="mt-auto pt-stack-sm">
+<div class="flex items-center gap-2 font-label-caps text-label-caps text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                            Select Individual <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</div>
+</div>
+</div>
+<!-- Selected State Marker -->
+<div class="absolute top-4 right-4 opacity-0 transition-opacity" id="check-individual">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</button>
+<!-- Family Selection Card -->
+<button class="selection-card group relative text-left bg-surface border border-outline-variant rounded-lg p-stack-lg transition-all duration-200 ease-in-out hover:border-primary hover:shadow-md active:scale-[0.98] outline-none" id="card-family" onclick="selectType('family')">
+<div class="flex flex-col h-full gap-stack-lg">
+<div class="w-12 h-12 flex items-center justify-center rounded-lg bg-surface-container-low text-primary group-hover:bg-primary group-hover:text-secondary transition-colors">
+<span class="material-symbols-outlined text-3xl" data-icon="family_history">family_history</span>
+</div>
+<div class="space-y-2">
+<h2 class="font-headline-md text-headline-md text-primary">Family</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Synchronized archives for up to 6 members. Shared logistics, collaborative strategic planning, and unified household networks.</p>
+</div>
+<div class="mt-auto pt-stack-sm">
+<div class="flex items-center gap-2 font-label-caps text-label-caps text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                            Select Family <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</div>
+</div>
+</div>
+<!-- Selected State Marker -->
+<div class="absolute top-4 right-4 opacity-0 transition-opacity" id="check-family">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</button>
+</div>
+<!-- Footer Actions -->
+<div class="pt-stack-lg flex flex-col md:flex-row justify-between items-center gap-stack-md border-t border-surface-variant">
+<button class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors py-2 px-4 uppercase tracking-wider" onclick="window.location.href='onboarding-1-city.html'">
+                Back to step 01
+            </button>
+<div class="flex gap-stack-md w-full md:w-auto">
+<button class="w-full md:w-48 bg-secondary text-on-secondary font-label-caps text-label-caps py-4 rounded-lg transition-all duration-300 opacity-30 cursor-not-allowed uppercase tracking-widest hover:brightness-105 shadow-sm" disabled="" id="next-button" onclick="window.location.href='onboarding-3-role.html'">
+                    Continue
+                </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Side Decoration -->
+<div class="fixed right-10 bottom-10 hidden lg:block select-none pointer-events-none">
+<div class="flex flex-col items-end gap-2 opacity-20">
+<span class="font-mono-data text-4xl leading-none text-primary">02</span>
+<div class="w-20 h-0.5 bg-primary"></div>
+<span class="font-label-caps text-label-caps rotate-90 origin-right translate-y-12 uppercase tracking-widest text-primary">Enrollment</span>
+</div>
+</div>
+<!-- Interaction Script -->
+<script>
+    let currentSelection = null;
+
+    function selectType(type) {
+        currentSelection = type;
+        
+        // Reset cards
+        const cards = ['individual', 'family'];
+        cards.forEach(t => {
+            const card = document.getElementById(`card-${t}`);
+            const check = document.getElementById(`check-${t}`);
+            card.classList.remove('selected', 'border-primary');
+            check.classList.add('opacity-0');
+        });
+
+        // Set active
+        const activeCard = document.getElementById(`card-${type}`);
+        const activeCheck = document.getElementById(`check-${type}`);
+        activeCard.classList.add('selected', 'border-primary');
+        activeCheck.classList.remove('opacity-0');
+
+        // Enable button
+        const nextBtn = document.getElementById('next-button');
+        nextBtn.disabled = false;
+        nextBtn.classList.remove('opacity-30', 'cursor-not-allowed');
+        nextBtn.classList.add('opacity-100', 'cursor-pointer');
+    }
+</script>
+<script src="assets/app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  ['individual', 'family'].forEach(t => {
+    const c = document.getElementById('card-' + t);
+    if (c) c.addEventListener('click', () => {
+      const p = LifeOS.store.get('profile', {}); p.enrollment = t; LifeOS.store.set('profile', p);
+    });
+  });
+});
+</script>
+</body></html>

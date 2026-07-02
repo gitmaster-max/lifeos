@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LifeOS | Dashboard</title>
+<meta name="description" content="LifeOS — one precision operating system for health, finance, nutrition, mind and legacy. Built for India, designed for the world."/>
+<meta property="og:title" content="LifeOS | Dashboard"/>
+<meta property="og:description" content="Health, finance, nutrition, mind and legacy — unified into a single precision dashboard."/>
+<meta name="theme-color" content="#002D40"/>
+<link href="assets/favicon.svg" rel="icon" type="image/svg+xml"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface": "#f9f9f9",
+                    "surface-dim": "#dadada",
+                    "surface-bright": "#f9f9f9",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-low": "#f3f3f4",
+                    "surface-container": "#eeeeef",
+                    "surface-container-high": "#e8e8e9",
+                    "surface-container-highest": "#e2e2e3",
+                    "primary": "#002D40",
+                    "on-primary": "#ffffff",
+                    "secondary": "#3dcc60", // Lime green highlight
+                    "on-secondary": "#002D40",
+                    "outline": "#d1d1d1",
+                    "outline-variant": "#e2e2e3",
+                    "on-surface": "#1a1c1e",
+                    "on-surface-variant": "#44474e",
+                    "error": "#ba1a1a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.5rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-lg": "32px",
+                    "max-width-content": "1280px",
+                    "container-padding": "40px",
+                    "gutter": "24px",
+                    "unit": "4px",
+                    "stack-md": "16px",
+                    "stack-sm": "8px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Inter", "sans-serif"],
+                    "mono-data": ["JetBrains Mono", "monospace"],
+                    "body-md": ["Inter", "sans-serif"],
+                    "body-lg": ["Inter", "sans-serif"],
+                    "label-caps": ["Inter", "sans-serif"],
+                    "headline-sm": ["Inter", "sans-serif"],
+                    "headline-md": ["Inter", "sans-serif"]
+            },
+            "fontSize": {
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "mono-data": ["13px", {"lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "400"}],
+                    "body-md": ["14px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+                    "body-lg": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-sm": ["18px", {"lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #f9f9f9;
+            color: #1a1c1e;
+            font-family: 'Inter', sans-serif;
+        }
+        .row-expanded {
+            max-height: 2000px;
+            opacity: 1;
+            padding-top: 24px;
+            padding-bottom: 24px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .row-collapsed {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            padding-top: 0;
+            padding-bottom: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .chevron-rotate {
+            transition: transform 0.2s ease;
+        }
+        .rotated {
+            transform: rotate(90deg);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .card-refinement {
+            border: 1px solid #e2e2e3;
+            background: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+        .card-refinement:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+            border-color: #d1d1d1;
+        }
+    </style>
+<link href="assets/app.css" rel="stylesheet"/>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- Left Navigation Shell -->
+<aside id="lifeos-nav" class="fixed left-0 top-0 h-screen w-[240px] bg-white border-r border-outline-variant flex flex-col py-6 px-4 z-50" style="font-family:'Inter',sans-serif">
+<a href="index.html" class="block mb-7 px-3">
+<h1 class="text-2xl font-bold text-primary tracking-tight">LifeOS</h1>
+<p class="text-[9px] font-semibold text-on-surface-variant tracking-[0.2em] mt-1">PRECISION LIFE MANAGEMENT</p>
+</a>
+<nav class="flex-grow space-y-0.5 overflow-y-auto">
+<a class="flex items-center gap-3 px-4 py-2 text-primary font-semibold bg-surface-container-low rounded-lg" href="dashboard.html"><span class="material-symbols-outlined text-[19px]" style="font-variation-settings: 'FILL' 1;">dashboard</span><span class="text-[13.5px]">Dashboard</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="health.html"><span class="material-symbols-outlined text-[19px]">monitor_heart</span><span class="text-[13.5px]">Health</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="finance.html"><span class="material-symbols-outlined text-[19px]">payments</span><span class="text-[13.5px]">Finance</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="liabilities.html"><span class="material-symbols-outlined text-[19px]">request_quote</span><span class="text-[13.5px]">Liabilities</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="nutrition.html"><span class="material-symbols-outlined text-[19px]">restaurant</span><span class="text-[13.5px]">Nutrition</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="calendar.html"><span class="material-symbols-outlined text-[19px]">calendar_today</span><span class="text-[13.5px]">Calendar</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="insurance.html"><span class="material-symbols-outlined text-[19px]">verified_user</span><span class="text-[13.5px]">Insurance</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="mental.html"><span class="material-symbols-outlined text-[19px]">psychology</span><span class="text-[13.5px]">Mind</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="nominees.html"><span class="material-symbols-outlined text-[19px]">family_restroom</span><span class="text-[13.5px]">Nominees</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="vault.html"><span class="material-symbols-outlined text-[19px]">folder_shared</span><span class="text-[13.5px]">Vault</span></a>
+</nav>
+<div class="pt-4 border-t border-outline-variant space-y-0.5">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[19px]">settings</span><span class="text-[13.5px]">Settings</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[19px]">help</span><span class="text-[13.5px]">Support</span></a>
+</div>
+</aside>
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 left-[240px] right-0 h-16 bg-surface-container-lowest border-b border-outline-variant flex justify-between items-center px-10 z-40">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant">search</span>
+<input class="bg-transparent border-none focus:ring-0 font-body-md text-on-surface-variant w-64 placeholder:text-on-surface-variant/50" placeholder="Command + K to search..." type="text"/>
+</div>
+<div class="flex items-center gap-6">
+<button class="flex items-center gap-2 px-5 py-2 bg-secondary text-on-secondary font-label-caps rounded-lg hover:brightness-95 active:scale-[0.98] transition-all shadow-sm">
+<span class="material-symbols-outlined text-[18px] font-bold">add</span>
+                QUICK ENTRY
+            </button>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">notifications</span>
+<div class="w-9 h-9 rounded-full border border-outline-variant bg-surface-container-high overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A minimalist professional portrait of a tech executive in a brightly lit, high-contrast studio environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1MUm53RDspxc8ewIq8gETvgHhnM7Q3NvgOqrB8RhvP0-mRZHSEUm-agjwSCeEXoZ3e_Es56RVTxczNXeiP4LuakaaVfoQIhx2pjSwWYEtJmmFUl7Xg3wD5gBTPyElKM47uIA1mixg7pGEr7BNWLBoqJqxl_eiO8M1Uu4MLKPG9bnslD2iuMN9X0aj8yN0r4Ge9lHumAbNz6JcZMOIe6QcrDpjIvFXP0sjhDoru-GqK7qKZJdZv9GPOfbeAZ2Aespyb0mn16mw6Pg"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-[240px] mt-16 p-10 max-w-max-width-content mx-auto">
+<!-- Header -->
+<div class="mb-stack-lg">
+<h2 class="font-display-lg text-4xl font-bold text-primary mb-2">Systems Overview</h2>
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-secondary animate-pulse"></div>
+<p class="font-body-lg text-on-surface-variant">Optimal performance status: <span class="text-primary font-medium">Sustained</span>.</p>
+</div>
+</div>
+<div class="space-y-4 flex flex-col">
+<!-- 1. Meal Prep & Nutrition -->
+<section class="card-refinement rounded-xl overflow-hidden group">
+<button class="w-full flex items-center justify-between py-6 text-left hover:bg-surface-container-lowest transition-colors px-6" onclick="toggleRow('nutrition-content', 'nutrition-chevron')">
+<div class="flex-grow grid grid-cols-12 items-center gap-gutter">
+<div class="col-span-3">
+<h3 class="font-headline-sm text-primary font-bold uppercase tracking-wider">Nutrition</h3>
+</div>
+<div class="col-span-6 flex items-center gap-8">
+<div class="flex-grow">
+<div class="flex justify-between font-label-caps text-[11px] mb-2 text-on-surface-variant">
+<span class="font-semibold uppercase">Daily Caloric Target</span>
+<span class="text-primary font-bold">1,840 / 2,400 kcal</span>
+</div>
+<div class="h-1.5 bg-surface-container-high rounded-full w-full overflow-hidden">
+<div class="h-full bg-primary w-[76%] transition-all duration-700"></div>
+</div>
+</div>
+<div class="flex gap-4 font-mono-data text-[12px] text-on-surface-variant whitespace-nowrap bg-surface-container-low px-3 py-1 rounded">
+<span class="">P: 140g</span>
+<span class="">C: 210g</span>
+<span class="">F: 65g</span>
+</div>
+</div>
+</div>
+<span class="material-symbols-outlined chevron-rotate text-on-surface-variant ml-4" id="nutrition-chevron">chevron_right</span>
+</button>
+<div class="row-collapsed px-6" id="nutrition-content">
+<div class="grid grid-cols-12 gap-gutter pt-4 pb-8 border-t border-outline-variant/30">
+<div class="col-span-8">
+<h4 class="font-label-caps text-[11px] text-on-surface-variant mb-4 uppercase tracking-widest">WEEKLY MEAL CALENDAR</h4>
+<div class="grid grid-cols-7 gap-3">
+<!-- Calendar Cells -->
+<div class="p-3 border border-outline-variant rounded-lg aspect-square flex flex-col justify-between hover:border-primary transition-colors cursor-pointer">
+<span class="font-mono-data text-[10px] text-on-surface-variant">MON</span>
+<span class="font-label-caps text-[10px] text-primary/60">KETO PREP</span>
+</div>
+<div class="p-3 border border-secondary bg-secondary/5 rounded-lg aspect-square flex flex-col justify-between shadow-[0_0_15px_-5px_rgba(61,204,96,0.2)]">
+<span class="font-mono-data text-[10px] text-secondary font-bold">TUE</span>
+<span class="font-label-caps text-[10px] text-secondary font-bold">COMPLETED</span>
+</div>
+<div class="p-3 border border-outline-variant rounded-lg aspect-square flex flex-col justify-between hover:border-primary transition-colors cursor-pointer">
+<span class="font-mono-data text-[10px] text-on-surface-variant">WED</span>
+<span class="font-label-caps text-[10px] text-primary/60">OMAD</span>
+</div>
+<div class="p-3 border border-outline-variant rounded-lg aspect-square flex flex-col justify-between hover:border-primary transition-colors cursor-pointer">
+<span class="font-mono-data text-[10px] text-on-surface-variant">THU</span>
+<span class="font-label-caps text-[10px] text-primary/60">PREP</span>
+</div>
+<div class="p-3 border border-outline-variant rounded-lg aspect-square flex flex-col justify-between hover:border-primary transition-colors cursor-pointer">
+<span class="font-mono-data text-[10px] text-on-surface-variant">FRI</span>
+<span class="font-label-caps text-[10px] text-primary/60">REFEED</span>
+</div>
+<div class="p-3 border border-outline-variant rounded-lg aspect-square flex flex-col justify-between hover:border-primary transition-colors cursor-pointer">
+<span class="font-mono-data text-[10px] text-on-surface-variant">SAT</span>
+<span class="font-label-caps text-[10px] text-primary/60">FAST</span>
+</div>
+<div class="p-3 border border-outline-variant rounded-lg aspect-square flex flex-col justify-between hover:border-primary transition-colors cursor-pointer">
+<span class="font-mono-data text-[10px] text-on-surface-variant">SUN</span>
+<span class="font-label-caps text-[10px] text-primary/60">PLAN</span>
+</div>
+</div>
+<div class="mt-8 flex gap-3">
+<button class="px-6 py-2.5 bg-primary text-on-primary font-label-caps text-[11px] rounded-lg hover:opacity-90 transition-all">APPLY PLAN TO MONTH</button>
+<button class="px-6 py-2.5 border border-outline text-primary font-label-caps text-[11px] rounded-lg hover:bg-surface-container-low transition-colors">EXPORT GROCERY LIST</button>
+</div>
+</div>
+<div class="col-span-4 border-l border-outline-variant pl-gutter">
+<h4 class="font-label-caps text-[11px] text-on-surface-variant mb-4 uppercase tracking-widest">MICRONUTRIENT STATUS</h4>
+<div class="space-y-3 font-mono-data text-[12px]">
+<div class="flex justify-between items-center border-b border-surface-container pb-1"><span class="text-on-surface-variant">Vitamin A</span> <span class="text-primary font-bold">92%</span></div>
+<div class="flex justify-between items-center border-b border-surface-container pb-1"><span class="text-on-surface-variant">Vitamin B12</span> <span class="text-error font-bold">42%</span></div>
+<div class="flex justify-between items-center border-b border-surface-container pb-1"><span class="text-on-surface-variant">Vitamin D</span> <span class="text-primary font-bold">88%</span></div>
+<div class="flex justify-between items-center border-b border-surface-container pb-1"><span class="text-on-surface-variant">Iron</span> <span class="text-primary font-bold">76%</span></div>
+<div class="flex justify-between items-center border-b border-surface-container pb-1"><span class="text-on-surface-variant">Magnesium</span> <span class="text-primary font-bold">98%</span></div>
+<div class="flex justify-between items-center border-b border-surface-container pb-1"><span class="text-on-surface-variant">Zinc</span> <span class="text-primary font-bold">81%</span></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 2. Gym Progress -->
+<section class="card-refinement rounded-xl overflow-hidden">
+<button class="w-full flex items-center justify-between py-6 text-left hover:bg-surface-container-lowest transition-colors px-6" onclick="toggleRow('gym-content', 'gym-chevron')">
+<div class="flex-grow grid grid-cols-12 items-center gap-gutter">
+<div class="col-span-3">
+<h3 class="font-headline-sm text-primary font-bold uppercase tracking-wider">Gym Progress</h3>
+</div>
+<div class="col-span-6 flex items-center gap-12">
+<div class="flex flex-col">
+<span class="font-label-caps text-on-surface-variant text-[11px] mb-1">LAST WORKOUT</span>
+<span class="font-mono-data text-primary font-semibold">Push (Strength) — 14 Oct</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-on-surface-variant text-[11px] mb-1">VOLUME TREND</span>
+<span class="font-mono-data text-secondary font-bold">+12.4% vs Last Wk</span>
+</div>
+</div>
+</div>
+<span class="material-symbols-outlined chevron-rotate text-on-surface-variant ml-4" id="gym-chevron">chevron_right</span>
+</button>
+<div class="row-collapsed px-6" id="gym-content">
+<div class="grid grid-cols-12 gap-gutter pt-4 pb-8 border-t border-outline-variant/30">
+<div class="col-span-7">
+<h4 class="font-label-caps text-[11px] text-on-surface-variant mb-4 uppercase tracking-widest">EXERCISE LOG: RECENT SESSIONS</h4>
+<table class="w-full font-mono-data text-[12px]">
+<thead>
+<tr class="text-left border-b border-outline-variant text-on-surface-variant uppercase">
+<th class="pb-3 font-semibold text-[10px] tracking-widest">EXERCISE</th>
+<th class="pb-3 font-semibold text-[10px] tracking-widest text-right">SETS/REPS</th>
+<th class="pb-3 font-semibold text-[10px] tracking-widest text-right">LOAD</th>
+<th class="pb-3 font-semibold text-[10px] tracking-widest text-right">1RM EST</th>
+</tr>
+</thead>
+<tbody class="text-on-surface">
+<tr class="border-b border-surface-container/50 hover:bg-surface-container-low transition-colors">
+<td class="py-3 font-medium">Barbell Bench Press</td>
+<td class="text-right">5 x 5</td>
+<td class="text-right text-primary font-bold">100kg</td>
+<td class="text-right">116kg</td>
+</tr>
+<tr class="border-b border-surface-container/50 hover:bg-surface-container-low transition-colors">
+<td class="py-3 font-medium">Overhead Press</td>
+<td class="text-right">3 x 8</td>
+<td class="text-right text-primary font-bold">60kg</td>
+<td class="text-right">72kg</td>
+</tr>
+<tr class="border-b border-surface-container/50 hover:bg-surface-container-low transition-colors">
+<td class="py-3 font-medium">Weighted Dips</td>
+<td class="text-right">3 x 10</td>
+<td class="text-right text-primary font-bold">BW + 20kg</td>
+<td class="text-right">—</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="col-span-5 border-l border-outline-variant pl-gutter">
+<h4 class="font-label-caps text-[11px] text-on-surface-variant mb-4 uppercase tracking-widest">PR TRACKING</h4>
+<div class="grid grid-cols-2 gap-4">
+<div class="p-4 border border-outline-variant rounded-lg bg-surface-container-low/30">
+<span class="font-label-caps text-on-surface-variant text-[10px] tracking-widest">SQUAT</span>
+<div class="text-[24px] font-bold text-primary">185 KG</div>
+<span class="font-mono-data text-[10px] text-secondary font-bold">NEW 14 DAYS AGO</span>
+</div>
+<div class="p-4 border border-outline-variant rounded-lg bg-surface-container-low/30">
+<span class="font-label-caps text-on-surface-variant text-[10px] tracking-widest">DEADLIFT</span>
+<div class="text-[24px] font-bold text-primary">220 KG</div>
+<span class="font-mono-data text-[10px] text-on-surface-variant">STABLE</span>
+</div>
+</div>
+</div>
+<div class="col-span-12 mt-8 pt-6 border-t border-outline-variant/30"><h4 class="font-label-caps text-[11px] text-on-surface-variant mb-4 uppercase tracking-widest">PARTNER GYMS &amp; TRAINERS</h4><div class="flex justify-between items-center bg-surface-container-low p-4 rounded-lg"><div class="flex items-center gap-4"><span class="material-symbols-outlined text-primary bg-white p-2 rounded shadow-sm">fitness_center</span><div class="flex flex-col"><span class="font-label-caps text-[10px] text-on-surface-variant font-bold">ACTIVE PARTNERS</span><span class="font-mono-data text-[13px] text-primary">Cult.fit, Anytime Fitness</span></div></div><button class="px-6 py-2 border border-primary text-primary font-label-caps text-[11px] rounded-lg hover:bg-primary hover:text-on-primary transition-all">BOOK SESSION</button></div></div></div>
+</div>
+</section>
+<!-- 3. Habit Tracker -->
+<section class="card-refinement rounded-xl overflow-hidden">
+<button class="w-full flex items-center justify-between py-6 text-left hover:bg-surface-container-lowest transition-colors px-6" onclick="toggleRow('habits-content', 'habits-chevron')">
+<div class="flex-grow grid grid-cols-12 items-center gap-gutter">
+<div class="col-span-3">
+<h3 class="font-headline-sm text-primary font-bold uppercase tracking-wider">Habit Tracker</h3>
+</div>
+<div class="col-span-6 flex gap-4">
+<div class="flex flex-col gap-1 w-full">
+<div class="flex justify-between font-label-caps text-[11px] mb-1 text-on-surface-variant">
+<span class="font-semibold uppercase">TOP 5 STREAK AVG</span>
+<span class="text-secondary font-bold">94% CONSISTENCY</span>
+</div>
+<div class="flex gap-1.5 h-3">
+<div class="flex-grow bg-primary rounded-sm"></div>
+<div class="flex-grow bg-primary rounded-sm"></div>
+<div class="flex-grow bg-primary rounded-sm"></div>
+<div class="flex-grow bg-primary rounded-sm"></div>
+<div class="flex-grow bg-surface-container-high rounded-sm"></div>
+</div>
+</div>
+</div>
+</div>
+<span class="material-symbols-outlined chevron-rotate text-on-surface-variant ml-4" id="habits-chevron">chevron_right</span>
+</button>
+<div class="row-collapsed px-6" id="habits-content">
+<div class="pt-4 pb-8 border-t border-outline-variant/30">
+<h4 class="font-label-caps text-[11px] text-on-surface-variant mb-6 uppercase tracking-widest">MONTHLY PERFORMANCE GRID</h4>
+<div class="grid grid-cols-7 gap-y-8 gap-x-gutter">
+<!-- Loop for habits -->
+<div class="col-span-1">
+<span class="font-label-caps text-[10px] block mb-3 text-primary font-bold">MEDITATION</span>
+<div class="grid grid-cols-5 gap-1.5">
+<div class="w-full aspect-square bg-primary rounded-sm shadow-sm"></div>
+<div class="w-full aspect-square bg-primary rounded-sm shadow-sm"></div>
+<div class="w-full aspect-square bg-primary rounded-sm shadow-sm"></div>
+<div class="w-full aspect-square bg-surface-container-high rounded-sm"></div>
+<div class="w-full aspect-square bg-primary rounded-sm shadow-sm"></div>
+</div>
+</div>
+<div class="col-span-1">
+<span class="font-label-caps text-[10px] block mb-3 text-primary font-bold">DEEP WORK</span>
+<div class="grid grid-cols-5 gap-1.5">
+<div class="w-full aspect-square bg-primary rounded-sm shadow-sm"></div>
+<div class="w-full aspect-square bg-primary rounded-sm shadow-sm"></div>
+<div class="w-full aspect-square bg-primary rounded-sm shadow-sm"></div>
+<div class="w-full aspect-square bg-primary rounded-sm shadow-sm"></div>
+<div class="w-full aspect-square bg-primary rounded-sm shadow-sm"></div>
+</div>
+</div>
+<div class="col-span-1">
+<span class="font-label-caps text-[10px] block mb-3 text-primary font-bold">HYDRATION</span>
+<div class="grid grid-cols-5 gap-1.5">
+<div class="w-full aspect-square bg-primary rounded-sm shadow-sm"></div>
+<div class="w-full aspect-square bg-surface-container-high rounded-sm"></div>
+<div class="w-full aspect-square bg-primary rounded-sm shadow-sm"></div>
+<div class="w-full aspect-square bg-primary rounded-sm shadow-sm"></div>
+<div class="w-full aspect-square bg-primary rounded-sm shadow-sm"></div>
+</div>
+</div>
+<div class="col-span-1">
+<span class="font-label-caps text-[10px] block mb-3 text-primary font-bold">READING</span>
+<div class="grid grid-cols-5 gap-1.5">
+<div class="w-full aspect-square bg-primary rounded-sm shadow-sm"></div>
+<div class="w-full aspect-square bg-primary rounded-sm shadow-sm"></div>
+<div class="w-full aspect-square bg-primary rounded-sm shadow-sm"></div>
+<div class="w-full aspect-square bg-primary rounded-sm shadow-sm"></div>
+<div class="w-full aspect-square bg-primary rounded-sm shadow-sm"></div>
+</div>
+</div>
+<div class="col-span-1">
+<span class="font-label-caps text-[10px] block mb-3 text-primary font-bold">COLD PLUNGE</span>
+<div class="grid grid-cols-5 gap-1.5">
+<div class="w-full aspect-square bg-surface-container-high rounded-sm"></div>
+<div class="w-full aspect-square bg-surface-container-high rounded-sm"></div>
+<div class="w-full aspect-square bg-primary rounded-sm shadow-sm"></div>
+<div class="w-full aspect-square bg-primary rounded-sm shadow-sm"></div>
+<div class="w-full aspect-square bg-surface-container-high rounded-sm"></div>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-8 border-t border-outline-variant/30"><h4 class="font-label-caps text-[11px] text-on-surface-variant mb-4 uppercase tracking-widest">RECOMMENDED TOOLS</h4><div class="grid grid-cols-2 gap-gutter"><div class="flex justify-between items-center p-4 border border-outline-variant rounded-lg bg-surface-container-low/30 hover:border-primary transition-colors cursor-pointer group"><div class="flex items-center gap-4"><span class="material-symbols-outlined text-primary bg-white p-2 rounded shadow-sm">watch_button</span><div class="flex flex-col"><span class="font-label-caps text-[10px] text-on-surface-variant font-bold">RECOVERY TRACKING</span><span class="font-mono-data text-[14px] font-bold text-primary">Oura Ring</span></div></div><button class="px-4 py-2 border border-primary text-primary font-label-caps text-[11px] rounded hover:bg-primary hover:text-on-primary transition-all">VIEW OFFER</button></div><div class="flex justify-between items-center p-4 border border-outline-variant rounded-lg bg-surface-container-low/30 hover:border-primary transition-colors cursor-pointer group"><div class="flex items-center gap-4"><span class="material-symbols-outlined text-primary bg-white p-2 rounded shadow-sm">bed</span><div class="flex flex-col"><span class="font-label-caps text-[10px] text-on-surface-variant font-bold">SLEEP OPTIMIZATION</span><span class="font-mono-data text-[14px] font-bold text-primary">Eight Sleep</span></div></div><button class="px-4 py-2 border border-primary text-primary font-label-caps text-[11px] rounded hover:bg-primary hover:text-on-primary transition-all">VIEW OFFER</button></div></div></div></div>
+</div>
+</section>
+<!-- 4. Health Metrics -->
+<section class="card-refinement rounded-xl overflow-hidden">
+<button class="w-full flex items-center justify-between py-6 text-left hover:bg-surface-container-lowest transition-colors px-6" onclick="toggleRow('health-content', 'health-chevron')">
+<div class="flex-grow grid grid-cols-12 items-center gap-gutter">
+<div class="col-span-3">
+<h3 class="font-headline-sm text-primary font-bold uppercase tracking-wider">Health Metrics</h3>
+</div>
+<div class="col-span-6 flex gap-12">
+<div class="flex items-baseline gap-2">
+<span class="font-label-caps text-[11px] text-on-surface-variant font-semibold">HR</span>
+<span class="font-mono-data text-[18px] text-primary font-bold">52 BPM</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-label-caps text-[11px] text-on-surface-variant font-semibold">SLEEP</span>
+<span class="font-mono-data text-[18px] text-primary font-bold">7h 42m</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-label-caps text-[11px] text-on-surface-variant font-semibold">RECOVERY</span>
+<span class="font-mono-data text-[18px] text-secondary font-bold">88%</span>
+</div>
+</div>
+</div>
+<span class="material-symbols-outlined chevron-rotate text-on-surface-variant ml-4" id="health-chevron">chevron_right</span>
+</button>
+<div class="row-collapsed px-6" id="health-content">
+<div class="grid grid-cols-12 gap-gutter pt-4 pb-8 border-t border-outline-variant/30">
+<div class="col-span-6">
+<h4 class="font-label-caps text-[11px] text-on-surface-variant mb-4 uppercase tracking-widest">BLOOD ANALYSIS UPLOAD</h4>
+<div class="border-2 border-dashed border-outline-variant h-40 rounded-xl flex flex-col items-center justify-center gap-2 hover:bg-surface-container-low hover:border-primary transition-all cursor-pointer group">
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors text-3xl">upload_file</span>
+<p class="font-label-caps text-[11px] text-on-surface-variant">Drag laboratory PDF here or <span class="text-primary underline font-bold">browse</span></p>
+</div>
+</div>
+<div class="col-span-6 border-l border-outline-variant pl-gutter">
+<h4 class="font-label-caps text-[11px] text-on-surface-variant mb-4 uppercase tracking-widest">SUPPLEMENT STACK STATUS</h4>
+<div class="grid grid-cols-2 gap-y-3 text-[12px] font-mono-data">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_8px_rgba(61,204,96,0.5)]"></div>
+<span class="text-primary font-medium">Omega-3 (Optimal)</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_8px_rgba(61,204,96,0.5)]"></div>
+<span class="text-primary font-medium">Creatine (Loading)</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_8px_rgba(61,204,96,0.5)]"></div>
+<span class="text-primary font-medium">Vit D3 (Maintenance)</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-error shadow-[0_0_8px_rgba(186,26,26,0.3)]"></div>
+<span class="text-error font-bold">Magnesium (Low Stock)</span>
+</div>
+</div>
+</div>
+<div class="col-span-12 mt-8 pt-6 border-t border-outline-variant/30">
+<h4 class="font-label-caps text-[11px] text-on-surface-variant mb-4 uppercase tracking-widest">FOOD SERVICES</h4>
+<div class="flex justify-between items-center bg-surface-container-low p-4 rounded-lg">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary bg-white p-2 rounded shadow-sm">delivery_dining</span>
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-on-surface-variant font-bold">ACTIVE IN BANGALORE</span>
+<span class="font-mono-data text-[13px] text-primary">Healthy Dine, FreshPrep</span>
+</div>
+</div>
+<button class="px-6 py-2 border border-primary text-primary font-label-caps text-[11px] rounded-lg hover:bg-primary hover:text-on-primary transition-all">
+      VIEW AFFILIATE PARTNERS
+    </button>
+</div>
+</div></div>
+</div>
+</section>
+<!-- 5. Finance & Investments -->
+<section class="card-refinement rounded-xl overflow-hidden">
+<button class="w-full flex items-center justify-between py-6 text-left hover:bg-surface-container-lowest transition-colors px-6" onclick="toggleRow('finance-content', 'finance-chevron')">
+<div class="flex-grow grid grid-cols-12 items-center gap-gutter">
+<div class="col-span-3">
+<h3 class="font-headline-sm text-primary font-bold uppercase tracking-wider">Investments</h3>
+</div>
+<div class="col-span-6 flex items-center gap-12">
+<div class="flex flex-col">
+<span class="font-label-caps text-on-surface-variant text-[11px] mb-1">TOTAL NET WORTH</span>
+<span class="font-mono-data text-[24px] font-bold text-primary">₹11.8 Cr</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-on-surface-variant text-[11px] mb-1">24H CHANGE</span>
+<span class="font-mono-data text-secondary font-bold">+₹3,49,500 (0.29%)</span>
+</div>
+</div>
+</div>
+<span class="material-symbols-outlined chevron-rotate text-on-surface-variant ml-4" id="finance-chevron">chevron_right</span>
+</button>
+<div class="row-collapsed px-6" id="finance-content">
+<div class="pt-4 pb-8 border-t border-outline-variant/30">
+<h4 class="font-label-caps text-[11px] text-on-surface-variant mb-4 uppercase tracking-widest">ASSET ALLOCATION BREAKDOWN</h4>
+<table class="w-full font-mono-data text-[12px]">
+<thead>
+<tr class="text-left border-b border-outline-variant text-on-surface-variant uppercase">
+<th class="pb-3 font-semibold text-[10px] tracking-widest">ASSET CLASS</th>
+<th class="pb-3 font-semibold text-[10px] tracking-widest text-right">VALUE</th>
+<th class="pb-3 font-semibold text-[10px] tracking-widest text-right">ALLOCATION</th>
+<th class="pb-3 font-semibold text-[10px] tracking-widest text-right">YIELD</th>
+</tr>
+</thead>
+<tbody class="text-on-surface">
+<tr class="border-b border-surface-container/50 hover:bg-surface-container-low transition-colors">
+<td class="py-3 font-medium">Cash &amp; Fixed Deposits</td>
+<td class="text-right font-bold text-primary">₹1,02,92,000</td>
+<td class="text-right">8.7%</td>
+<td class="text-right text-secondary font-bold">4.2%</td>
+</tr>
+<tr class="border-b border-surface-container/50 hover:bg-surface-container-low transition-colors">
+<td class="py-3 font-medium">Equity (Broad Market ETFs)</td>
+<td class="text-right font-bold text-primary">₹6,99,27,500</td>
+<td class="text-right">59.1%</td>
+<td class="text-right text-secondary font-bold">9.4%</td>
+</tr>
+<tr class="border-b border-surface-container/50 hover:bg-surface-container-low transition-colors">
+<td class="py-3 font-medium">Direct Equity (Tech Focused)</td>
+<td class="text-right font-bold text-primary">₹1,78,78,366</td>
+<td class="text-right">15.1%</td>
+<td class="text-right text-secondary font-bold">12.8%</td>
+</tr>
+<tr class="border-b border-surface-container/50 hover:bg-surface-container-low transition-colors">
+<td class="py-3 font-medium">Commodities (Gold/Silver)</td>
+<td class="text-right font-bold text-primary">₹81,34,000</td>
+<td class="text-right">6.9%</td>
+<td class="text-right text-secondary font-bold">2.1%</td>
+</tr>
+<tr class="border-b border-surface-container/50 hover:bg-surface-container-low transition-colors">
+<td class="py-3 font-medium">Private Venture / Other</td>
+<td class="text-right font-bold text-primary">₹1,20,35,000</td>
+<td class="text-right">10.2%</td>
+<td class="text-right">—</td>
+</tr>
+</tbody>
+</table>
+<div class="mt-8 pt-6 border-t border-outline-variant/30">
+<h4 class="font-label-caps text-[11px] text-on-surface-variant mb-4 uppercase tracking-widest">FUND MANAGEMENT PARTNERS</h4>
+<div class="flex justify-between items-center p-5 border border-outline-variant rounded-xl bg-surface-container-low/30">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary bg-white p-2.5 rounded-lg shadow-sm border border-outline-variant">account_balance</span>
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-on-surface-variant font-bold">MANAGED FUNDS</span>
+<span class="font-mono-data text-[15px] font-bold text-primary">Dezerv</span>
+</div>
+</div>
+<div class="flex gap-3">
+<button class="px-6 py-2.5 border border-primary text-primary font-label-caps text-[11px] rounded-lg hover:bg-surface-container-low transition-colors">LEARN MORE</button>
+<button class="px-6 py-2.5 bg-primary text-on-primary font-label-caps text-[11px] rounded-lg hover:brightness-110 active:scale-[0.98] transition-all shadow-sm">CONNECT TO ADVISOR</button>
+</div>
+</div>
+</div><div class="mt-8 flex justify-end">
+<button class="px-8 py-3 bg-primary text-on-primary font-label-caps text-[12px] rounded-lg hover:brightness-110 active:scale-[0.98] transition-all shadow-md">REBALANCE PORTFOLIO</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<script>
+        function toggleRow(contentId, chevronId) {
+            const content = document.getElementById(contentId);
+            const chevron = document.getElementById(chevronId);
+            
+            if (content.classList.contains('row-collapsed')) {
+                content.classList.remove('row-collapsed');
+                content.classList.add('row-expanded');
+                chevron.classList.add('rotated');
+                chevron.style.color = '#002D40';
+            } else {
+                content.classList.remove('row-expanded');
+                content.classList.add('row-collapsed');
+                chevron.classList.remove('rotated');
+                chevron.style.color = '';
+            }
+        }
+
+        // micro-interactions for bar charts
+        window.onload = () => {
+            const bars = document.querySelectorAll('.h-full.bg-primary');
+            bars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 300);
+            });
+        };
+    </script>
+<script src="assets/app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const p = LifeOS.store.get('profile', {});
+  const status = document.querySelector('main p.font-body-lg');
+  if (status && p.city) {
+    status.insertAdjacentHTML('beforeend',
+      ' &nbsp;·&nbsp; Base: <span class="text-primary font-medium">' + p.city + '</span>');
+  }
+
+  const stack = document.querySelector('main .space-y-4.flex.flex-col');
+  if (!stack) return;
+
+  // ----- Life Score -----
+  const logs0 = LifeOS.store.get('logs', []);
+  const pol = LifeOS.store.get('policies', []);
+  let score = 68; const notes = [];
+  score += Math.min(logs0.length * 2, 12);
+  if (logs0.length) notes.push(logs0.length + ' entries logged');
+  if (p.city || p.onboarded) { score += 8; notes.push('Profile initialized'); }
+  const dueSoon = pol.filter(x => (new Date(x.premium_due_date) - Date.now()) / 864e5 < 20);
+  if (dueSoon.length) { score -= 6; notes.push(dueSoon.length + ' premium due soon'); }
+  else if (pol.length) { score += 6; notes.push('Premiums on track'); }
+  score += 6; notes.push('Habit consistency 94%');
+  score = Math.max(35, Math.min(score, 98));
+  const C = 2 * Math.PI * 30, dash = (score / 100) * C;
+  const scoreCard = document.createElement('section');
+  scoreCard.className = 'card-refinement rounded-xl px-6 py-5 mb-4';
+  scoreCard.innerHTML =
+    '<div class="flex items-center gap-6 flex-wrap">' +
+    '<svg width="76" height="76" viewBox="0 0 76 76"><circle cx="38" cy="38" r="30" fill="none" stroke="#e8e8e9" stroke-width="7"/>' +
+    '<circle cx="38" cy="38" r="30" fill="none" stroke="#3dcc60" stroke-width="7" stroke-linecap="round" stroke-dasharray="' + dash + ' ' + C + '" transform="rotate(-90 38 38)"/>' +
+    '<text x="38" y="43" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="19" font-weight="700" fill="#002D40">' + score + '</text></svg>' +
+    '<div class="flex-1 min-w-[220px]"><h3 class="font-headline-sm text-primary font-bold uppercase tracking-wider mb-1">Life Score</h3>' +
+    '<p class="font-body-md text-on-surface-variant text-[13px]">' + notes.join(' · ') + '</p></div>' +
+    '<a href="audit.html" data-wired="1" class="px-5 py-2.5 bg-primary text-on-primary font-label-caps text-[11px] rounded-lg hover:brightness-110 transition-all">VIEW FULL LIFE AUDIT</a>' +
+    '</div>';
+  stack.parentElement.insertBefore(scoreCard, stack);
+
+  // ----- Recent Entries feed -----
+  const ICONS = { Meal: 'restaurant', Workout: 'fitness_center', Habit: 'check_circle', Expense: 'payments', Note: 'sticky_note_2' };
+  const ago = (ts) => {
+    const s = Math.max(1, Math.round((Date.now() - ts) / 1000));
+    if (s < 60) return s + 's ago';
+    if (s < 3600) return Math.round(s / 60) + 'm ago';
+    if (s < 86400) return Math.round(s / 3600) + 'h ago';
+    return Math.round(s / 86400) + 'd ago';
+  };
+  const wrap = document.createElement('section');
+  wrap.className = 'card-refinement rounded-xl px-6 py-5 mb-4';
+  stack.parentElement.insertBefore(wrap, stack);
+  function render() {
+    const logs = LifeOS.store.get('logs', []).slice(-5).reverse();
+    wrap.innerHTML =
+      '<div class="flex items-center justify-between mb-4">' +
+      '<h3 class="font-headline-sm text-primary font-bold uppercase tracking-wider">Recent Entries</h3>' +
+      '<button data-wired="1" id="feed-add" class="px-4 py-1.5 bg-secondary text-on-secondary font-label-caps text-[10px] rounded-lg hover:brightness-95 transition-all">LOG ENTRY</button></div>' +
+      (logs.length
+        ? '<div class="space-y-2">' + logs.map(l =>
+            '<div class="flex items-center gap-4 py-2 border-b border-outline-variant/40 last:border-0">' +
+            '<span class="material-symbols-outlined text-primary text-[18px]">' + (ICONS[l.type] || 'note') + '</span>' +
+            '<div class="flex-1"><span class="font-body-md text-on-surface">' + l.text + '</span>' +
+            (l.value ? ' <span class="font-mono-data text-[12px] text-on-surface-variant">· ' + l.value + '</span>' : '') + '</div>' +
+            '<span class="font-mono-data text-[11px] text-on-surface-variant">' + ago(l.ts) + '</span></div>').join('') + '</div>'
+        : '<p class="font-body-md text-on-surface-variant">No entries yet — use Quick Entry (or press Ctrl+K) to log your first meal, workout or expense.</p>');
+    wrap.querySelector('#feed-add').addEventListener('click', () => LifeOS.quickEntry());
+  }
+  render();
+  document.addEventListener('lifeos:log', render);
+});
+</script>
+</body></html>

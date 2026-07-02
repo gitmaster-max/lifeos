@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LifeOS | Nutrition</title>
+<meta name="description" content="LifeOS — one precision operating system for health, finance, nutrition, mind and legacy. Built for India, designed for the world."/>
+<meta property="og:title" content="LifeOS | Nutrition"/>
+<meta property="og:description" content="Health, finance, nutrition, mind and legacy — unified into a single precision dashboard."/>
+<meta name="theme-color" content="#002D40"/>
+<link href="assets/favicon.svg" rel="icon" type="image/svg+xml"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9f9f9;
+            color: #002d40;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        /* Custom highlight color from design system request */
+        .bg-lime-highlight { background-color: #3dcc60; }
+        .text-lime-highlight { color: #3dcc60; }
+        .border-lime-highlight { border-color: #3dcc60; }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface": "#f9f9f9",
+                        "on-surface": "#002d40",
+                        "primary": "#002d40",
+                        "on-primary": "#ffffff",
+                        "secondary": "#4a5568",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f3f3f4",
+                        "surface-container-high": "#e2e8f0",
+                        "outline-variant": "#cbd5e0",
+                        "on-surface-variant": "#4a5568",
+                        "brand-navy": "#002d40",
+                        "brand-lime": "#3dcc60"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "8px",
+                        "lg": "8px",
+                        "xl": "12px",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "unit": "4px",
+                        "stack-lg": "32px",
+                        "container-padding": "40px",
+                        "stack-md": "16px",
+                        "max-width-content": "1280px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "mono-data": ["JetBrains Mono"],
+                        "label-caps": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<link href="assets/app.css" rel="stylesheet"/>
+</head>
+<body class="overflow-x-hidden">
+<!-- Side Navigation Bar - Navy Theme -->
+<aside id="lifeos-nav" class="fixed left-0 top-0 h-screen w-[240px] bg-white border-r border-outline-variant flex flex-col py-6 px-4 z-50" style="font-family:'Inter',sans-serif">
+<a href="index.html" class="block mb-7 px-3">
+<h1 class="text-2xl font-bold text-primary tracking-tight">LifeOS</h1>
+<p class="text-[9px] font-semibold text-on-surface-variant tracking-[0.2em] mt-1">PRECISION LIFE MANAGEMENT</p>
+</a>
+<nav class="flex-grow space-y-0.5 overflow-y-auto">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="dashboard.html"><span class="material-symbols-outlined text-[19px]">dashboard</span><span class="text-[13.5px]">Dashboard</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="health.html"><span class="material-symbols-outlined text-[19px]">monitor_heart</span><span class="text-[13.5px]">Health</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="finance.html"><span class="material-symbols-outlined text-[19px]">payments</span><span class="text-[13.5px]">Finance</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="liabilities.html"><span class="material-symbols-outlined text-[19px]">request_quote</span><span class="text-[13.5px]">Liabilities</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-primary font-semibold bg-surface-container-low rounded-lg" href="nutrition.html"><span class="material-symbols-outlined text-[19px]" style="font-variation-settings: 'FILL' 1;">restaurant</span><span class="text-[13.5px]">Nutrition</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="calendar.html"><span class="material-symbols-outlined text-[19px]">calendar_today</span><span class="text-[13.5px]">Calendar</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="insurance.html"><span class="material-symbols-outlined text-[19px]">verified_user</span><span class="text-[13.5px]">Insurance</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="mental.html"><span class="material-symbols-outlined text-[19px]">psychology</span><span class="text-[13.5px]">Mind</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="nominees.html"><span class="material-symbols-outlined text-[19px]">family_restroom</span><span class="text-[13.5px]">Nominees</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="vault.html"><span class="material-symbols-outlined text-[19px]">folder_shared</span><span class="text-[13.5px]">Vault</span></a>
+</nav>
+<div class="pt-4 border-t border-outline-variant space-y-0.5">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[19px]">settings</span><span class="text-[13.5px]">Settings</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[19px]">help</span><span class="text-[13.5px]">Support</span></a>
+</div>
+</aside>
+<!-- Top App Bar -->
+<header class="sticky top-0 z-40 w-full h-16 flex justify-between items-center px-gutter ml-[240px] bg-white border-b border-gray-200" style="width: calc(100% - 240px);">
+<div class="flex items-center bg-surface-container-low w-full max-w-md px-4 py-2 rounded-lg border border-transparent focus-within:border-brand-navy transition-all">
+<span class="material-symbols-outlined text-gray-500 mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-full placeholder-gray-500" placeholder="Search foods, meals, or nutrients..." type="text"/>
+</div>
+<div class="flex items-center space-x-gutter">
+<button class="material-symbols-outlined text-gray-500 hover:text-brand-navy transition-colors">notifications</button>
+<button class="px-4 py-2 bg-gray-100 text-brand-navy font-bold text-[11px] uppercase tracking-wider rounded-lg hover:bg-gray-200 transition-colors">Quick Entry</button>
+<div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden border border-gray-300">
+<img class="w-full h-full object-cover" data-alt="User Portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrm9pJpHUbtebzLIPdKf6e4_yNRzttHtMQxxaNT0XBaPNkS0Nagtu_5o2vZ55LQWAJkJGZnP5chbcHhpLpCnwaxt5OjKyB8Gu0TdsKCUuUU0ig4jlvyYoQ8QcRW3IhPc8UYUBIgzyV_aul7v3w71KylGbRLGtEvzfuJncm5Iy45jFjJUUITTJnPwepRQBtfnamCxDqJyEoubKRb4ca4Iy1dSjUmR3th9mSm3eeEQSpXdSRt17UQmdw71egFwrqJYOUEauKdMRB444"/>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="ml-[240px] p-container-padding max-w-max-width-content mx-auto">
+<!-- Header Section -->
+<section class="mb-stack-lg">
+<p class="font-bold text-[11px] text-gray-500 mb-1 uppercase tracking-[0.2em]">Fuel Optimization</p>
+<h2 class="text-4xl font-extrabold text-brand-navy tracking-tight">Nutrition Dashboard</h2>
+</section>
+<div class="bento-grid">
+<!-- Daily Fuel Log -->
+<div class="col-span-8 bg-white border border-gray-200 rounded-xl p-gutter shadow-sm">
+<div class="flex justify-between items-end mb-stack-md">
+<div>
+<h3 class="text-xl font-bold text-brand-navy mb-1">Daily Fuel Log</h3>
+<p class="text-sm text-gray-500">Real-time calorie and macronutrient tracking.</p>
+</div>
+<div class="text-right">
+<span class="font-mono-data text-4xl block leading-none font-bold text-brand-navy">1,840</span>
+<span class="text-[10px] font-bold text-gray-500 uppercase tracking-widest">KCAL / 2,400 TARGET</span>
+</div>
+</div>
+<!-- Progress Bar - Lime Highlight -->
+<div class="h-2 bg-gray-100 rounded-full mb-stack-lg overflow-hidden">
+<div class="h-full bg-brand-lime" style="width: 76.6%;"></div>
+</div>
+<!-- Meal List -->
+<div class="space-y-2">
+<!-- Breakfast -->
+<div class="group flex items-center p-3 rounded-lg hover:bg-gray-50 border border-transparent hover:border-gray-100 transition-all cursor-pointer">
+<div class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center mr-4">
+<span class="material-symbols-outlined text-brand-navy">breakfast_dining</span>
+</div>
+<div class="flex-1">
+<p class="font-semibold text-brand-navy">Steel-cut Oats with Walnuts</p>
+<p class="font-mono-data text-[11px] text-gray-500">08:30 AM • 420 kcal</p>
+</div>
+<div class="text-right flex items-center space-x-4">
+<div class="hidden md:flex space-x-1">
+<span class="px-2 py-0.5 bg-gray-100 text-[10px] font-bold text-gray-600 rounded uppercase">P: 12g</span>
+<span class="px-2 py-0.5 bg-gray-100 text-[10px] font-bold text-gray-600 rounded uppercase">C: 58g</span>
+<span class="px-2 py-0.5 bg-gray-100 text-[10px] font-bold text-gray-600 rounded uppercase">F: 14g</span>
+</div>
+<span class="material-symbols-outlined text-gray-400 group-hover:translate-x-1 transition-transform">chevron_right</span>
+</div>
+</div>
+<!-- Lunch -->
+<div class="group flex items-center p-3 rounded-lg hover:bg-gray-50 border border-transparent hover:border-gray-100 transition-all cursor-pointer">
+<div class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center mr-4">
+<span class="material-symbols-outlined text-brand-navy">lunch_dining</span>
+</div>
+<div class="flex-1">
+<p class="font-semibold text-brand-navy">Grilled Salmon &amp; Quinoa Salad</p>
+<p class="font-mono-data text-[11px] text-gray-500">01:15 PM • 680 kcal</p>
+</div>
+<div class="text-right flex items-center space-x-4">
+<div class="hidden md:flex space-x-1">
+<span class="px-2 py-0.5 bg-gray-100 text-[10px] font-bold text-gray-600 rounded uppercase">P: 45g</span>
+<span class="px-2 py-0.5 bg-gray-100 text-[10px] font-bold text-gray-600 rounded uppercase">C: 32g</span>
+<span class="px-2 py-0.5 bg-gray-100 text-[10px] font-bold text-gray-600 rounded uppercase">F: 28g</span>
+</div>
+<span class="material-symbols-outlined text-gray-400 group-hover:translate-x-1 transition-transform">chevron_right</span>
+</div>
+</div>
+<!-- Snack -->
+<div class="group flex items-center p-3 rounded-lg hover:bg-gray-50 border border-transparent hover:border-gray-100 transition-all cursor-pointer">
+<div class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center mr-4">
+<span class="material-symbols-outlined text-brand-navy">bakery_dining</span>
+</div>
+<div class="flex-1">
+<p class="font-semibold text-brand-navy">Greek Yogurt with Berries</p>
+<p class="font-mono-data text-[11px] text-gray-500">04:45 PM • 210 kcal</p>
+</div>
+<div class="text-right flex items-center space-x-4">
+<div class="hidden md:flex space-x-1">
+<span class="px-2 py-0.5 bg-gray-100 text-[10px] font-bold text-gray-600 rounded uppercase">P: 18g</span>
+<span class="px-2 py-0.5 bg-gray-100 text-[10px] font-bold text-gray-600 rounded uppercase">C: 15g</span>
+<span class="px-2 py-0.5 bg-gray-100 text-[10px] font-bold text-gray-600 rounded uppercase">F: 4g</span>
+</div>
+<span class="material-symbols-outlined text-gray-400 group-hover:translate-x-1 transition-transform">chevron_right</span>
+</div>
+</div>
+</div>
+<button class="mt-stack-md flex items-center text-[11px] font-bold text-brand-navy uppercase tracking-widest hover:text-black transition-colors">
+<span class="material-symbols-outlined text-[18px] mr-1">add</span>
+                    Add Custom Entry
+                </button>
+</div>
+<!-- Micronutrient Balance - Navy Section Header -->
+<div class="col-span-4 bg-white border border-gray-200 rounded-xl p-gutter flex flex-col shadow-sm">
+<h3 class="text-xl font-bold text-brand-navy mb-1">Micronutrients</h3>
+<p class="text-sm text-gray-500 mb-stack-md">Critical mineral optimization.</p>
+<div class="space-y-stack-md flex-1">
+<!-- Magnesium -->
+<div>
+<div class="flex justify-between items-center mb-1">
+<span class="text-[11px] font-bold text-brand-navy uppercase tracking-wide">Magnesium</span>
+<span class="font-mono-data text-[11px] text-gray-600">340mg / 400mg</span>
+</div>
+<div class="h-1 bg-gray-100 w-full rounded-full overflow-hidden">
+<div class="h-full bg-brand-navy" style="width: 85%;"></div>
+</div>
+</div>
+<!-- Vitamin D -->
+<div>
+<div class="flex justify-between items-center mb-1">
+<span class="text-[11px] font-bold text-brand-navy uppercase tracking-wide">Vitamin D</span>
+<span class="font-mono-data text-[11px] text-gray-600">600 IU / 800 IU</span>
+</div>
+<div class="h-1 bg-gray-100 w-full rounded-full overflow-hidden">
+<div class="h-full bg-brand-navy" style="width: 75%;"></div>
+</div>
+</div>
+<!-- Iron -->
+<div>
+<div class="flex justify-between items-center mb-1">
+<span class="text-[11px] font-bold text-brand-navy uppercase tracking-wide">Iron</span>
+<span class="font-mono-data text-[11px] text-gray-600">12mg / 18mg</span>
+</div>
+<div class="h-1 bg-gray-100 w-full rounded-full overflow-hidden">
+<div class="h-full bg-brand-navy" style="width: 66%;"></div>
+</div>
+</div>
+<!-- Zinc -->
+<div>
+<div class="flex justify-between items-center mb-1">
+<span class="text-[11px] font-bold text-brand-navy uppercase tracking-wide">Zinc</span>
+<span class="font-mono-data text-[11px] text-gray-600">11mg / 11mg</span>
+</div>
+<div class="h-1 bg-gray-100 w-full rounded-full overflow-hidden">
+<div class="h-full bg-brand-lime" style="width: 100%;"></div>
+</div>
+</div>
+</div>
+<div class="mt-auto pt-4 border-t border-gray-100">
+<p class="text-[12px] italic text-gray-500 leading-relaxed">"Suggested: Increase dark leafy greens to meet Magnesium target."</p>
+</div>
+</div>
+<!-- Meal Planner Calendar -->
+<div class="col-span-12 bg-white border border-gray-200 rounded-xl p-gutter shadow-sm">
+<div class="flex justify-between items-center mb-stack-md">
+<h3 class="text-xl font-bold text-brand-navy">Meal Planner</h3>
+<div class="flex space-x-2">
+<button class="p-2 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"><span class="material-symbols-outlined text-[18px]">chevron_left</span></button>
+<button class="p-2 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"><span class="material-symbols-outlined text-[18px]">chevron_right</span></button>
+</div>
+</div>
+<div class="grid grid-cols-7 border-t border-l border-gray-200 rounded-lg overflow-hidden">
+<!-- Days Headers -->
+<div class="bg-gray-50 border-r border-b border-gray-200 p-2 text-center text-[10px] font-bold text-gray-500 tracking-widest">MON</div>
+<div class="bg-gray-50 border-r border-b border-gray-200 p-2 text-center text-[10px] font-bold text-gray-500 tracking-widest">TUE</div>
+<div class="bg-gray-50 border-r border-b border-gray-200 p-2 text-center text-[10px] font-bold text-gray-500 tracking-widest">WED</div>
+<div class="bg-gray-50 border-r border-b border-gray-200 p-2 text-center text-[10px] font-bold text-gray-500 tracking-widest">THU</div>
+<div class="bg-gray-50 border-r border-b border-gray-200 p-2 text-center text-[10px] font-bold text-gray-500 tracking-widest">FRI</div>
+<div class="bg-gray-50 border-r border-b border-gray-200 p-2 text-center text-[10px] font-bold text-gray-500 tracking-widest">SAT</div>
+<div class="bg-gray-50 border-r border-b border-gray-200 p-2 text-center text-[10px] font-bold text-gray-500 tracking-widest">SUN</div>
+<!-- Calendar Cells -->
+<div class="bg-white border-r border-b border-gray-200 p-3 min-h-[120px] opacity-40">
+<span class="font-mono-data text-[11px] mb-2 block font-bold">12</span>
+<div class="text-[10px] p-1.5 bg-gray-100 rounded mb-1 truncate font-medium">Greek Salad</div>
+</div>
+<div class="bg-white border-r border-b border-gray-200 p-3 min-h-[120px] opacity-40">
+<span class="font-mono-data text-[11px] mb-2 block font-bold">13</span>
+<div class="text-[10px] p-1.5 bg-gray-100 rounded mb-1 truncate font-medium">Tuna Wrap</div>
+</div>
+<div class="bg-white border-r border-b border-gray-200 p-3 min-h-[120px] ring-2 ring-inset ring-brand-navy relative z-10">
+<span class="font-mono-data text-[11px] mb-2 block font-extrabold text-brand-navy">14 Today</span>
+<div class="text-[10px] p-1.5 bg-brand-navy text-white rounded mb-1 truncate font-bold shadow-sm">Salmon Quinoa</div>
+<div class="text-[10px] p-1.5 bg-gray-50 rounded truncate font-medium border border-gray-100">Beef Stew</div>
+</div>
+<div class="bg-white border-r border-b border-gray-200 p-3 min-h-[120px]">
+<span class="font-mono-data text-[11px] mb-2 block font-bold">15</span>
+<div class="text-[10px] p-1.5 bg-gray-50 rounded mb-1 truncate font-medium border border-gray-100">Poke Bowl</div>
+</div>
+<div class="bg-white border-r border-b border-gray-200 p-3 min-h-[120px]">
+<span class="font-mono-data text-[11px] mb-2 block font-bold">16</span>
+<div class="text-[10px] p-1.5 bg-gray-50 rounded mb-1 truncate font-medium border border-gray-100">Lentil Soup</div>
+</div>
+<div class="bg-white border-r border-b border-gray-200 p-3 min-h-[120px]">
+<span class="font-mono-data text-[11px] mb-2 block font-bold">17</span>
+</div>
+<div class="bg-white border-r border-b border-gray-200 p-3 min-h-[120px]">
+<span class="font-mono-data text-[11px] mb-2 block font-bold">18</span>
+</div>
+</div>
+</div>
+<!-- Local Meal Services Module -->
+<div class="col-span-12 bg-white border border-gray-200 rounded-xl p-gutter shadow-sm">
+<div class="flex items-center justify-between mb-stack-lg">
+<div>
+<h3 class="text-xl font-bold text-brand-navy mb-1">Local Meal Services</h3>
+<p class="text-sm text-gray-500">Verified affiliate partners for precise fueling.</p>
+</div>
+<a class="text-brand-navy font-bold text-[11px] uppercase tracking-widest border-b-2 border-brand-lime hover:border-brand-navy transition-all" href="#">Explore All Partners</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Partner Card 1 - Highlighted -->
+<div class="group bg-white border border-gray-200 rounded-xl overflow-hidden hover:border-brand-navy transition-all duration-300 hover:shadow-lg">
+<div class="h-40 overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Grain bowl from Healthy Dine" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB16h7b-FFCnwCWUPrtE6RrLwXOP3p0ckHHcIhzBysr-t_2E7n6sHACB4yA-dAz3gBdJHOxA4GGjIQSrex8fE2zBN345Sc9vm7buDAw9VHycZZktHj8_ISikpgYpjqsyrDMw0AExGHmc3-8jJLBk9QgDqQioTOzlWvDZHAU6y3ubzpOpMP88yUn8cJqle274ZdN4O13l-dBUJsHyS68vt01yuWkZ0bKo5CALHqJZmcmmnmRmiUol2rkMw8g0twPZEUF17yTLsLMqqk"/>
+<div class="absolute top-3 right-3 bg-brand-navy text-white font-bold text-[9px] px-2 py-1 rounded tracking-widest">PREMIUM</div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-2">
+<h4 class="text-lg font-bold text-brand-navy">Healthy Dine</h4>
+<span class="font-mono-data text-[12px] font-bold text-brand-navy">4.9 ★</span>
+</div>
+<p class="text-sm text-gray-600 mb-5 h-10 overflow-hidden">Macronutrient-calculated meals delivered daily to your home or office.</p>
+<button class="w-full py-3 bg-brand-lime text-brand-navy font-extrabold text-[11px] uppercase tracking-[0.2em] rounded-lg hover:brightness-105 transition-all shadow-sm">Order Now</button>
+</div>
+</div>
+<!-- Partner Card 2 -->
+<div class="group bg-white border border-gray-200 rounded-xl overflow-hidden hover:border-brand-navy transition-all duration-300 hover:shadow-lg">
+<div class="h-40 overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Meal prep containers from FuelPrep" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkhyWHtCvuvIq5tyxwvP8vGO3CowClTkBR_7SoFWRAxdbV02xFDaPcQT69PgDmw0_rMkJKtwfPByMiOnWbnQCKi-Q-7SpguVvxN8XcUWME0BBT90Op9h5OO4E-Ut5uW_H7ScS2TRQYQhuab1SvplqaUXJ0jphbuZA5Py7U6vydTVj8gm_OZB-bzrzJzrdbGpdlqWIfWJvUhSJlS29WNUYL3_t9grwkVtO-CJRV4iHDpDzvOzq7JfPUvGw-bRY5KQ97-BSVAqDw7Yw"/>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-2">
+<h4 class="text-lg font-bold text-brand-navy">FuelPrep</h4>
+<span class="font-mono-data text-[12px] font-bold text-brand-navy">4.7 ★</span>
+</div>
+<p class="text-sm text-gray-600 mb-5 h-10 overflow-hidden">Weekly subscriptions focused on high-protein athletic performance diets.</p>
+<button class="w-full py-3 bg-gray-50 border border-gray-200 text-brand-navy font-extrabold text-[11px] uppercase tracking-[0.2em] rounded-lg hover:bg-brand-navy hover:text-white transition-all">View Menu</button>
+</div>
+</div>
+<!-- Partner Card 3 -->
+<div class="group bg-white border border-gray-200 rounded-xl overflow-hidden hover:border-brand-navy transition-all duration-300 hover:shadow-lg">
+<div class="h-40 overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Vegetable juices from Pure Squeeze" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCr3FHDMczKWQx3huWMbdFpxmZumsGbPKS-BNT15_hXxV6-CSB1MspNHDvda-X6Pus-O4YraCB9EDMgq3GKzdDNY_2Yjp9sV9rIyGP_508vfhhUyk0G_NPKLWqA5W_ZQe6X7oWw5HYMXdvUPTXcVwQvqYdn5nXMKKiWcys2LNV7SatLY85HBx8ttaAIYUMtT8ym961R2X5koOif5U4S5qYPRVuPXfwX_YdYPWCmJEC6Ynsx8bL2TiTBfPpdJx4Qnie35f3P5UvuzgU"/>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-2">
+<h4 class="text-lg font-bold text-brand-navy">Pure Squeeze</h4>
+<span class="font-mono-data text-[12px] font-bold text-brand-navy">4.8 ★</span>
+</div>
+<p class="text-sm text-gray-600 mb-5 h-10 overflow-hidden">Cold-pressed juices and micronutrient shots for daily optimization.</p>
+<button class="w-full py-3 bg-gray-50 border border-gray-200 text-brand-navy font-extrabold text-[11px] uppercase tracking-[0.2em] rounded-lg hover:bg-brand-navy hover:text-white transition-all">Get 10% Off</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="py-stack-lg text-center mt-stack-lg border-t border-gray-200">
+<p class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em]">© 2026 LifeOS Nutrition Engine. All biometric data is encrypted.</p>
+</div>
+</main>
+<!-- Floating Action Button for Mobile -->
+<div class="fixed bottom-gutter right-gutter md:hidden z-50">
+<button class="w-14 h-14 bg-brand-navy text-brand-lime rounded-full shadow-xl flex items-center justify-center active:scale-95 transition-transform">
+<span class="material-symbols-outlined font-bold">add</span>
+</button>
+</div>
+<script>
+        // State management
+        document.querySelectorAll('.group').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                // Tailwind classes handle this now
+            });
+        });
+    </script>
+<script src="assets/app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  let offset = 0;
+  const fmt = () => {
+    const d = new Date(); d.setDate(d.getDate() - ((d.getDay() + 6) % 7) + offset * 7);
+    const e = new Date(d); e.setDate(d.getDate() + 6);
+    const o = { month: 'short', day: 'numeric' };
+    return d.toLocaleDateString('en', o) + ' – ' + e.toLocaleDateString('en', o);
+  };
+  const h3 = [...document.querySelectorAll('h3')].find(h => /meal planner/i.test(h.textContent));
+  if (h3) {
+    const btns = h3.parentElement.querySelectorAll('button');
+    if (btns.length >= 2) {
+      btns[0].dataset.wired = 1; btns[1].dataset.wired = 1;
+      btns[0].addEventListener('click', () => { offset--; LifeOS.toast('Meal plan · ' + fmt()); });
+      btns[1].addEventListener('click', () => { offset++; LifeOS.toast('Meal plan · ' + fmt()); });
+    }
+  }
+});
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const main = document.querySelector('main');
+  const aff = document.getElementById('lifeos-affiliates');
+  if (!main) return;
+  const sec = document.createElement('section');
+  sec.style.cssText = 'margin:40px 0 8px;font-family:Inter,sans-serif;max-width:1280px';
+  sec.innerHTML =
+    '<div style="display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid #e2e2e3;padding-top:28px;margin-bottom:18px;flex-wrap:wrap;gap:6px">' +
+    '<h3 style="font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#002D40">Go deeper</h3>' +
+    '<span style="font-size:11px;color:#44474e">Tools that turn your targets into actual meals</span></div>' +
+    '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px">' +
+    [
+      ['pie_chart', 'Design Your Plate', 'See your breakfast, lunch, dinner and snacks drawn as real plates — portions computed from your calorie budget.', 'plate.html'],
+      ['calculate', 'Your Calorie Budget', 'Weight × 40 — the whole formula, with fat-loss and muscle-gain adjustments built in.', 'plate.html#formula'],
+      ['medication', 'Supplement Protocol', 'What no plate can carry: B12, vitamin D, and the two fitness supplements worth taking.', 'plate.html#supplements'],
+    ].map(c =>
+      '<a href="' + c[3] + '" style="text-decoration:none;background:#fff;border:1px solid #e2e2e3;border-radius:12px;padding:20px;display:block;transition:border-color .2s ease" ' +
+      'onmouseover="this.style.borderColor=\'#002D40\'" onmouseout="this.style.borderColor=\'#e2e2e3\'">' +
+      '<span class="material-symbols-outlined" style="color:#002D40;background:#f3f3f4;padding:7px;border-radius:8px;font-size:18px">' + c[0] + '</span>' +
+      '<p style="font-size:14px;font-weight:700;color:#002D40;margin:12px 0 4px">' + c[1] + '</p>' +
+      '<p style="font-size:12.5px;color:#44474e;line-height:1.5;margin:0 0 10px">' + c[2] + '</p>' +
+      '<span style="font-size:10px;font-weight:700;letter-spacing:.12em;color:#1d9c40">OPEN &rarr;</span></a>').join('') +
+    '</div>';
+  main.insertBefore(sec, aff);
+});
+</script>
+</body></html>

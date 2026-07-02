@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LifeOS | Nominees</title>
+<meta name="description" content="LifeOS — one precision operating system for health, finance, nutrition, mind and legacy. Built for India, designed for the world."/>
+<meta property="og:title" content="LifeOS | Nominees"/>
+<meta property="og:description" content="Health, finance, nutrition, mind and legacy — unified into a single precision dashboard."/>
+<meta name="theme-color" content="#002D40"/>
+<link href="assets/favicon.svg" rel="icon" type="image/svg+xml"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#e0e3e4",
+                    "surface-container-high": "#e8e8e8",
+                    "error": "#ba1a1a",
+                    "on-secondary": "#ffffff",
+                    "glass-border": "rgba(0, 45, 64, 0.1)",
+                    "on-primary-container": "#7195ac",
+                    "on-primary-fixed-variant": "#264b5f",
+                    "on-background": "#1a1c1c",
+                    "surface-container-highest": "#e2e2e2",
+                    "inverse-on-surface": "#f0f1f1",
+                    "background": "#f9f9f9",
+                    "outline": "#72787d",
+                    "surface-bright": "#f9f9f9",
+                    "secondary-fixed": "#3dcc60",
+                    "on-tertiary-container": "#8d9192",
+                    "status-borderline": "#FFD700",
+                    "error-container": "#ffdad6",
+                    "on-secondary-container": "#5b6900",
+                    "on-tertiary-fixed": "#181c1d",
+                    "surface": "#f9f9f9",
+                    "surface-variant": "#e2e2e2",
+                    "on-surface": "#1a1c1c",
+                    "secondary-fixed-dim": "#b8d300",
+                    "surface-container-low": "#f3f3f4",
+                    "on-error-container": "#93000a",
+                    "primary-fixed-dim": "#a7cbe4",
+                    "outline-variant": "#c2c7cc",
+                    "inverse-surface": "#2f3131",
+                    "inverse-primary": "#a7cbe4",
+                    "secondary": "#3dcc60",
+                    "primary": "#001723",
+                    "surface-dim": "#dadada",
+                    "on-tertiary-fixed-variant": "#434748",
+                    "status-optimal": "#00C853",
+                    "on-secondary-fixed-variant": "#414c00",
+                    "surface-container-lowest": "#ffffff",
+                    "on-surface-variant": "#42484c",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed-dim": "#c4c7c8",
+                    "on-error": "#ffffff",
+                    "primary-container": "#002d40",
+                    "on-primary-fixed": "#001e2c",
+                    "tertiary": "#121617",
+                    "text-muted": "#64748B",
+                    "primary-fixed": "#c4e7ff",
+                    "status-at-risk": "#FF4D4D",
+                    "tertiary-container": "#262a2b",
+                    "secondary-container": "#3dcc60",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-fixed": "#191e00",
+                    "surface-tint": "#3f6378",
+                    "surface-container": "#eeeeee"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "16px",
+                    "base": "8px",
+                    "gutter": "24px",
+                    "container-max": "1280px",
+                    "section-gap": "120px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Inter"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "display-hero": ["Inter"],
+                    "numeric-stat": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.08em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "headline-lg": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "display-hero": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                    "numeric-stat": ["48px", {"lineHeight": "1", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 45, 64, 0.1);
+        }
+    </style>
+<link href="assets/app.css" rel="stylesheet"/>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- SideNavBar (Execution from JSON) -->
+<aside id="lifeos-nav" class="fixed left-0 top-0 h-screen w-[240px] bg-white border-r border-outline-variant flex flex-col py-6 px-4 z-50" style="font-family:'Inter',sans-serif">
+<a href="index.html" class="block mb-7 px-3">
+<h1 class="text-2xl font-bold text-primary tracking-tight">LifeOS</h1>
+<p class="text-[9px] font-semibold text-on-surface-variant tracking-[0.2em] mt-1">PRECISION LIFE MANAGEMENT</p>
+</a>
+<nav class="flex-grow space-y-0.5 overflow-y-auto">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="dashboard.html"><span class="material-symbols-outlined text-[19px]">dashboard</span><span class="text-[13.5px]">Dashboard</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="health.html"><span class="material-symbols-outlined text-[19px]">monitor_heart</span><span class="text-[13.5px]">Health</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="finance.html"><span class="material-symbols-outlined text-[19px]">payments</span><span class="text-[13.5px]">Finance</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="liabilities.html"><span class="material-symbols-outlined text-[19px]">request_quote</span><span class="text-[13.5px]">Liabilities</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="nutrition.html"><span class="material-symbols-outlined text-[19px]">restaurant</span><span class="text-[13.5px]">Nutrition</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="calendar.html"><span class="material-symbols-outlined text-[19px]">calendar_today</span><span class="text-[13.5px]">Calendar</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="insurance.html"><span class="material-symbols-outlined text-[19px]">verified_user</span><span class="text-[13.5px]">Insurance</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="mental.html"><span class="material-symbols-outlined text-[19px]">psychology</span><span class="text-[13.5px]">Mind</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-primary font-semibold bg-surface-container-low rounded-lg" href="nominees.html"><span class="material-symbols-outlined text-[19px]" style="font-variation-settings: 'FILL' 1;">family_restroom</span><span class="text-[13.5px]">Nominees</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="vault.html"><span class="material-symbols-outlined text-[19px]">folder_shared</span><span class="text-[13.5px]">Vault</span></a>
+</nav>
+<div class="pt-4 border-t border-outline-variant space-y-0.5">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[19px]">settings</span><span class="text-[13.5px]">Settings</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[19px]">help</span><span class="text-[13.5px]">Support</span></a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-[240px] min-h-screen">
+<!-- TopAppBar (Execution from JSON) -->
+<header class="sticky top-0 z-40 w-full h-16 flex justify-between items-center px-gutter bg-surface border-b border-outline-variant">
+<div class="flex items-center flex-1 max-w-xl">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-lg focus:ring-1 focus:ring-primary text-body-md" placeholder="Search registry..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="flex items-center gap-2 px-4 py-2 bg-primary text-on-primary rounded-full font-bold text-label-caps hover:opacity-90 transition-all">
+<span>Quick Entry</span>
+<span class="material-symbols-outlined">add</span>
+</button>
+<button class="relative text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<img class="w-8 h-8 rounded-full border border-outline-variant object-cover" data-alt="A clean professional headshot of a person in high-end business attire against a neutral grey clinical background, representing the high-performer user profile of LifeOS. The lighting is soft and professional, and the composition is a tight portrait suitable for a premium dashboard profile icon." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8fuEPH-xjer85DBRGNV4j2WNMdDPmsxNAWsE1dsixpRrCanM4-pdDRmMrzym8hlmtPMYCFIVpBuBi0SGfe1xKc3bfrqvRC6hkwzSPYC5cUdvPYfNFnzK0lSh_qX2473Z-V1LlI2hb8k-frKx1iLuFYzln1TvZHGJlb-rWMJblBgR9Kl8oYQmx8SY6HVPYQb4TF_HZHNH7Y44VQq49xDHLJZG2-CSAlPWOrXLGjBXckyxsKqBLINidcBOtLe8LK8bBi9Ls6Hqo9eI"/>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div class="px-gutter py-8 max-w-container-max mx-auto">
+<!-- Breadcrumbs & Title -->
+<div class="mb-10">
+<nav class="flex items-center gap-2 text-on-surface-variant text-label-caps mb-4">
+<span>Finance</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-primary font-bold">Nominee Registry</span>
+</nav>
+<div class="flex justify-between items-end">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary">Nominee Registry</h2>
+<p class="text-on-surface-variant font-body-lg mt-2">Manage legal beneficiaries for your clinical and financial assets.</p>
+</div>
+<div class="flex gap-4">
+<button class="flex items-center gap-2 px-5 py-3 border border-outline-variant rounded-xl font-bold text-label-caps hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined">ios_share</span>
+                            Secure Share
+                        </button>
+<button class="flex items-center gap-2 px-5 py-3 bg-secondary text-primary rounded-xl font-bold text-label-caps hover:opacity-90 transition-all">
+<span class="material-symbols-outlined">description</span>
+                            Legacy Document
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Nominee Status Dashboard (Bento Grid) -->
+<div class="grid grid-cols-12 gap-6 mb-section-gap">
+<!-- Priority Alert Card -->
+<div class="col-span-12 md:col-span-4 glass-card p-6 rounded-xl flex flex-col justify-between border-l-4 border-l-error">
+<div>
+<div class="flex items-center gap-2 text-error mb-2">
+<span class="material-symbols-outlined">warning</span>
+<span class="font-label-caps text-label-caps uppercase">High Priority Alert</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary">3 Missing Nominees</h3>
+<p class="text-on-surface-variant text-body-md mt-2">Critical financial assets are currently without designated legal beneficiaries.</p>
+</div>
+<div class="mt-6">
+<div class="flex items-center justify-between text-label-caps text-on-surface-variant mb-2">
+<span>REGISTRY COMPLETION</span>
+<span>65%</span>
+</div>
+<div class="h-2 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-error transition-all duration-1000" style="width: 65%;"></div>
+</div>
+</div>
+</div>
+<!-- Status Overview Grid -->
+<div class="col-span-12 md:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="bg-surface-container-lowest border border-outline-variant p-6 rounded-xl">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-lg bg-primary-container/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">verified_user</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Verified</span>
+</div>
+<div class="font-numeric-stat text-numeric-stat text-primary">12</div>
+<p class="text-on-surface-variant text-body-md">Assets fully secure</p>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-6 rounded-xl">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-lg bg-status-borderline/10 flex items-center justify-center text-status-borderline">
+<span class="material-symbols-outlined">pending</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Pending</span>
+</div>
+<div class="font-numeric-stat text-numeric-stat text-primary">04</div>
+<p class="text-on-surface-variant text-body-md">Awaiting validation</p>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-6 rounded-xl">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">share_reviews</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Notified</span>
+</div>
+<div class="font-numeric-stat text-numeric-stat text-primary">08</div>
+<p class="text-on-surface-variant text-body-md">Nominees informed</p>
+</div>
+</div>
+</div>
+<!-- Unified Registry Table -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden mb-section-gap">
+<div class="p-6 border-b border-outline-variant flex justify-between items-center">
+<h3 class="font-headline-md text-headline-md text-primary">Unified Asset Registry</h3>
+<div class="flex gap-2">
+<button class="p-2 hover:bg-surface-container-low rounded-lg transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+<button class="p-2 hover:bg-surface-container-low rounded-lg transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low/50">
+<th class="px-6 py-4 font-label-caps text-label-caps text-on-surface-variant">ASSET NAME</th>
+<th class="px-6 py-4 font-label-caps text-label-caps text-on-surface-variant">INSTITUTION</th>
+<th class="px-6 py-4 font-label-caps text-label-caps text-on-surface-variant">NOMINEE NAME</th>
+<th class="px-6 py-4 font-label-caps text-label-caps text-on-surface-variant">RELATIONSHIP</th>
+<th class="px-6 py-4 font-label-caps text-label-caps text-on-surface-variant text-center">STATUS</th>
+<th class="px-6 py-4 font-label-caps text-label-caps text-on-surface-variant text-right">ACTION</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">account_balance</span>
+<span class="font-bold text-primary font-body-md">Primary Savings</span>
+</div>
+</td>
+<td class="px-6 py-4 text-on-surface-variant font-body-md">Chase Private Client</td>
+<td class="px-6 py-4 font-bold text-primary font-body-md">Ananya Sharma</td>
+<td class="px-6 py-4 text-on-surface-variant font-body-md">Spouse</td>
+<td class="px-6 py-4 text-center">
+<span class="px-3 py-1 bg-status-optimal/10 text-status-optimal text-[10px] font-bold uppercase rounded-full">Verified</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined">more_vert</span></button>
+</td>
+</tr>
+<!-- Row 2 (Missing) -->
+<tr class="bg-error-container/5 hover:bg-error-container/10 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-error">monitoring</span>
+<span class="font-bold text-primary font-body-md">Tech Equity Portfolio</span>
+</div>
+</td>
+<td class="px-6 py-4 text-on-surface-variant font-body-md">Charles Schwab</td>
+<td class="px-6 py-4 italic text-error font-body-md">Not Assigned</td>
+<td class="px-6 py-4 text-on-surface-variant font-body-md">—</td>
+<td class="px-6 py-4 text-center">
+<span class="px-3 py-1 bg-error/10 text-error text-[10px] font-bold uppercase rounded-full">Missing</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="px-4 py-1.5 bg-primary text-on-primary rounded-lg text-label-caps font-bold hover:scale-[1.02] active:scale-[0.98] transition-all">Assign</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">savings</span>
+<span class="font-bold text-primary font-body-md">Provident Fund (Retirement)</span>
+</div>
+</td>
+<td class="px-6 py-4 text-on-surface-variant font-body-md">Fidelity Investments</td>
+<td class="px-6 py-4 font-bold text-primary font-body-md">Jameson Carter</td>
+<td class="px-6 py-4 text-on-surface-variant font-body-md">Brother</td>
+<td class="px-6 py-4 text-center">
+<span class="px-3 py-1 bg-status-borderline/10 text-status-borderline text-[10px] font-bold uppercase rounded-full">Pending</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined">more_vert</span></button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">real_estate_agent</span>
+<span class="font-bold text-primary font-body-md">Real Estate Holding</span>
+</div>
+</td>
+<td class="px-6 py-4 text-on-surface-variant font-body-md">Private LLC</td>
+<td class="px-6 py-4 font-bold text-primary font-body-md">Ananya Sharma</td>
+<td class="px-6 py-4 text-on-surface-variant font-body-md">Spouse</td>
+<td class="px-6 py-4 text-center">
+<span class="px-3 py-1 bg-status-optimal/10 text-status-optimal text-[10px] font-bold uppercase rounded-full">Verified</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined">more_vert</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Secure Share Features -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-section-gap">
+<div class="glass-card p-8 rounded-2xl">
+<h4 class="font-headline-md text-headline-md text-primary mb-4 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">security</span>
+                        Secure Notification
+                    </h4>
+<p class="text-on-surface-variant font-body-md mb-8">Send an encrypted notification to your nominees informing them of their status without revealing specific account balances or sensitive credentials until a trigger event.</p>
+<div class="space-y-4">
+<div class="flex items-center gap-4 p-4 bg-surface-container-low rounded-xl">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="A portrait of a smiling woman in her 30s with a warm and trustworthy expression, styled as a modern user profile avatar for a family member. High-quality studio lighting, minimalist aesthetic consistent with a premium life management application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKH0hR1Y0uh7SvFBq8ANz0EXO7O6TJn65oL0KxwGQXlJ8wVKtMMHpDiFB0-isNoBUzcWAZ0PJGwEr0uX4__RfvMxqcugb1fuat6LFw2SLqUUmDDpBxt7YNMtE3w2f7zQNBF7TyVpBrqQ4w8VzZk84Qodw3FFEpVlRG92cF1odZzxsNcsgwSz30sjsHIamKkhXnUTPPz-52YmG5h8guAHkMTkBcjuZlC96vqXXcB613k-yMZgP7AARw_WLB5dyzQ0tUPyhi_JTB9q4"/>
+<div class="flex-1">
+<div class="font-bold text-primary">Ananya Sharma</div>
+<div class="text-label-caps text-on-surface-variant uppercase text-[10px]">Last notified: 12 days ago</div>
+</div>
+<button class="px-4 py-2 border border-outline text-label-caps font-bold rounded-lg hover:bg-surface transition-all">Resend</button>
+</div>
+<button class="w-full py-4 border-2 border-dashed border-outline-variant rounded-xl text-on-surface-variant font-bold text-label-caps hover:bg-surface-container-low transition-all">
+                            + ADD NEW NOMINEE CONTACT
+                        </button>
+</div>
+</div>
+<div class="relative overflow-hidden p-8 rounded-2xl bg-primary text-on-primary">
+
+<div class="relative z-10">
+<h4 class="font-headline-md text-headline-md mb-4 flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">lock</span>
+                            Vault Access Protocol
+                        </h4>
+<p class="text-on-primary/70 font-body-md mb-8">Establish the conditions under which your Legacy Document is released. LifeOS uses multiple verification signals including proof of life and trusted third-party attestation.</p>
+<div class="space-y-3">
+<div class="flex justify-between items-center p-3 bg-white/5 rounded-lg border border-white/10">
+<span class="font-label-caps">Inactivity Period</span>
+<span class="font-bold text-secondary">180 Days</span>
+</div>
+<div class="flex justify-between items-center p-3 bg-white/5 rounded-lg border border-white/10">
+<span class="font-label-caps">Verification Contacts</span>
+<span class="font-bold text-secondary">3/3 Confirmed</span>
+</div>
+</div>
+<button class="mt-8 w-full py-4 bg-secondary text-primary rounded-xl font-bold text-label-caps flex items-center justify-center gap-2 hover:opacity-90 transition-all">
+                            CONFIGURE VAULT TRIGGER
+                            <span class="material-symbols-outlined text-sm">settings</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Asset Class Quick Filter Chips -->
+<div class="flex flex-wrap gap-3 mb-8">
+<span class="font-label-caps text-on-surface-variant self-center mr-4">FILTER BY CLASS:</span>
+<button class="px-4 py-2 bg-primary text-on-primary rounded-full font-bold text-label-caps">All Assets</button>
+<button class="px-4 py-2 bg-surface-container-high text-on-surface-variant rounded-full font-bold text-label-caps hover:bg-outline-variant transition-colors">Bank Accounts</button>
+<button class="px-4 py-2 bg-surface-container-high text-on-surface-variant rounded-full font-bold text-label-caps hover:bg-outline-variant transition-colors">Investments</button>
+<button class="px-4 py-2 bg-surface-container-high text-on-surface-variant rounded-full font-bold text-label-caps hover:bg-outline-variant transition-colors">Retirement</button>
+<button class="px-4 py-2 bg-surface-container-high text-on-surface-variant rounded-full font-bold text-label-caps hover:bg-outline-variant transition-colors">Real Estate</button>
+</div>
+</div>
+</main>
+<!-- Micro-interaction for Progress Bar -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const progressBar = document.querySelector('.bg-error.transition-all');
+            if (progressBar) {
+                progressBar.style.width = '0%';
+                setTimeout(() => {
+                    progressBar.style.width = '65%';
+                }, 500);
+            }
+        });
+    </script>
+<script src="assets/app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const addBtn = [...document.querySelectorAll('button')].find(b => /ADD NEW NOMINEE/.test(b.textContent));
+  const row = (n) => {
+    const init = n.name.split(' ').map(w => w[0] || '').join('').slice(0, 2).toUpperCase();
+    return '<div class="flex items-center gap-4 p-4 bg-surface-container-low rounded-xl">' +
+      '<div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">' + init + '</div>' +
+      '<div class="flex-1"><div class="font-bold text-primary">' + n.name + '</div>' +
+      '<div class="text-label-caps text-on-surface-variant uppercase text-[10px]">' + (n.relation || 'Nominee') + ' · Pending notification</div></div>' +
+      '<button data-wired="1" onclick="LifeOS.toast(\'Encrypted notification sent to ' + n.name.replace(/'/g, '') + '\')" class="px-4 py-2 border border-outline text-label-caps font-bold rounded-lg hover:bg-surface transition-all">Resend</button></div>';
+  };
+  if (addBtn) {
+    LifeOS.store.get('nominees', []).forEach(n => addBtn.insertAdjacentHTML('beforebegin', row(n)));
+    addBtn.dataset.wired = 1;
+    addBtn.addEventListener('click', () => LifeOS.form('Add Nominee', [
+      ['Name', 'text'], ['Relation', 'select', ['Wife', 'Husband', 'Mother', 'Father', 'Son', 'Daughter', 'Other']],
+      ['Email', 'email'],
+    ], (v) => {
+      if (!v.name) { LifeOS.toast('Name is required'); return; }
+      const a = LifeOS.store.get('nominees', []); a.push(v); LifeOS.store.set('nominees', a);
+      addBtn.insertAdjacentHTML('beforebegin', row(v));
+      LifeOS.toast(v.name + ' added as nominee');
+    }, 'Add Nominee'));
+  }
+  [...document.querySelectorAll('button')].forEach(b => {
+    if (b.textContent.trim() === 'Resend' && !b.dataset.wired) {
+      b.dataset.wired = 1;
+      b.addEventListener('click', () => LifeOS.toast('Encrypted notification sent'));
+    }
+  });
+});
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const main = document.querySelector('main');
+  if (main) main.insertAdjacentHTML('afterbegin',
+    '<div style="margin:24px 40px 0;max-width:1280px;font-family:Inter,sans-serif">' +
+    '<div style="display:flex;gap:14px;align-items:flex-start;background:rgba(61,204,96,.08);border:1px solid rgba(61,204,96,.35);border-radius:12px;padding:16px 20px">' +
+    '<span class="material-symbols-outlined" style="color:#1d9c40">diversity_1</span>' +
+    '<div><div style="font-size:13px;font-weight:700;color:#002D40;margin-bottom:2px">Family account · Shared visibility</div>' +
+    '<div style="font-size:12.5px;color:#44474e;line-height:1.6">In India, nominees are mandatory — but families often never learn what their loved ones assigned to them. ' +
+    'Every member of this family account can see these nominee assignments, so nothing stays unknown when it matters most.</div></div></div></div>');
+});
+</script>
+</body></html>

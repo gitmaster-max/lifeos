@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LifeOS | Document Vault</title>
+<meta name="description" content="Every family document in one place — connected to India's DigiLocker."/>
+<meta name="theme-color" content="#002D40"/>
+<link href="assets/favicon.svg" rel="icon" type="image/svg+xml"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = { theme: { extend: { colors: {
+    surface: "#f9f9f9", "surface-container-lowest": "#ffffff", "surface-container-low": "#f3f3f4",
+    "surface-container-high": "#e8e8e9", primary: "#002D40", "on-primary": "#ffffff",
+    secondary: "#3dcc60", "on-secondary": "#002D40", "outline-variant": "#e2e2e3",
+    "on-surface": "#1a1c1e", "on-surface-variant": "#44474e", error: "#ba1a1a"
+  } } } }
+</script>
+<style>
+  body { font-family: 'Inter', sans-serif; background:#f9f9f9; color:#1a1c1e; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .vcard { background:#fff; border:1px solid #e2e2e3; border-radius:16px; }
+</style>
+<link href="assets/app.css" rel="stylesheet"/>
+</head>
+<body class="bg-surface text-on-surface">
+<aside id="lifeos-nav" class="fixed left-0 top-0 h-screen w-[240px] bg-white border-r border-outline-variant flex flex-col py-6 px-4 z-50" style="font-family:'Inter',sans-serif">
+<a href="index.html" class="block mb-7 px-3">
+<h1 class="text-2xl font-bold text-primary tracking-tight">LifeOS</h1>
+<p class="text-[9px] font-semibold text-on-surface-variant tracking-[0.2em] mt-1">PRECISION LIFE MANAGEMENT</p>
+</a>
+<nav class="flex-grow space-y-0.5 overflow-y-auto">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="dashboard.html"><span class="material-symbols-outlined text-[19px]">dashboard</span><span class="text-[13.5px]">Dashboard</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="health.html"><span class="material-symbols-outlined text-[19px]">monitor_heart</span><span class="text-[13.5px]">Health</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="finance.html"><span class="material-symbols-outlined text-[19px]">payments</span><span class="text-[13.5px]">Finance</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="liabilities.html"><span class="material-symbols-outlined text-[19px]">request_quote</span><span class="text-[13.5px]">Liabilities</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="nutrition.html"><span class="material-symbols-outlined text-[19px]">restaurant</span><span class="text-[13.5px]">Nutrition</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="calendar.html"><span class="material-symbols-outlined text-[19px]">calendar_today</span><span class="text-[13.5px]">Calendar</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="insurance.html"><span class="material-symbols-outlined text-[19px]">verified_user</span><span class="text-[13.5px]">Insurance</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="mental.html"><span class="material-symbols-outlined text-[19px]">psychology</span><span class="text-[13.5px]">Mind</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="nominees.html"><span class="material-symbols-outlined text-[19px]">family_restroom</span><span class="text-[13.5px]">Nominees</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-primary font-semibold bg-surface-container-low rounded-lg" href="vault.html"><span class="material-symbols-outlined text-[19px]" style="font-variation-settings: 'FILL' 1;">folder_shared</span><span class="text-[13.5px]">Vault</span></a>
+</nav>
+<div class="pt-4 border-t border-outline-variant space-y-0.5">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[19px]">settings</span><span class="text-[13.5px]">Settings</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[19px]">help</span><span class="text-[13.5px]">Support</span></a>
+</div>
+</aside>
+
+<div class="ml-[240px] min-h-screen">
+  <header class="sticky top-0 z-40 h-16 px-10 bg-white border-b border-outline-variant flex justify-between items-center">
+    <h1 class="text-[19px] font-bold text-primary tracking-tight">Document Vault</h1>
+    <button data-wired="1" id="add-doc" class="flex items-center gap-2 px-5 py-2 bg-secondary text-on-secondary text-[11px] font-bold tracking-wider rounded-lg hover:brightness-95 transition-all">
+      <span class="material-symbols-outlined text-[16px]">add</span> ADD DOCUMENT
+    </button>
+  </header>
+
+  <main class="px-10 py-10 max-w-[1280px]">
+    <div class="mb-8">
+      <h2 class="text-4xl font-bold text-primary tracking-tight mb-2">Every paper. One place.</h2>
+      <p class="text-[15px] text-on-surface-variant max-w-2xl">Policies in a cupboard, property papers in a bank locker, PF statements in email — record where everything lives, and pull government documents straight from DigiLocker.</p>
+    </div>
+
+    <!-- DigiLocker -->
+    <section id="dl-card" class="vcard p-7 mb-8 flex items-center justify-between flex-wrap gap-5">
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center" style="background:rgba(61,204,96,.12);border:1px solid rgba(61,204,96,.35)">
+          <span class="material-symbols-outlined" style="color:#1d9c40">account_balance</span>
+        </div>
+        <div>
+          <h3 class="font-bold text-primary text-[16px]">DigiLocker <span class="text-[10px] font-bold tracking-[.12em] text-on-surface-variant">· GOVT. OF INDIA</span></h3>
+          <p class="text-[13px] text-on-surface-variant" id="dl-status">Not connected — link your Aadhaar-backed document locker</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="https://www.digilocker.gov.in" target="_blank" rel="noopener" class="text-[12px] text-on-surface-variant underline underline-offset-2 hover:text-primary">What is DigiLocker?</a>
+        <button data-wired="1" id="dl-btn" class="px-6 py-2.5 bg-primary text-on-primary text-[11px] font-bold tracking-widest rounded-lg hover:brightness-110 transition-all">CONNECT DIGILOCKER</button>
+      </div>
+    </section>
+    <div id="dl-docs" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3 mb-10" style="display:none"></div>
+
+    <!-- Family registry -->
+    <section class="mb-4 flex items-baseline justify-between flex-wrap gap-2">
+      <h3 class="text-[12px] font-bold tracking-[.18em] text-primary uppercase">Family document registry</h3>
+      <span class="text-[11px] text-on-surface-variant">Visible to everyone in your family account — so nothing is ever "lost"</span>
+    </section>
+    <div id="docs" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 mb-6"></div>
+    <div id="docs-empty" class="vcard p-10 text-center">
+      <span class="material-symbols-outlined text-primary text-[36px] mb-2 block">folder_shared</span>
+      <p class="text-[14px] font-bold text-primary mb-1">Nothing recorded yet</p>
+      <p class="text-[13px] text-on-surface-variant">Add your first record — even "property papers are in the SBI locker, Jayanagar branch" counts.</p>
+    </div>
+  </main>
+</div>
+
+<script src="assets/app.js"></script>
+<script>
+(function () {
+  "use strict";
+  var DL_DOCS = [
+    ["badge", "Aadhaar"], ["credit_card", "PAN Card"], ["directions_car", "Driving Licence"],
+    ["school", "Class X & XII"], ["vaccines", "CoWIN Certs"], ["receipt_long", "Vehicle RC"],
+  ];
+  var CATS = ["Insurance policy", "Property", "Bank / FD", "PF / Pension", "Will / Legal", "Medical", "Other"];
+  var CAT_ICON = { "Insurance policy": "verified_user", "Property": "home_work", "Bank / FD": "account_balance", "PF / Pension": "savings", "Will / Legal": "gavel", "Medical": "medical_information", "Other": "description" };
+
+  var docs = LifeOS.store.get("vaultdocs", []);
+  function save() { LifeOS.store.set("vaultdocs", docs); }
+
+  // DigiLocker simulated connect
+  function renderDL() {
+    var connected = LifeOS.store.get("digilocker", false);
+    document.getElementById("dl-status").textContent = connected
+      ? "Connected — 6 issued documents synced from your locker"
+      : "Not connected — link your Aadhaar-backed document locker";
+    var btn = document.getElementById("dl-btn");
+    btn.textContent = connected ? "CONNECTED ✓" : "CONNECT DIGILOCKER";
+    btn.style.background = connected ? "#1d9c40" : "";
+    var grid = document.getElementById("dl-docs");
+    grid.style.display = connected ? "grid" : "none";
+    if (connected) grid.innerHTML = DL_DOCS.map(function (d) {
+      return '<div class="vcard p-4 text-center"><span class="material-symbols-outlined text-primary mb-1 block">' + d[0] + '</span>' +
+        '<p class="text-[11.5px] font-bold text-primary leading-tight">' + d[1] + '</p>' +
+        '<p class="text-[9px] font-bold tracking-[.1em] mt-1" style="color:#1d9c40">ISSUED ✓</p></div>';
+    }).join("");
+  }
+  document.getElementById("dl-btn").addEventListener("click", function () {
+    if (LifeOS.store.get("digilocker", false)) { LifeOS.toast("DigiLocker already connected"); return; }
+    LifeOS.modal("Connect DigiLocker", 
+      '<p style="font-size:13px;color:#44474e;line-height:1.6;margin-bottom:16px">You\'ll be redirected to <b>digilocker.gov.in</b> to sign in with Aadhaar and approve read-only access to your issued documents. LifeOS never stores the documents — only secure references.</p>' +
+      '<button class="lifeos-btn-primary" id="dl-go">SIGN IN WITH DIGILOCKER</button>',
+      function (ov) {
+        ov.querySelector("#dl-go").addEventListener("click", function () {
+          this.textContent = "AUTHORISING…";
+          var self = this;
+          setTimeout(function () {
+            LifeOS.store.set("digilocker", true);
+            document.getElementById("lifeos-modal-overlay").remove();
+            renderDL();
+            LifeOS.toast("DigiLocker connected — 6 documents synced");
+          }, 1400);
+        });
+      });
+  });
+
+  // registry
+  function render() {
+    var wrap = document.getElementById("docs");
+    document.getElementById("docs-empty").style.display = docs.length ? "none" : "block";
+    wrap.innerHTML = docs.map(function (d, i) {
+      return '<div class="vcard p-5"><div class="flex items-start justify-between mb-2">' +
+        '<span class="material-symbols-outlined text-primary bg-surface-container-low p-2 rounded-lg">' + (CAT_ICON[d.category] || "description") + '</span>' +
+        '<button data-wired="1" class="doc-del text-on-surface-variant hover:text-error" data-i="' + i + '"><span class="material-symbols-outlined text-[18px]">delete</span></button></div>' +
+        '<p class="font-bold text-primary text-[14px] mb-0.5">' + d.document_name + '</p>' +
+        '<p class="text-[11px] font-bold tracking-[.1em] text-on-surface-variant uppercase mb-2">' + d.category + '</p>' +
+        '<p class="text-[12.5px] text-on-surface-variant"><span class="material-symbols-outlined text-[14px] align-middle">location_on</span> ' + d.where_is_it_kept + '</p>' +
+        (d.belongs_to ? '<p class="text-[11px] text-on-surface-variant mt-1">Belongs to: <b class="text-primary">' + d.belongs_to + "</b></p>" : "") + "</div>";
+    }).join("");
+    wrap.querySelectorAll(".doc-del").forEach(function (b) {
+      b.addEventListener("click", function () {
+        docs.splice(+b.dataset.i, 1); save(); render();
+        LifeOS.toast("Record removed");
+      });
+    });
+  }
+  document.getElementById("add-doc").addEventListener("click", function () {
+    LifeOS.form("Add Document Record", [
+      ["Document name", "text", "e.g. LIC policy #882301"],
+      ["Category", "select", CATS],
+      ["Where is it kept?", "text", "e.g. SBI locker, Jayanagar / DigiLocker / almirah file 2"],
+      ["Belongs to", "text", "e.g. Papa"],
+    ], function (v) {
+      if (!v.document_name || !v.where_is_it_kept) { LifeOS.toast("Name and location are required"); return; }
+      docs.push(v); save(); render();
+      LifeOS.toast('"' + v.document_name + '" recorded — family can now find it');
+    }, "Save Record");
+  });
+
+  document.addEventListener("DOMContentLoaded", function () { renderDL(); render(); });
+  renderDL(); render();
+})();
+</script>
+</body>
+</html>

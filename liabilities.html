@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LifeOS | Liabilities</title>
+<meta name="description" content="Track every loan, see the full amortization, and finish your loans faster."/>
+<meta name="theme-color" content="#002D40"/>
+<link href="assets/favicon.svg" rel="icon" type="image/svg+xml"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = { theme: { extend: { colors: {
+    surface: "#f9f9f9", "surface-container-lowest": "#ffffff", "surface-container-low": "#f3f3f4",
+    "surface-container-high": "#e8e8e9", primary: "#002D40", "on-primary": "#ffffff",
+    secondary: "#3dcc60", "on-secondary": "#002D40", "outline-variant": "#e2e2e3",
+    "on-surface": "#1a1c1e", "on-surface-variant": "#44474e", error: "#ba1a1a"
+  } } } }
+</script>
+<style>
+  body { font-family: 'Inter', sans-serif; background:#f9f9f9; color:#1a1c1e; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .lcard { background:#fff; border:1px solid #e2e2e3; border-radius:16px; }
+  input[type=range] { accent-color:#002D40; }
+</style>
+<link href="assets/app.css" rel="stylesheet"/>
+</head>
+<body class="bg-surface text-on-surface">
+<aside id="lifeos-nav" class="fixed left-0 top-0 h-screen w-[240px] bg-white border-r border-outline-variant flex flex-col py-6 px-4 z-50" style="font-family:'Inter',sans-serif">
+<a href="index.html" class="block mb-7 px-3">
+<h1 class="text-2xl font-bold text-primary tracking-tight">LifeOS</h1>
+<p class="text-[9px] font-semibold text-on-surface-variant tracking-[0.2em] mt-1">PRECISION LIFE MANAGEMENT</p>
+</a>
+<nav class="flex-grow space-y-0.5 overflow-y-auto">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="dashboard.html"><span class="material-symbols-outlined text-[19px]">dashboard</span><span class="text-[13.5px]">Dashboard</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="health.html"><span class="material-symbols-outlined text-[19px]">monitor_heart</span><span class="text-[13.5px]">Health</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="finance.html"><span class="material-symbols-outlined text-[19px]">payments</span><span class="text-[13.5px]">Finance</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-primary font-semibold bg-surface-container-low rounded-lg" href="liabilities.html"><span class="material-symbols-outlined text-[19px]" style="font-variation-settings: 'FILL' 1;">request_quote</span><span class="text-[13.5px]">Liabilities</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="nutrition.html"><span class="material-symbols-outlined text-[19px]">restaurant</span><span class="text-[13.5px]">Nutrition</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="calendar.html"><span class="material-symbols-outlined text-[19px]">calendar_today</span><span class="text-[13.5px]">Calendar</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="insurance.html"><span class="material-symbols-outlined text-[19px]">verified_user</span><span class="text-[13.5px]">Insurance</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="mental.html"><span class="material-symbols-outlined text-[19px]">psychology</span><span class="text-[13.5px]">Mind</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="nominees.html"><span class="material-symbols-outlined text-[19px]">family_restroom</span><span class="text-[13.5px]">Nominees</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="vault.html"><span class="material-symbols-outlined text-[19px]">folder_shared</span><span class="text-[13.5px]">Vault</span></a>
+</nav>
+<div class="pt-4 border-t border-outline-variant space-y-0.5">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[19px]">settings</span><span class="text-[13.5px]">Settings</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[19px]">help</span><span class="text-[13.5px]">Support</span></a>
+</div>
+</aside>
+
+<div class="ml-[240px] min-h-screen">
+  <header class="sticky top-0 z-40 h-16 px-10 bg-white border-b border-outline-variant flex justify-between items-center">
+    <h1 class="text-[19px] font-bold text-primary tracking-tight">Liabilities</h1>
+    <button data-wired="1" id="add-loan" class="flex items-center gap-2 px-5 py-2 bg-secondary text-on-secondary text-[11px] font-bold tracking-wider rounded-lg hover:brightness-95 transition-all">
+      <span class="material-symbols-outlined text-[16px]">add</span> ADD LOAN
+    </button>
+  </header>
+
+  <main class="px-10 py-10 max-w-[1280px]">
+    <div class="mb-8">
+      <h2 class="text-4xl font-bold text-primary tracking-tight mb-2">Know your debt. Beat your debt.</h2>
+      <p class="text-[15px] text-on-surface-variant max-w-2xl">Enter each loan once — LifeOS builds the full amortization schedule and shows exactly how small prepayments finish your loans years earlier.</p>
+    </div>
+
+    <div id="summary" class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10" style="display:none">
+      <div class="lcard p-5"><p class="text-[10px] font-bold tracking-[.14em] text-on-surface-variant uppercase mb-1">Total outstanding</p><p class="mono text-[22px] font-bold text-primary" id="s-out">—</p></div>
+      <div class="lcard p-5"><p class="text-[10px] font-bold tracking-[.14em] text-on-surface-variant uppercase mb-1">Monthly EMIs</p><p class="mono text-[22px] font-bold text-primary" id="s-emi">—</p></div>
+      <div class="lcard p-5"><p class="text-[10px] font-bold tracking-[.14em] text-on-surface-variant uppercase mb-1">Interest remaining</p><p class="mono text-[22px] font-bold" style="color:#ba1a1a" id="s-int">—</p></div>
+      <div class="lcard p-5"><p class="text-[10px] font-bold tracking-[.14em] text-on-surface-variant uppercase mb-1">Debt-free by</p><p class="mono text-[22px] font-bold" style="color:#1d9c40" id="s-free">—</p></div>
+    </div>
+
+    <div id="loans" class="space-y-8"></div>
+
+    <div id="empty" class="lcard p-14 text-center">
+      <span class="material-symbols-outlined text-primary text-[40px] mb-3 block">request_quote</span>
+      <h3 class="font-bold text-primary text-[18px] mb-2">No loans tracked yet</h3>
+      <p class="text-[13px] text-on-surface-variant mb-6 max-w-md mx-auto">Add your home loan, car loan, personal loan or credit card EMI — everything stays on your device.</p>
+      <button data-wired="1" onclick="document.getElementById('add-loan').click()" class="px-7 py-3 bg-primary text-on-primary text-[11px] font-bold tracking-widest rounded-lg hover:brightness-110 transition-all">ADD YOUR FIRST LOAN</button>
+    </div>
+  </main>
+</div>
+
+<script src="assets/app.js"></script>
+<script>
+(function () {
+  "use strict";
+  var loans = LifeOS.store.get("loans", []);
+  function save() { LifeOS.store.set("loans", loans); }
+  function inr(n) { return "₹" + Math.round(n).toLocaleString("en-IN"); }
+  function inrShort(n) {
+    if (n >= 1e7) return "₹" + (n / 1e7).toFixed(2).replace(/\.?0+$/, "") + " Cr";
+    if (n >= 1e5) return "₹" + (n / 1e5).toFixed(1).replace(/\.0$/, "") + " L";
+    return inr(n);
+  }
+
+  // EMI for principal P, annual rate a%, n months
+  function emi(P, a, n) { var r = a / 1200; return r ? P * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1) : P / n; }
+  // simulate payoff: returns {months, interest, yearly:[{y, principal, interest, balance}]}
+  function simulate(P, a, pay, extraMonthly, extraYearly) {
+    var r = a / 1200, bal = P, months = 0, interest = 0, yearly = [], yp = 0, yi = 0;
+    var d = new Date();
+    while (bal > 0 && months < 720) {
+      var i = bal * r; interest += i; yi += i;
+      var principal = pay + (extraMonthly || 0) - i;
+      if (months && extraYearly && months % 12 === 0) principal += extraYearly;
+      if (principal <= 0) return null; // EMI doesn't cover interest
+      if (principal > bal) principal = bal;
+      bal -= principal; yp += principal; months++;
+      if (months % 12 === 0 || bal <= 0) {
+        yearly.push({ y: d.getFullYear() + Math.ceil(months / 12) - 1, principal: yp, interest: yi, balance: bal });
+        yp = 0; yi = 0;
+      }
+    }
+    return { months: months, interest: interest, yearly: yearly };
+  }
+  function payoffDate(months) {
+    var d = new Date(); d.setMonth(d.getMonth() + months);
+    return ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][d.getMonth()] + " " + d.getFullYear();
+  }
+  function yrs(m) { var y = Math.floor(m / 12), mm = m % 12; return (y ? y + "y " : "") + (mm ? mm + "m" : y ? "" : "0m"); }
+
+  function loanCard(l, idx) {
+    var e = emi(l.principal, l.rate, l.tenure);
+    var base = simulate(l.principal, l.rate, e, 0, 0);
+    var extra = LifeOS.store.get("extra_" + l.id, 0);
+    var sim = simulate(l.principal, l.rate, e, extra, 0) || base;
+    var oneEmi = simulate(l.principal, l.rate, e, 0, e);
+    var saved = base.interest - sim.interest, earlier = base.months - sim.months;
+
+    var card = document.createElement("section");
+    card.className = "lcard p-7";
+    card.innerHTML =
+      '<div class="flex items-start justify-between flex-wrap gap-4 mb-5">' +
+      '<div><div class="flex items-center gap-3 mb-1"><span class="material-symbols-outlined text-primary bg-surface-container-low p-2 rounded-lg">' + (l.type === "Home" ? "home" : l.type === "Car" ? "directions_car" : l.type === "Education" ? "school" : "credit_card") + '</span>' +
+      '<div><h3 class="font-bold text-primary text-[17px]">' + l.name + '</h3>' +
+      '<p class="text-[11px] text-on-surface-variant mono">' + l.type + " loan · " + l.rate + "% p.a. · " + Math.round(l.tenure / 12) + " yrs</p></div></div></div>" +
+      '<div class="flex gap-8 text-right flex-wrap">' +
+      '<div><p class="text-[10px] font-bold tracking-[.12em] text-on-surface-variant uppercase">Outstanding</p><p class="mono text-[19px] font-bold text-primary">' + inrShort(l.principal) + "</p></div>" +
+      '<div><p class="text-[10px] font-bold tracking-[.12em] text-on-surface-variant uppercase">EMI</p><p class="mono text-[19px] font-bold text-primary">' + inr(e) + "</p></div>" +
+      '<div><p class="text-[10px] font-bold tracking-[.12em] text-on-surface-variant uppercase">Total interest</p><p class="mono text-[19px] font-bold" style="color:#ba1a1a">' + inrShort(base.interest) + "</p></div>" +
+      '<button data-wired="1" class="del-loan text-on-surface-variant hover:text-error self-center" title="Remove loan"><span class="material-symbols-outlined text-[20px]">delete</span></button>' +
+      "</div></div>" +
+
+      // optimizer
+      '<div class="rounded-xl p-5 mb-5" style="background:rgba(61,204,96,.07);border:1px solid rgba(61,204,96,.3)">' +
+      '<div class="flex items-center justify-between flex-wrap gap-3 mb-3">' +
+      '<p class="text-[12px] font-bold tracking-[.12em] text-primary uppercase">Finish it faster — prepayment simulator</p>' +
+      '<p class="text-[12px] text-on-surface-variant">Extra per month: <span class="mono font-bold text-primary ex-val">' + inr(extra) + "</span></p></div>" +
+      '<input type="range" min="0" max="' + Math.round(e * 1.5 / 500) * 500 + '" step="500" value="' + extra + '" class="w-full ex-range"/>' +
+      '<div class="grid grid-cols-1 md:grid-cols-3 gap-3 mt-4 ex-out">' +
+      '<div class="bg-white rounded-lg p-3 border border-outline-variant"><p class="text-[10px] font-bold tracking-[.1em] text-on-surface-variant uppercase">Loan ends</p><p class="mono text-[15px] font-bold text-primary ex-date">' + payoffDate(sim.months) + " (" + yrs(sim.months) + ')</p></div>' +
+      '<div class="bg-white rounded-lg p-3 border border-outline-variant"><p class="text-[10px] font-bold tracking-[.1em] text-on-surface-variant uppercase">Finish earlier by</p><p class="mono text-[15px] font-bold ex-early" style="color:#1d9c40">' + yrs(earlier) + '</p></div>' +
+      '<div class="bg-white rounded-lg p-3 border border-outline-variant"><p class="text-[10px] font-bold tracking-[.1em] text-on-surface-variant uppercase">Interest saved</p><p class="mono text-[15px] font-bold ex-saved" style="color:#1d9c40">' + inrShort(saved) + "</p></div></div>" +
+      (oneEmi ? '<p class="text-[12px] text-on-surface-variant mt-3">Tip: even <span class="font-semibold text-primary">one extra EMI a year</span> ends this loan <span class="font-semibold" style="color:#1d9c40">' + yrs(base.months - oneEmi.months) + " earlier</span> and saves <span class=\"font-semibold\" style=\"color:#1d9c40\">" + inrShort(base.interest - oneEmi.interest) + "</span>.</p>" : "") +
+      "</div>" +
+
+      // amortization
+      '<details><summary class="text-[12px] font-bold tracking-[.12em] text-primary uppercase cursor-pointer">Amortization schedule (year by year)</summary>' +
+      '<div class="overflow-x-auto mt-3"><table class="w-full mono text-[12px]">' +
+      '<thead><tr class="text-left text-on-surface-variant border-b border-outline-variant uppercase text-[10px] tracking-widest">' +
+      "<th class='py-2'>Year</th><th class='text-right'>Principal paid</th><th class='text-right'>Interest paid</th><th class='text-right'>Balance</th></tr></thead>" +
+      "<tbody class='amort'>" + amortRows(base) + "</tbody></table></div></details>";
+
+    // wiring
+    var range = card.querySelector(".ex-range");
+    range.addEventListener("input", function () {
+      var ex = +range.value;
+      LifeOS.store.set("extra_" + l.id, ex);
+      var s = simulate(l.principal, l.rate, e, ex, 0) || base;
+      card.querySelector(".ex-val").textContent = inr(ex);
+      card.querySelector(".ex-date").textContent = payoffDate(s.months) + " (" + yrs(s.months) + ")";
+      card.querySelector(".ex-early").textContent = yrs(base.months - s.months);
+      card.querySelector(".ex-saved").textContent = inrShort(base.interest - s.interest);
+      card.querySelector(".amort").innerHTML = amortRows(s);
+    });
+    card.querySelector(".del-loan").addEventListener("click", function () {
+      loans = loans.filter(function (x) { return x.id !== l.id; });
+      save(); render();
+      LifeOS.toast('"' + l.name + '" removed');
+    });
+    return card;
+  }
+  function amortRows(sim) {
+    return sim.yearly.map(function (y) {
+      return "<tr class='border-b border-outline-variant/40'><td class='py-2 font-bold text-primary'>" + y.y + "</td>" +
+        "<td class='text-right'>" + inr(y.principal) + "</td>" +
+        "<td class='text-right' style='color:#ba1a1a'>" + inr(y.interest) + "</td>" +
+        "<td class='text-right font-bold text-primary'>" + inr(y.balance) + "</td></tr>";
+    }).join("");
+  }
+
+  function render() {
+    var wrap = document.getElementById("loans");
+    wrap.innerHTML = "";
+    document.getElementById("empty").style.display = loans.length ? "none" : "block";
+    document.getElementById("summary").style.display = loans.length ? "grid" : "none";
+    var out = 0, emis = 0, ints = 0, maxM = 0;
+    loans.forEach(function (l, i) {
+      var e = emi(l.principal, l.rate, l.tenure);
+      var extra = LifeOS.store.get("extra_" + l.id, 0);
+      var s = simulate(l.principal, l.rate, e, extra, 0) || simulate(l.principal, l.rate, e, 0, 0);
+      out += l.principal; emis += e + extra; ints += s.interest; maxM = Math.max(maxM, s.months);
+      wrap.appendChild(loanCard(l, i));
+    });
+    if (loans.length) {
+      document.getElementById("s-out").textContent = inrShort(out);
+      document.getElementById("s-emi").textContent = inr(emis) + "/mo";
+      document.getElementById("s-int").textContent = inrShort(ints);
+      document.getElementById("s-free").textContent = payoffDate(maxM);
+    }
+  }
+
+  document.getElementById("add-loan").addEventListener("click", function () {
+    LifeOS.form("Add Loan", [
+      ["Loan name", "text", "e.g. HDFC Home Loan"],
+      ["Type", "select", ["Home", "Car", "Personal", "Education", "Credit Card"]],
+      ["Outstanding principal (₹)", "number", "e.g. 4500000"],
+      ["Interest rate (% p.a.)", "number", "e.g. 8.5"],
+      ["Remaining tenure (years)", "number", "e.g. 18"],
+    ], function (v) {
+      var P = parseFloat(v["outstanding_principal"]), a = parseFloat(v["interest_rate_p_a"]), y = parseFloat(v["remaining_tenure_years"]);
+      if (!v.loan_name || !(P > 0) || !(a >= 0) || !(y > 0)) { LifeOS.toast("Fill name, principal, rate and tenure"); return; }
+      loans.push({ id: Date.now(), name: v.loan_name, type: v.type, principal: P, rate: a, tenure: Math.round(y * 12) });
+      save(); render();
+      LifeOS.toast('"' + v.loan_name + '" added — schedule ready');
+    }, "Add Loan");
+  });
+
+  document.addEventListener("DOMContentLoaded", render);
+  render();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LifeOS | Life Audit Report</title>
+<meta name="description" content="Your complete Life Audit — health, insurance, finance and legacy gaps in one report."/>
+<meta name="theme-color" content="#002D40"/>
+<link href="assets/favicon.svg" rel="icon" type="image/svg+xml"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = { theme: { extend: { colors: {
+    surface: "#f9f9f9", "surface-container-lowest": "#ffffff", "surface-container-low": "#f3f3f4",
+    primary: "#002D40", "on-primary": "#ffffff", secondary: "#3dcc60", "on-secondary": "#002D40",
+    "outline-variant": "#e2e2e3", "on-surface": "#1a1c1e", "on-surface-variant": "#44474e", error: "#ba1a1a"
+  } } } }
+</script>
+<style>
+  body { font-family: 'Inter', sans-serif; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  @media print { .no-print { display: none !important; } body { background: #fff; } }
+</style>
+<link href="assets/app.css" rel="stylesheet"/>
+</head>
+<body class="bg-surface text-on-surface min-h-screen">
+
+<header class="border-b border-outline-variant bg-surface-container-lowest no-print">
+  <div class="max-w-4xl mx-auto px-8 h-16 flex items-center justify-between">
+    <a href="index.html" class="text-2xl font-bold text-primary tracking-tight">LifeOS</a>
+    <div class="flex items-center gap-3">
+      <button data-wired="1" onclick="window.print()" class="px-5 py-2 border border-primary text-primary text-[12px] font-semibold tracking-wider rounded-lg hover:bg-surface-container-low transition-colors">PRINT / PDF</button>
+      <a href="dashboard.html" class="px-5 py-2 bg-primary text-on-primary text-[12px] font-semibold tracking-wider rounded-lg hover:brightness-110 transition-all">BACK TO DASHBOARD</a>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-4xl mx-auto px-8 py-12">
+  <div class="flex items-start justify-between flex-wrap gap-6 mb-10">
+    <div>
+      <p class="text-[10px] font-semibold tracking-[0.25em] text-on-surface-variant uppercase mb-2">Life Audit · July 2026</p>
+      <h1 class="text-4xl font-semibold text-primary tracking-tight">Vijay's Family Report</h1>
+      <p class="text-[14px] text-on-surface-variant mt-2">4 findings across health, insurance, finance and legacy · generated from your own tracked data</p>
+    </div>
+    <div class="text-center">
+      <svg width="96" height="96" viewBox="0 0 96 96">
+        <circle cx="48" cy="48" r="38" fill="none" stroke="#e8e8e9" stroke-width="9"/>
+        <circle cx="48" cy="48" r="38" fill="none" stroke="#3dcc60" stroke-width="9" stroke-linecap="round" stroke-dasharray="188 239" transform="rotate(-90 48 48)"/>
+        <text x="48" y="55" text-anchor="middle" class="mono" font-size="24" font-weight="700" fill="#002D40">79</text>
+      </svg>
+      <p class="text-[10px] font-semibold tracking-[0.2em] text-on-surface-variant uppercase mt-1">Life Score</p>
+    </div>
+  </div>
+
+  <div class="space-y-5">
+    <section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-7">
+      <div class="flex items-center justify-between mb-3">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-primary bg-surface-container-low p-2 rounded-lg">monitor_heart</span>
+          <h2 class="font-semibold text-primary text-[16px]">Health — Vitamin B12 deficiency risk</h2>
+        </div>
+        <span class="text-[9px] font-bold tracking-[.12em] px-3 py-1 rounded-full" style="background:rgba(186,26,26,.1);color:#ba1a1a;border:1px solid rgba(186,26,26,.3)">HIGH</span>
+      </div>
+      <p class="text-[13px] text-on-surface-variant leading-relaxed mb-4">B12 is at <span class="font-semibold text-error">42%</span> of reference range and trending down over 2 lab uploads. Sustained deficiency affects energy, mood and nerve health. Annual executive screening is also overdue for your age band.</p>
+      <button data-wired="1" onclick="LifeOS.openPartner('Manipal Hospitals')" class="px-5 py-2.5 bg-primary text-on-primary text-[11px] font-bold tracking-wider rounded-lg hover:brightness-110 transition-all no-print">BOOK DIAGNOSTIC PANEL · MANIPAL HOSPITALS</button>
+    </section>
+
+    <section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-7">
+      <div class="flex items-center justify-between mb-3">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-primary bg-surface-container-low p-2 rounded-lg">verified_user</span>
+          <h2 class="font-semibold text-primary text-[16px]">Insurance — critical-illness gap & inflation mismatch</h2>
+        </div>
+        <span class="text-[9px] font-bold tracking-[.12em] px-3 py-1 rounded-full" style="background:rgba(186,26,26,.1);color:#ba1a1a;border:1px solid rgba(186,26,26,.3)">HIGH</span>
+      </div>
+      <p class="text-[13px] text-on-surface-variant leading-relaxed mb-4">You are uncovered for critical illness, and your 2018 term policy's sum assured hasn't been adjusted for the <span class="font-semibold">18% cost-of-living increase</span>. HDFC Life premium (₹28,500) is due <span class="font-semibold">15 July</span> — 13 days away.</p>
+      <button data-wired="1" onclick="LifeOS.openPartner('Ditto Insurance')" class="px-5 py-2.5 bg-primary text-on-primary text-[11px] font-bold tracking-wider rounded-lg hover:brightness-110 transition-all no-print">FREE ADVISORY CALL · DITTO INSURANCE</button>
+    </section>
+
+    <section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-7">
+      <div class="flex items-center justify-between mb-3">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-primary bg-surface-container-low p-2 rounded-lg">payments</span>
+          <h2 class="font-semibold text-primary text-[16px]">Finance — allocation drift & idle cash</h2>
+        </div>
+        <span class="text-[9px] font-bold tracking-[.12em] px-3 py-1 rounded-full" style="background:rgba(255,171,0,.12);color:#8a6d00;border:1px solid rgba(255,171,0,.35)">MEDIUM</span>
+      </div>
+      <p class="text-[13px] text-on-surface-variant leading-relaxed mb-4">Equity allocation has drifted <span class="font-semibold">+3.1%</span> past your target band, and <span class="font-semibold">8.7% of net worth</span> sits in cash & FDs yielding 4.2% — below inflation. A rebalance restores your intended risk profile.</p>
+      <button data-wired="1" onclick="LifeOS.openPartner('Dezerv')" class="px-5 py-2.5 bg-primary text-on-primary text-[11px] font-bold tracking-wider rounded-lg hover:brightness-110 transition-all no-print">EXPERT REBALANCE · DEZERV</button>
+    </section>
+
+    <section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-7">
+      <div class="flex items-center justify-between mb-3">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-primary bg-surface-container-low p-2 rounded-lg">family_restroom</span>
+          <h2 class="font-semibold text-primary text-[16px]">Legacy — one account missing a nominee</h2>
+        </div>
+        <span class="text-[9px] font-bold tracking-[.12em] px-3 py-1 rounded-full" style="background:rgba(255,171,0,.12);color:#8a6d00;border:1px solid rgba(255,171,0,.35)">MEDIUM</span>
+      </div>
+      <p class="text-[13px] text-on-surface-variant leading-relaxed mb-4">Your mutual-fund folio has no nominee registered. Unclaimed assets in India exceed ₹1 lakh crore, largely because families never knew what existed. Your family account keeps every assignment visible.</p>
+      <a href="nominees.html" class="inline-block px-5 py-2.5 bg-primary text-on-primary text-[11px] font-bold tracking-wider rounded-lg hover:brightness-110 transition-all no-print">FIX IN NOMINEE REGISTRY</a>
+    </section>
+  </div>
+
+  <p class="text-[11px] text-on-surface-variant mt-10 text-center">Suggestions reference LifeOS partners; LifeOS may earn a referral fee. This report is generated from your tracked data and is not medical, legal or investment advice.</p>
+</main>
+
+<script src="assets/app.js"></script>
+</body>
+</html>
