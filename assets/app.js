@@ -127,6 +127,8 @@
     ["dashboard", "Dashboard", "dashboard.html", "Systems overview"],
     ["monitor_heart", "Health", "health.html", "Biometrics & recovery"],
     ["payments", "Finance", "finance.html", "Net worth & allocation"],
+    ["account_balance_wallet", "Budget Planner", "budget.html", "Give every rupee a job"],
+    ["flight_takeoff", "Vacation Planner", "vacation.html", "Itinerary, packing list & trip budget"],
     ["receipt_long", "Taxes", "taxes.html", "Old vs new regime, worked out"],
     ["restaurant", "Nutrition", "nutrition.html", "Meals & macros"],
     ["calendar_today", "Calendar", "calendar.html", "Personal life calendar"],

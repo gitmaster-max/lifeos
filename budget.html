@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LifeOS | Budget Planner</title>
+<meta name="description" content="Plan every rupee of the month — category budgets, live spend tracking, and a savings-rate check."/>
+<meta name="theme-color" content="#002D40"/>
+<link href="assets/favicon.svg" rel="icon" type="image/svg+xml"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = { theme: { extend: { colors: {
+    surface: "#f9f9f9", "surface-container-lowest": "#ffffff", "surface-container-low": "#f3f3f4",
+    "surface-container-high": "#e8e8e9", primary: "#002D40", "on-primary": "#ffffff",
+    secondary: "#3dcc60", "on-secondary": "#002D40", "outline-variant": "#e2e2e3",
+    "on-surface": "#1a1c1e", "on-surface-variant": "#44474e", error: "#ba1a1a"
+  } } } }
+</script>
+<style>
+  body { font-family: 'Inter', sans-serif; background:#f9f9f9; color:#1a1c1e; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .bcard { background:#fff; border:1px solid #e2e2e3; border-radius:16px; }
+</style>
+<link href="assets/app.css" rel="stylesheet"/>
+</head>
+<body class="bg-surface text-on-surface">
+<aside id="lifeos-nav" class="fixed left-0 top-0 h-screen w-[240px] bg-white border-r border-outline-variant flex flex-col py-6 px-4 z-50" style="font-family:'Inter',sans-serif">
+<a href="index.html" class="block mb-7 px-3">
+<h1 class="text-2xl font-bold text-primary tracking-tight">LifeOS</h1>
+<p class="text-[9px] font-semibold text-on-surface-variant tracking-[0.2em] mt-1">PRECISION LIFE MANAGEMENT</p>
+</a>
+<nav class="flex-grow space-y-0.5 overflow-y-auto">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="dashboard.html"><span class="material-symbols-outlined text-[19px]">dashboard</span><span class="text-[13.5px]">Dashboard</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="health.html"><span class="material-symbols-outlined text-[19px]">monitor_heart</span><span class="text-[13.5px]">Health</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="finance.html"><span class="material-symbols-outlined text-[19px]">payments</span><span class="text-[13.5px]">Finance</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-primary font-semibold bg-surface-container-low rounded-lg" href="budget.html"><span class="material-symbols-outlined text-[19px]" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span><span class="text-[13.5px]">Budget Planner</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="vacation.html"><span class="material-symbols-outlined text-[19px]">flight_takeoff</span><span class="text-[13.5px]">Vacation Planner</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="taxes.html"><span class="material-symbols-outlined text-[19px]">receipt_long</span><span class="text-[13.5px]">Taxes</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="liabilities.html"><span class="material-symbols-outlined text-[19px]">request_quote</span><span class="text-[13.5px]">Liabilities</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="nutrition.html"><span class="material-symbols-outlined text-[19px]">restaurant</span><span class="text-[13.5px]">Nutrition</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="calendar.html"><span class="material-symbols-outlined text-[19px]">calendar_today</span><span class="text-[13.5px]">Calendar</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="insurance.html"><span class="material-symbols-outlined text-[19px]">verified_user</span><span class="text-[13.5px]">Insurance</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="mental.html"><span class="material-symbols-outlined text-[19px]">psychology</span><span class="text-[13.5px]">Mind</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="nominees.html"><span class="material-symbols-outlined text-[19px]">family_restroom</span><span class="text-[13.5px]">Nominees</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="family-map.html"><span class="material-symbols-outlined text-[19px]">account_tree</span><span class="text-[13.5px]">Family Tree</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="around-me.html"><span class="material-symbols-outlined text-[19px]">explore</span><span class="text-[13.5px]">Around Me</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="vault.html"><span class="material-symbols-outlined text-[19px]">folder_shared</span><span class="text-[13.5px]">Vault</span></a>
+</nav>
+<div class="pt-4 border-t border-outline-variant space-y-0.5">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[19px]">settings</span><span class="text-[13.5px]">Settings</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[19px]">help</span><span class="text-[13.5px]">Support</span></a>
+</div>
+</aside>
+
+<div class="ml-[240px] min-h-screen">
+  <header class="sticky top-0 z-40 h-16 px-10 bg-white border-b border-outline-variant flex justify-between items-center">
+    <h1 class="text-[19px] font-bold text-primary tracking-tight">Budget Planner</h1>
+    <div class="flex items-center gap-3">
+      <button data-wired="1" id="add-cat" class="hidden items-center gap-2 px-5 py-2 bg-white border border-outline-variant text-primary text-[11px] font-bold tracking-wider rounded-lg hover:bg-surface-container-low transition-all">
+        <span class="material-symbols-outlined text-[16px]">add</span> ADD CATEGORY
+      </button>
+      <button data-wired="1" id="edit-income" class="flex items-center gap-2 px-5 py-2 bg-secondary text-on-secondary text-[11px] font-bold tracking-wider rounded-lg hover:brightness-95 transition-all">
+        <span class="material-symbols-outlined text-[16px]">edit</span> SET MONTHLY INCOME
+      </button>
+    </div>
+  </header>
+
+  <main class="px-10 py-10 max-w-[1280px]">
+    <div class="mb-8">
+      <h2 class="text-4xl font-bold text-primary tracking-tight mb-2">Give every rupee a job.</h2>
+      <p class="text-[15px] text-on-surface-variant max-w-2xl">Set your income once — LifeOS drafts a realistic Indian household budget, tracks what you actually spend, and flags the categories drifting over before month-end does.</p>
+    </div>
+
+    <!-- Empty state -->
+    <div id="empty" class="bcard p-14 text-center">
+      <span class="material-symbols-outlined text-primary text-[40px] mb-3 block">account_balance_wallet</span>
+      <h3 class="font-bold text-primary text-[18px] mb-2">Set up your budget</h3>
+      <p class="text-[13px] text-on-surface-variant mb-6 max-w-md mx-auto">Enter your monthly take-home income and LifeOS will draft 12 sensible category allocations — Housing, Groceries, EMIs, Savings and more. Tweak every number after. Everything stays on your device.</p>
+      <button data-wired="1" onclick="document.getElementById('edit-income').click()" class="px-7 py-3 bg-primary text-on-primary text-[11px] font-bold tracking-widest rounded-lg hover:brightness-110 transition-all">SET UP YOUR BUDGET</button>
+    </div>
+
+    <div id="results" style="display:none">
+      <!-- Summary -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+        <div class="bcard p-5"><p class="text-[10px] font-bold tracking-[.14em] text-on-surface-variant uppercase mb-1">Monthly income</p><p class="mono text-[22px] font-bold text-primary" id="s-income">—</p></div>
+        <div class="bcard p-5"><p class="text-[10px] font-bold tracking-[.14em] text-on-surface-variant uppercase mb-1">Total allocated</p><p class="mono text-[22px] font-bold text-primary" id="s-alloc">—</p><p class="text-[11px] text-on-surface-variant mt-0.5" id="s-alloc-note"></p></div>
+        <div class="bcard p-5"><p class="text-[10px] font-bold tracking-[.14em] text-on-surface-variant uppercase mb-1">Total spent</p><p class="mono text-[22px] font-bold text-primary" id="s-spent">—</p><p class="text-[11px] text-on-surface-variant mt-0.5" id="s-spent-note"></p></div>
+        <div class="bcard p-5"><p class="text-[10px] font-bold tracking-[.14em] text-on-surface-variant uppercase mb-1" id="s-left-label">Remaining</p><p class="mono text-[22px] font-bold" id="s-left">—</p><p class="text-[11px] text-on-surface-variant mt-0.5" id="s-left-note"></p></div>
+      </div>
+
+      <!-- Savings-rate insight -->
+      <div id="savings-card" class="rounded-xl p-5 mb-8 flex items-center justify-between flex-wrap gap-3">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-[22px]" id="savings-icon">savings</span>
+          <p class="text-[14px] text-primary"><span class="font-bold mono" id="savings-pct">—</span> <span>of income allocated to Savings / Investments.</span> <span class="font-semibold" id="savings-verdict"></span></p>
+        </div>
+        <p class="text-[12px] text-on-surface-variant">Guideline: put at least 20% of take-home pay toward savings and investments.</p>
+      </div>
+
+      <!-- Category breakdown -->
+      <div class="bcard p-7 mb-8">
+        <div class="flex items-center justify-between flex-wrap gap-3 mb-1">
+          <h3 class="font-bold text-primary text-[17px]" id="month-title">Category budgets</h3>
+          <button data-wired="1" id="reset-month" class="text-[11px] font-bold tracking-wider text-on-surface-variant hover:text-error transition-colors flex items-center gap-1"><span class="material-symbols-outlined text-[15px]">restart_alt</span> START NEW MONTH</button>
+        </div>
+        <p class="text-[12px] text-on-surface-variant mb-6">Use each category's <span class="font-semibold text-primary">+</span> button to record spend against it; expenses logged via Quick Entry (Ctrl+K) land automatically in the read-only <span class="font-semibold text-primary">Quick Entries — uncategorised</span> line below.</p>
+        <div id="cat-rows" class="space-y-5"></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="assets/app.js"></script>
+<script src="assets/auth.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  function inr(n) { return "₹" + Math.round(n).toLocaleString("en-IN"); }
+  function inrShort(n) {
+    if (n >= 1e7) return "₹" + (n / 1e7).toFixed(2).replace(/\.?0+$/, "") + " Cr";
+    if (n >= 1e5) return "₹" + (n / 1e5).toFixed(1).replace(/\.0$/, "") + " L";
+    return inr(n);
+  }
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+  function monthKey() {
+    var d = new Date();
+    return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0");
+  }
+  function monthName() {
+    var d = new Date();
+    return ["January","February","March","April","May","June","July","August","September","October","November","December"][d.getMonth()] + " " + d.getFullYear();
+  }
+
+  // Default Indian household allocations (fraction of monthly income, sums to 100%)
+  var DEFAULTS = [
+    ["Housing / Rent", 0.25], ["Groceries", 0.12], ["Transport", 0.06],
+    ["Utilities & Bills", 0.05], ["Dining Out", 0.05], ["Entertainment", 0.03],
+    ["Health & Fitness", 0.04], ["Shopping", 0.05], ["Savings / Investments", 0.20],
+    ["EMIs / Loans", 0.10], ["Insurance Premiums", 0.03], ["Miscellaneous", 0.02],
+  ];
+  var ICONS = [
+    [/hous|rent|home/i, "home"], [/grocer/i, "shopping_cart"], [/transport|fuel|commute|cab/i, "directions_car"],
+    [/utilit|bill|electric|wifi|phone/i, "bolt"], [/dining|restaurant|food|eat/i, "restaurant"],
+    [/entertain|movie|ott|subscript/i, "movie"], [/health|fitness|gym|medical/i, "fitness_center"],
+    [/shop/i, "shopping_bag"], [/sav|invest|sip|mutual/i, "savings"], [/emi|loan|debt/i, "request_quote"],
+    [/insur|premium/i, "verified_user"], [/travel|vacation|trip/i, "flight_takeoff"], [/kid|child|school|educat/i, "school"],
+  ];
+  function iconFor(name) {
+    for (var i = 0; i < ICONS.length; i++) if (ICONS[i][0].test(name)) return ICONS[i][1];
+    return "category";
+  }
+
+  function getBudget() { return LifeOS.store.get("budget", null); }
+  function saveBudget(b) { LifeOS.store.set("budget", b); }
+
+  // Roll over automatically when a new calendar month starts: keep allocations, zero out spend.
+  function rollMonthIfNeeded(b) {
+    if (b && b.month !== monthKey()) {
+      b.month = monthKey();
+      b.categories.forEach(function (c) { c.spent = 0; });
+      saveBudget(b);
+      LifeOS.toast("New month — spend reset, allocations kept");
+    }
+    return b;
+  }
+
+  // Quick-entry Expense logs (shape {type,text,value,ts} from app.js quickEntry) for the current month
+  function quickExpenses() {
+    var logs = LifeOS.store.get("logs", []), now = new Date();
+    var start = new Date(now.getFullYear(), now.getMonth(), 1).getTime();
+    var total = 0, count = 0;
+    logs.forEach(function (l) {
+      if (l && l.type === "Expense" && l.ts >= start) {
+        var v = parseFloat(l.value);
+        if (v > 0) { total += v; count++; }
+      }
+    });
+    return { total: total, count: count };
+  }
+
+  function barColor(pct) { return pct > 1 ? "#ba1a1a" : pct >= 0.85 ? "#f59e0b" : "#3dcc60"; }
+
+  function catRow(c, idx) {
+    var pct = c.alloc > 0 ? c.spent / c.alloc : (c.spent > 0 ? 2 : 0);
+    var width = Math.min(100, Math.round(pct * 100));
+    var over = c.spent > c.alloc;
+    var row = document.createElement("div");
+    row.innerHTML =
+      '<div class="flex justify-between items-center gap-3 mb-1.5 flex-wrap">' +
+        '<div class="flex items-center gap-2.5 min-w-0">' +
+          '<span class="material-symbols-outlined text-primary bg-surface-container-low p-1.5 rounded-lg text-[18px]">' + iconFor(c.name) + '</span>' +
+          '<span class="text-[13.5px] font-semibold text-primary truncate">' + esc(c.name) + '</span>' +
+          (over ? '<span class="text-[10px] font-bold tracking-[.08em] uppercase px-2 py-0.5 rounded-full" style="background:rgba(186,26,26,.1);color:#ba1a1a">Over by ' + inr(c.spent - c.alloc) + '</span>' : '') +
+        '</div>' +
+        '<div class="flex items-center gap-3">' +
+          '<span class="mono text-[12px] text-on-surface-variant"><span class="font-bold ' + (over ? '' : 'text-primary') + '"' + (over ? ' style="color:#ba1a1a"' : '') + '>' + inr(c.spent) + '</span> / ' + inr(c.alloc) + '</span>' +
+          '<button data-wired="1" class="cat-spend text-on-surface-variant hover:text-primary" title="Record spend"><span class="material-symbols-outlined text-[18px]">add_circle</span></button>' +
+          '<button data-wired="1" class="cat-edit text-on-surface-variant hover:text-primary" title="Edit category"><span class="material-symbols-outlined text-[18px]">edit</span></button>' +
+          '<button data-wired="1" class="cat-del text-on-surface-variant hover:text-error" title="Remove category"><span class="material-symbols-outlined text-[18px]">delete</span></button>' +
+        '</div>' +
+      '</div>' +
+      '<div class="h-2 bg-surface-container-high rounded-full overflow-hidden"><div class="h-full rounded-full transition-all duration-300" style="width:' + width + '%;background:' + barColor(pct) + '"></div></div>';
+
+    row.querySelector(".cat-spend").addEventListener("click", function () {
+      LifeOS.form('Record spend — ' + c.name, [
+        ["Amount (₹)", "number", "e.g. 1250"],
+        ["Note", "text", "optional — e.g. BESCOM bill"],
+      ], function (v) {
+        var amt = parseFloat(v.amount);
+        if (!(amt > 0)) { LifeOS.toast("Enter a valid amount"); return; }
+        var b = getBudget();
+        b.categories[idx].spent = (b.categories[idx].spent || 0) + amt;
+        saveBudget(b); render();
+        LifeOS.toast(inr(amt) + " added to " + c.name);
+      }, "Record");
+    });
+    row.querySelector(".cat-edit").addEventListener("click", function () {
+      LifeOS.form("Edit Category", [
+        ["Category name", "text", "e.g. Groceries", c.name],
+        ["Allocated per month (₹)", "number", "e.g. 15000", c.alloc],
+        ["Spent so far this month (₹)", "number", "e.g. 8200", c.spent],
+      ], function (v) {
+        var alloc = parseFloat(v.allocated_per_month), spent = parseFloat(v.spent_so_far_this_month);
+        if (!v.category_name || !(alloc >= 0)) { LifeOS.toast("Fill a name and a valid allocation"); return; }
+        var b = getBudget();
+        b.categories[idx].name = v.category_name;
+        b.categories[idx].alloc = alloc;
+        b.categories[idx].spent = spent >= 0 ? spent : 0;
+        saveBudget(b); render();
+        LifeOS.toast('"' + v.category_name + '" updated');
+      }, "Save");
+    });
+    row.querySelector(".cat-del").addEventListener("click", function () {
+      var b = getBudget();
+      b.categories.splice(idx, 1);
+      saveBudget(b); render();
+      LifeOS.toast('"' + c.name + '" removed');
+    });
+    return row;
+  }
+
+  function render() {
+    var b = rollMonthIfNeeded(getBudget());
+    document.getElementById("empty").style.display = b ? "none" : "block";
+    document.getElementById("results").style.display = b ? "block" : "none";
+    document.getElementById("add-cat").classList.toggle("hidden", !b);
+    document.getElementById("add-cat").classList.toggle("flex", !!b);
+    document.getElementById("edit-income").lastChild.textContent = b ? " EDIT INCOME" : " SET MONTHLY INCOME";
+    if (!b) return;
+
+    var qe = quickExpenses();
+    var alloc = 0, spent = 0;
+    b.categories.forEach(function (c) { alloc += c.alloc; spent += c.spent; });
+    var totalSpent = spent + qe.total;
+    var left = b.income - totalSpent;
+    var unalloc = b.income - alloc;
+
+    document.getElementById("s-income").textContent = inrShort(b.income);
+    document.getElementById("s-alloc").textContent = inrShort(alloc);
+    document.getElementById("s-alloc-note").textContent = unalloc >= 0
+      ? inr(unalloc) + " unallocated" : "Over-allocated by " + inr(-unalloc);
+    document.getElementById("s-alloc-note").style.color = unalloc >= 0 ? "" : "#ba1a1a";
+    document.getElementById("s-spent").textContent = inrShort(totalSpent);
+    document.getElementById("s-spent-note").textContent = b.income > 0
+      ? Math.round(totalSpent / b.income * 100) + "% of income" : "";
+    document.getElementById("s-left-label").textContent = left >= 0 ? "Remaining" : "Overspent";
+    document.getElementById("s-left").textContent = inrShort(Math.abs(left));
+    document.getElementById("s-left").style.color = left >= 0 ? "#1d9c40" : "#ba1a1a";
+    document.getElementById("s-left-note").textContent = left >= 0 ? "left to spend this month" : "beyond this month's income";
+
+    // Savings-rate insight — based on the allocation to any Savings / Investments category
+    var savAlloc = b.categories.reduce(function (t, c) { return /sav|invest|sip/i.test(c.name) ? t + c.alloc : t; }, 0);
+    var rate = b.income > 0 ? savAlloc / b.income * 100 : 0;
+    var verdict, good;
+    if (rate >= 30) { verdict = "Excellent — well above the 20% guideline."; good = true; }
+    else if (rate >= 20) { verdict = "Healthy — above the 20% guideline."; good = true; }
+    else if (rate >= 10) { verdict = "Below the recommended 20% savings rate — nudge it up when you can."; good = false; }
+    else { verdict = "Well below the recommended 20% savings rate — start small, but start."; good = false; }
+    var sc = document.getElementById("savings-card");
+    sc.style.background = good ? "rgba(61,204,96,.07)" : "rgba(245,158,11,.08)";
+    sc.style.border = good ? "1px solid rgba(61,204,96,.3)" : "1px solid rgba(245,158,11,.35)";
+    document.getElementById("savings-icon").style.color = good ? "#1d9c40" : "#b45309";
+    document.getElementById("savings-pct").textContent = rate.toFixed(1) + "%";
+    var sv = document.getElementById("savings-verdict");
+    sv.textContent = verdict;
+    sv.style.color = good ? "#1d9c40" : "#b45309";
+
+    document.getElementById("month-title").textContent = "Category budgets — " + monthName();
+
+    var rows = document.getElementById("cat-rows");
+    rows.innerHTML = "";
+    b.categories.forEach(function (c, i) { rows.appendChild(catRow(c, i)); });
+    if (!b.categories.length) {
+      rows.innerHTML = '<p class="text-[13px] text-on-surface-variant">No categories yet — use "Add Category" above to create your first one.</p>';
+    }
+
+    // Quick-entry reconciliation line (read-only, auto-pulled from lifeos.logs)
+    var qrow = document.createElement("div");
+    qrow.className = "pt-5 border-t border-outline-variant";
+    qrow.innerHTML =
+      '<div class="flex justify-between items-center gap-3 mb-1.5 flex-wrap">' +
+        '<div class="flex items-center gap-2.5">' +
+          '<span class="material-symbols-outlined text-on-surface-variant bg-surface-container-low p-1.5 rounded-lg text-[18px]">bolt</span>' +
+          '<span class="text-[13.5px] font-semibold text-primary">Quick Entries — uncategorised</span>' +
+          '<span class="text-[10px] font-bold tracking-[.08em] uppercase px-2 py-0.5 rounded-full bg-surface-container-low text-on-surface-variant">Auto-pulled</span>' +
+        '</div>' +
+        '<span class="mono text-[12px] text-on-surface-variant"><span class="font-bold text-primary">' + inr(qe.total) + '</span> · ' + qe.count + ' log' + (qe.count === 1 ? "" : "s") + ' this month</span>' +
+      '</div>' +
+      '<p class="text-[12px] text-on-surface-variant">Every "Expense" logged via Quick Entry counts toward Total Spent above. To budget it properly, record it against a category with its + button instead.</p>';
+    rows.appendChild(qrow);
+  }
+
+  // ----- header actions -----
+  document.getElementById("edit-income").addEventListener("click", function () {
+    var b = getBudget();
+    LifeOS.form("Monthly Income", [
+      ["Monthly take-home income (₹)", "number", "e.g. 150000", b ? b.income : ""],
+    ], function (v) {
+      var income = parseFloat(v.monthly_take_home_income);
+      if (!(income > 0)) { LifeOS.toast("Enter a valid monthly income"); return; }
+      if (!b) {
+        // First-time setup: seed default categories scaled to income, rounded to ₹100
+        b = {
+          income: income,
+          month: monthKey(),
+          categories: DEFAULTS.map(function (d) {
+            return { id: Date.now() + Math.random(), name: d[0], alloc: Math.round(income * d[1] / 100) * 100, spent: 0 };
+          }),
+        };
+        saveBudget(b); render();
+        LifeOS.toast("Budget drafted — tweak any category to fit your life");
+      } else {
+        b.income = income;
+        saveBudget(b); render();
+        LifeOS.toast("Income updated");
+      }
+    }, "Save");
+  });
+
+  document.getElementById("add-cat").addEventListener("click", function () {
+    LifeOS.form("Add Category", [
+      ["Category name", "text", "e.g. Kids' Education"],
+      ["Allocated per month (₹)", "number", "e.g. 8000"],
+    ], function (v) {
+      var alloc = parseFloat(v.allocated_per_month);
+      if (!v.category_name || !(alloc >= 0)) { LifeOS.toast("Fill a name and a valid allocation"); return; }
+      var b = getBudget();
+      if (!b) { LifeOS.toast("Set your monthly income first"); return; }
+      b.categories.push({ id: Date.now(), name: v.category_name, alloc: alloc, spent: 0 });
+      saveBudget(b); render();
+      LifeOS.toast('"' + v.category_name + '" added');
+    }, "Add Category");
+  });
+
+  document.getElementById("reset-month").addEventListener("click", function () {
+    var b = getBudget();
+    if (!b) return;
+    b.month = monthKey();
+    b.categories.forEach(function (c) { c.spent = 0; });
+    saveBudget(b); render();
+    LifeOS.toast("Fresh month — all spend reset to zero");
+  });
+
+  // Re-render when a Quick Entry is logged elsewhere on the page (command palette)
+  document.addEventListener("lifeos:log", render);
+
+  document.addEventListener("DOMContentLoaded", render);
+  render();
+})();
+</script>
+</body>
+</html>

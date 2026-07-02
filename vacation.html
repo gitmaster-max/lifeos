@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LifeOS | Vacation Planner</title>
+<meta name="description" content="Plan every trip end to end — itinerary, packing list and a rupee budget that keeps itself honest, synced straight to your calendar."/>
+<meta name="theme-color" content="#002D40"/>
+<link href="assets/favicon.svg" rel="icon" type="image/svg+xml"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = { theme: { extend: { colors: {
+    surface: "#f9f9f9", "surface-container-lowest": "#ffffff", "surface-container-low": "#f3f3f4",
+    "surface-container-high": "#e8e8e9", primary: "#002D40", "on-primary": "#ffffff",
+    secondary: "#3dcc60", "on-secondary": "#002D40", "outline-variant": "#e2e2e3",
+    "on-surface": "#1a1c1e", "on-surface-variant": "#44474e", error: "#ba1a1a"
+  } } } }
+</script>
+<style>
+  body { font-family: 'Inter', sans-serif; background:#f9f9f9; color:#1a1c1e; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .tcard { background:#fff; border:1px solid #e2e2e3; border-radius:16px; }
+  .trip-head { transition: background .12s ease; }
+  .trip-head:hover { background:#fafafa; }
+  .vp-input { background:#f3f3f4; border:1px solid transparent; border-radius:8px; padding:8px 12px; font-size:13px; width:100%; }
+  .vp-input:focus { outline:none; border-color:#002D40; background:#fff; box-shadow:none; }
+</style>
+<link href="assets/app.css" rel="stylesheet"/>
+</head>
+<body class="bg-surface text-on-surface">
+<aside id="lifeos-nav" class="fixed left-0 top-0 h-screen w-[240px] bg-white border-r border-outline-variant flex flex-col py-6 px-4 z-50" style="font-family:'Inter',sans-serif">
+<a href="index.html" class="block mb-7 px-3">
+<h1 class="text-2xl font-bold text-primary tracking-tight">LifeOS</h1>
+<p class="text-[9px] font-semibold text-on-surface-variant tracking-[0.2em] mt-1">PRECISION LIFE MANAGEMENT</p>
+</a>
+<nav class="flex-grow space-y-0.5 overflow-y-auto">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="dashboard.html"><span class="material-symbols-outlined text-[19px]">dashboard</span><span class="text-[13.5px]">Dashboard</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="health.html"><span class="material-symbols-outlined text-[19px]">monitor_heart</span><span class="text-[13.5px]">Health</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="finance.html"><span class="material-symbols-outlined text-[19px]">payments</span><span class="text-[13.5px]">Finance</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="budget.html"><span class="material-symbols-outlined text-[19px]">account_balance_wallet</span><span class="text-[13.5px]">Budget Planner</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-primary font-semibold bg-surface-container-low rounded-lg" href="vacation.html"><span class="material-symbols-outlined text-[19px]" style="font-variation-settings: 'FILL' 1;">flight_takeoff</span><span class="text-[13.5px]">Vacation Planner</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="taxes.html"><span class="material-symbols-outlined text-[19px]">receipt_long</span><span class="text-[13.5px]">Taxes</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="liabilities.html"><span class="material-symbols-outlined text-[19px]">request_quote</span><span class="text-[13.5px]">Liabilities</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="nutrition.html"><span class="material-symbols-outlined text-[19px]">restaurant</span><span class="text-[13.5px]">Nutrition</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="calendar.html"><span class="material-symbols-outlined text-[19px]">calendar_today</span><span class="text-[13.5px]">Calendar</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="insurance.html"><span class="material-symbols-outlined text-[19px]">verified_user</span><span class="text-[13.5px]">Insurance</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="mental.html"><span class="material-symbols-outlined text-[19px]">psychology</span><span class="text-[13.5px]">Mind</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="nominees.html"><span class="material-symbols-outlined text-[19px]">family_restroom</span><span class="text-[13.5px]">Nominees</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="family-map.html"><span class="material-symbols-outlined text-[19px]">account_tree</span><span class="text-[13.5px]">Family Tree</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="around-me.html"><span class="material-symbols-outlined text-[19px]">explore</span><span class="text-[13.5px]">Around Me</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="vault.html"><span class="material-symbols-outlined text-[19px]">folder_shared</span><span class="text-[13.5px]">Vault</span></a>
+</nav>
+<div class="pt-4 border-t border-outline-variant space-y-0.5">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[19px]">settings</span><span class="text-[13.5px]">Settings</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[19px]">help</span><span class="text-[13.5px]">Support</span></a>
+</div>
+</aside>
+
+<div class="ml-[240px] min-h-screen">
+  <header class="sticky top-0 z-40 h-16 px-10 bg-white border-b border-outline-variant flex justify-between items-center">
+    <h1 class="text-[19px] font-bold text-primary tracking-tight">Vacation Planner</h1>
+    <button data-wired="1" id="add-trip" class="flex items-center gap-2 px-5 py-2 bg-secondary text-on-secondary text-[11px] font-bold tracking-wider rounded-lg hover:brightness-95 transition-all">
+      <span class="material-symbols-outlined text-[16px]">add</span> PLAN A TRIP
+    </button>
+  </header>
+
+  <main class="px-10 py-10 max-w-[1280px]">
+    <div class="mb-8">
+      <h2 class="text-4xl font-bold text-primary tracking-tight mb-2">Plan the trip. Then actually enjoy it.</h2>
+      <p class="text-[15px] text-on-surface-variant max-w-2xl">Destination, dates, day-by-day itinerary, packing list and a rupee budget in one place — every trip lands on your LifeOS calendar automatically.</p>
+    </div>
+
+    <div id="summary" class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10" style="display:none">
+      <div class="tcard p-5"><p class="text-[10px] font-bold tracking-[.14em] text-on-surface-variant uppercase mb-1">Trips planned</p><p class="mono text-[22px] font-bold text-primary" id="s-count">—</p></div>
+      <div class="tcard p-5"><p class="text-[10px] font-bold tracking-[.14em] text-on-surface-variant uppercase mb-1">Next trip</p><p class="text-[15px] font-bold text-primary leading-[30px] truncate" id="s-next">—</p></div>
+      <div class="tcard p-5"><p class="text-[10px] font-bold tracking-[.14em] text-on-surface-variant uppercase mb-1">Days until departure</p><p class="mono text-[22px] font-bold" style="color:#1d9c40" id="s-days">—</p></div>
+      <div class="tcard p-5"><p class="text-[10px] font-bold tracking-[.14em] text-on-surface-variant uppercase mb-1">Budget (upcoming)</p><p class="mono text-[22px] font-bold text-primary" id="s-budget">—</p></div>
+    </div>
+
+    <div id="trips" class="space-y-5"></div>
+
+    <div id="empty" class="tcard p-14 text-center">
+      <span class="material-symbols-outlined text-primary text-[40px] mb-3 block">flight_takeoff</span>
+      <h3 class="font-bold text-primary text-[18px] mb-2">No trips planned yet</h3>
+      <p class="text-[13px] text-on-surface-variant mb-6 max-w-md mx-auto">Add a destination and dates — LifeOS blocks the days on your calendar and gives you an itinerary, packing list and budget tracker for the trip.</p>
+      <button data-wired="1" onclick="document.getElementById('add-trip').click()" class="px-7 py-3 bg-primary text-on-primary text-[11px] font-bold tracking-widest rounded-lg hover:brightness-110 transition-all">PLAN YOUR FIRST TRIP</button>
+    </div>
+
+    <p class="text-[11px] text-on-surface-variant mt-6">Trips are stored on your device and mirrored as travel events on your <a class="underline hover:text-primary" href="calendar.html">Calendar</a> — edit or delete a trip here and the calendar entry follows.</p>
+  </main>
+</div>
+
+<script src="assets/app.js"></script>
+<script src="assets/auth.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  // ---------- helpers ----------
+  function iso(d) { return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); }
+  function today0() { var d = new Date(); d.setHours(0, 0, 0, 0); return d; }
+  function parseISO(s) { var p = s.split("-"); return new Date(+p[0], +p[1] - 1, +p[2]); }
+  function inr(n) { return "₹" + Math.round(n).toLocaleString("en-IN"); }
+  function inrShort(n) {
+    if (n >= 1e7) return "₹" + (n / 1e7).toFixed(2).replace(/\.?0+$/, "") + " Cr";
+    if (n >= 1e5) return "₹" + (n / 1e5).toFixed(1).replace(/\.0$/, "") + " L";
+    return inr(n);
+  }
+  function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+  var MN = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  function fmtD(s) { var d = parseISO(s); return d.getDate() + " " + MN[d.getMonth()] + " " + d.getFullYear(); }
+  function fmtRange(a, b) {
+    var d1 = parseISO(a), d2 = parseISO(b);
+    if (d1.getFullYear() === d2.getFullYear()) {
+      if (d1.getMonth() === d2.getMonth() && d1.getDate() === d2.getDate()) return fmtD(a);
+      return d1.getDate() + " " + MN[d1.getMonth()] + " – " + d2.getDate() + " " + MN[d2.getMonth()] + " " + d2.getFullYear();
+    }
+    return fmtD(a) + " – " + fmtD(b);
+  }
+  function tripDays(t) { return Math.max(1, Math.round((parseISO(t.end) - parseISO(t.start)) / 864e5) + 1); }
+  function tripStatus(t) {
+    var now = today0(), s = parseISO(t.start), e = parseISO(t.end);
+    if (now < s) return "upcoming";
+    if (now > e) return "past";
+    return "ongoing";
+  }
+
+  // ---------- store ----------
+  var trips = LifeOS.store.get("vacations", []);
+  function save() { LifeOS.store.set("vacations", trips); }
+
+  // ---------- calendar sync (events2 — same store the Calendar page reads) ----------
+  function calTitle(t) { return t.destination + " vacation"; }
+  function syncCalendarEvent(t) {
+    var evs = LifeOS.store.get("events2", []);
+    var rec = { id: t.eventId, title: calTitle(t), date: t.start, start: "00:00", end: "23:59", type: "travel", note: t.notes || "", days: tripDays(t) };
+    var found = false;
+    for (var i = 0; i < evs.length; i++) { if (evs[i].id === t.eventId) { evs[i] = rec; found = true; break; } }
+    if (!found) evs.push(rec);
+    LifeOS.store.set("events2", evs);
+  }
+  function removeCalendarEvent(t) {
+    var evs = LifeOS.store.get("events2", []).filter(function (e) { return e.id !== t.eventId; });
+    LifeOS.store.set("events2", evs);
+  }
+
+  // ---------- rendering ----------
+  var openId = null;
+  var BADGE = {
+    upcoming: { label: "Upcoming", css: "background:rgba(0,45,64,.08);color:#002D40" },
+    ongoing: { label: "Ongoing", css: "background:rgba(61,204,96,.18);color:#1d9c40" },
+    past: { label: "Past", css: "background:#e8e8e9;color:#44474e" },
+  };
+
+  function itineraryHTML(t) {
+    var days = tripDays(t), items = t.itinerary || [];
+    var groups = "";
+    for (var d = 1; d <= days; d++) {
+      var dayItems = [];
+      items.forEach(function (it, i) { if (+it.day === d) dayItems.push({ it: it, i: i }); });
+      if (!dayItems.length) continue;
+      var dd = parseISO(t.start); dd.setDate(dd.getDate() + d - 1);
+      groups += '<div class="mb-3"><p class="text-[10px] font-bold tracking-[.12em] text-on-surface-variant uppercase mb-1.5">Day ' + d + ' · ' + dd.getDate() + " " + MN[dd.getMonth()] + '</p>' +
+        dayItems.map(function (x) {
+          return '<div class="flex items-start gap-2 group py-1"><span class="material-symbols-outlined text-secondary text-[15px] mt-0.5">arrow_right</span>' +
+            '<span class="flex-1 text-[13px] text-primary">' + esc(x.it.text) + '</span>' +
+            '<button data-act="it-rm" data-i="' + x.i + '" class="opacity-0 group-hover:opacity-100 text-on-surface-variant hover:text-error transition-all"><span class="material-symbols-outlined text-[15px] block pointer-events-none">close</span></button></div>';
+        }).join("") + "</div>";
+    }
+    if (!groups) groups = '<p class="text-[12px] text-on-surface-variant italic py-3 text-center">No plans yet — add your first item below.</p>';
+    var opts = "";
+    for (var d2 = 1; d2 <= days; d2++) opts += "<option value='" + d2 + "'>Day " + d2 + "</option>";
+    return groups +
+      '<div class="flex items-center gap-2 mt-2 pt-3 border-t border-outline-variant/60">' +
+      '<select class="vp-input it-day" style="width:88px;flex:none;padding-right:28px">' + opts + "</select>" +
+      '<input type="text" class="vp-input it-input" placeholder="e.g. Arrive, check into hotel"/>' +
+      '<button data-act="it-add" class="p-2 bg-primary text-on-primary rounded-lg hover:brightness-110 transition-all flex-none"><span class="material-symbols-outlined text-[18px] block pointer-events-none">add</span></button></div>';
+  }
+
+  function packingHTML(t) {
+    var items = t.packing || [];
+    var list = items.length ? items.map(function (it, i) {
+      return '<div class="flex items-center gap-3 group px-1 py-1">' +
+        '<input type="checkbox" data-act="pk-check" data-i="' + i + '" class="w-4 h-4 rounded accent-[#002d40]"' + (it.done ? " checked" : "") + '/>' +
+        '<span class="flex-1 text-[13px]' + (it.done ? " line-through text-on-surface-variant/60" : " text-primary") + '">' + esc(it.text) + "</span>" +
+        '<button data-act="pk-rm" data-i="' + i + '" class="opacity-0 group-hover:opacity-100 text-on-surface-variant hover:text-error transition-all"><span class="material-symbols-outlined text-[15px] block pointer-events-none">close</span></button></div>';
+    }).join("") : '<p class="text-[12px] text-on-surface-variant italic py-3 text-center">Nothing on the list yet.</p>';
+    var packed = items.filter(function (it) { return it.done; }).length;
+    return (items.length ? '<p class="mono text-[11px] text-on-surface-variant mb-2">' + packed + " / " + items.length + " packed</p>" : "") + list +
+      '<div class="flex items-center gap-2 mt-2 pt-3 border-t border-outline-variant/60">' +
+      '<input type="text" class="vp-input pk-input" placeholder="e.g. Sunscreen SPF 50"/>' +
+      '<button data-act="pk-add" class="p-2 bg-primary text-on-primary rounded-lg hover:brightness-110 transition-all flex-none"><span class="material-symbols-outlined text-[18px] block pointer-events-none">add</span></button></div>';
+  }
+
+  function budgetHTML(t) {
+    var exps = t.expenses || [];
+    var spent = exps.reduce(function (s, e) { return s + (+e.amount || 0); }, 0);
+    var remaining = (+t.budget || 0) - spent;
+    var over = remaining < 0;
+    var list = exps.length ? exps.map(function (e, i) {
+      return '<div class="flex items-center gap-3 group px-1 py-1">' +
+        '<span class="flex-1 text-[13px] text-primary truncate">' + esc(e.desc) + "</span>" +
+        '<span class="mono text-[12px] text-on-surface-variant flex-none">' + inr(+e.amount || 0) + "</span>" +
+        '<button data-act="ex-rm" data-i="' + i + '" class="opacity-0 group-hover:opacity-100 text-on-surface-variant hover:text-error transition-all"><span class="material-symbols-outlined text-[15px] block pointer-events-none">close</span></button></div>';
+    }).join("") : '<p class="text-[12px] text-on-surface-variant italic py-3 text-center">No expenses added yet.</p>';
+    return '<div class="grid grid-cols-3 gap-2 mb-3">' +
+      '<div class="bg-surface-container-low rounded-lg p-2.5"><p class="text-[9px] font-bold tracking-[.1em] text-on-surface-variant uppercase">Budget</p><p class="mono text-[14px] font-bold text-primary">' + inrShort(+t.budget || 0) + "</p></div>" +
+      '<div class="bg-surface-container-low rounded-lg p-2.5"><p class="text-[9px] font-bold tracking-[.1em] text-on-surface-variant uppercase">Spent</p><p class="mono text-[14px] font-bold text-primary">' + inrShort(spent) + "</p></div>" +
+      '<div class="bg-surface-container-low rounded-lg p-2.5"><p class="text-[9px] font-bold tracking-[.1em] text-on-surface-variant uppercase">' + (over ? "Over by" : "Remaining") + '</p><p class="mono text-[14px] font-bold" style="color:' + (over ? "#ba1a1a" : "#1d9c40") + '">' + inrShort(Math.abs(remaining)) + "</p></div></div>" +
+      list +
+      '<div class="flex items-center gap-2 mt-2 pt-3 border-t border-outline-variant/60">' +
+      '<input type="text" class="vp-input ex-desc" placeholder="e.g. Flights"/>' +
+      '<input type="number" class="vp-input ex-amt" placeholder="₹" style="width:110px;flex:none"/>' +
+      '<button data-act="ex-add" class="p-2 bg-primary text-on-primary rounded-lg hover:brightness-110 transition-all flex-none"><span class="material-symbols-outlined text-[18px] block pointer-events-none">add</span></button></div>';
+  }
+
+  function tripCard(t) {
+    var st = tripStatus(t), b = BADGE[st], open = t.id === openId;
+    var days = tripDays(t);
+    return '<div class="tcard overflow-hidden" data-trip="' + t.id + '">' +
+      '<div class="trip-head flex items-center justify-between gap-4 p-5 cursor-pointer" data-act="toggle">' +
+        '<div class="flex items-center gap-4 min-w-0">' +
+          '<span class="material-symbols-outlined text-primary bg-surface-container-low p-3 rounded-lg text-[24px] flex-none">' + (st === "past" ? "flight_land" : "flight_takeoff") + "</span>" +
+          '<div class="min-w-0">' +
+            '<div class="flex items-center gap-2.5 flex-wrap">' +
+              '<h3 class="font-bold text-primary text-[17px] truncate">' + esc(t.destination) + "</h3>" +
+              '<span class="text-[10px] font-bold tracking-[.1em] uppercase px-2.5 py-1 rounded-full flex-none" style="' + b.css + '">' + b.label + "</span></div>" +
+            '<p class="mono text-[12px] text-on-surface-variant mt-1">' + fmtRange(t.start, t.end) + " · " + days + (days === 1 ? " day" : " days") + "</p>" +
+            (t.notes ? '<p class="text-[13px] text-on-surface-variant mt-1 truncate">' + esc(t.notes) + "</p>" : "") +
+          "</div></div>" +
+        '<div class="flex items-center gap-1.5 flex-none">' +
+          '<div class="text-right mr-3 hidden md:block"><p class="text-[9px] font-bold tracking-[.12em] text-on-surface-variant uppercase">Budget</p><p class="mono text-[16px] font-bold text-primary">' + inrShort(+t.budget || 0) + "</p></div>" +
+          '<button data-act="edit" title="Edit trip" class="p-2 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors"><span class="material-symbols-outlined text-[18px] block pointer-events-none">edit</span></button>' +
+          '<button data-act="del" title="Delete trip" class="p-2 rounded-lg text-on-surface-variant hover:text-error hover:bg-surface-container-low transition-colors"><span class="material-symbols-outlined text-[18px] block pointer-events-none">delete</span></button>' +
+          '<span class="material-symbols-outlined text-on-surface-variant text-[22px]">' + (open ? "expand_less" : "expand_more") + "</span>" +
+        "</div></div>" +
+      (open ?
+        '<div class="border-t border-outline-variant grid grid-cols-1 lg:grid-cols-3 divide-y lg:divide-y-0 lg:divide-x divide-outline-variant">' +
+          '<div class="p-5"><div class="flex items-center gap-2 mb-3"><span class="material-symbols-outlined text-primary text-[18px]">map</span><h4 class="text-[12px] font-bold tracking-[.12em] text-primary uppercase">Itinerary</h4></div>' + itineraryHTML(t) + "</div>" +
+          '<div class="p-5"><div class="flex items-center gap-2 mb-3"><span class="material-symbols-outlined text-primary text-[18px]">luggage</span><h4 class="text-[12px] font-bold tracking-[.12em] text-primary uppercase">Packing List</h4></div>' + packingHTML(t) + "</div>" +
+          '<div class="p-5"><div class="flex items-center gap-2 mb-3"><span class="material-symbols-outlined text-primary text-[18px]">account_balance_wallet</span><h4 class="text-[12px] font-bold tracking-[.12em] text-primary uppercase">Budget Tracker</h4></div>' + budgetHTML(t) + "</div>" +
+        "</div>"
+      : "") +
+    "</div>";
+  }
+
+  function renderSummary() {
+    var el = document.getElementById("summary");
+    if (!trips.length) { el.style.display = "none"; return; }
+    el.style.display = "grid";
+    document.getElementById("s-count").textContent = String(trips.length);
+    var future = trips.filter(function (t) { return tripStatus(t) !== "past"; })
+      .sort(function (a, b) { return parseISO(a.start) - parseISO(b.start); });
+    var next = future[0] || null;
+    document.getElementById("s-next").textContent = next ? next.destination : "—";
+    if (next) {
+      var dd = Math.max(0, Math.round((parseISO(next.start) - today0()) / 864e5));
+      document.getElementById("s-days").textContent = tripStatus(next) === "ongoing" ? "On trip!" : String(dd);
+    } else document.getElementById("s-days").textContent = "—";
+    var budget = future.reduce(function (s, t) { return s + (+t.budget || 0); }, 0);
+    document.getElementById("s-budget").textContent = budget ? inrShort(budget) : "—";
+  }
+
+  function render() {
+    var box = document.getElementById("trips");
+    document.getElementById("empty").style.display = trips.length ? "none" : "block";
+    var order = { ongoing: 0, upcoming: 1, past: 2 };
+    var sorted = trips.slice().sort(function (a, b) {
+      var sa = order[tripStatus(a)], sb = order[tripStatus(b)];
+      if (sa !== sb) return sa - sb;
+      var da = parseISO(a.start) - parseISO(b.start);
+      return sa === 2 ? -da : da; // past trips newest first
+    });
+    box.innerHTML = sorted.map(tripCard).join("");
+    renderSummary();
+  }
+
+  // ---------- add / edit trip form ----------
+  function tripForm(t) {
+    LifeOS.form(t ? "Edit Trip" : "Plan a Trip", [
+      ["Destination", "text", "e.g. Goa", t ? t.destination : ""],
+      ["Start date", "date", "", t ? t.start : ""],
+      ["End date", "date", "", t ? t.end : ""],
+      ["Budget (₹)", "number", "e.g. 60000", t ? t.budget : ""],
+      ["Notes", "text", "e.g. flights booked, hotel pending", t ? t.notes : ""],
+    ], function (v) {
+      if (!v.destination || !v.destination.trim()) { LifeOS.toast("Give the trip a destination"); return; }
+      if (!v.start_date) { LifeOS.toast("Pick a start date"); return; }
+      var start = v.start_date, end = v.end_date || v.start_date;
+      if (parseISO(end) < parseISO(start)) end = start;
+      var rec = {
+        id: t ? t.id : Date.now(),
+        eventId: t ? t.eventId : Date.now() + 1,
+        destination: v.destination.trim(),
+        start: start, end: end,
+        budget: parseFloat(v.budget) || 0,
+        notes: (v.notes || "").trim(),
+        itinerary: t ? (t.itinerary || []) : [],
+        packing: t ? (t.packing || []) : [],
+        expenses: t ? (t.expenses || []) : [],
+      };
+      if (t) { trips = trips.map(function (x) { return x.id === t.id ? rec : x; }); }
+      else { trips.push(rec); openId = rec.id; }
+      save();
+      syncCalendarEvent(rec);
+      render();
+      LifeOS.toast((t ? "Updated" : "Planned") + ' "' + rec.destination + '" — calendar synced');
+    }, t ? "Save Changes" : "Add Trip");
+  }
+
+  function confirmDelete(t) {
+    LifeOS.modal("Delete Trip", '<p style="font-size:13.5px;color:#44474e;margin-bottom:14px">Remove <strong style="color:#002D40">' + esc(t.destination) + "</strong> (" + fmtRange(t.start, t.end) + ")? Its itinerary, packing list, expenses and the linked calendar event will all be deleted.</p>" +
+      '<button id="vp-del-confirm" style="width:100%;background:#ba1a1a;color:#fff;border:none;border-radius:8px;padding:11px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer">Delete Trip</button>');
+    var btn = document.getElementById("vp-del-confirm");
+    if (btn) btn.addEventListener("click", function () {
+      trips = trips.filter(function (x) { return x.id !== t.id; });
+      save();
+      removeCalendarEvent(t);
+      if (openId === t.id) openId = null;
+      var ov = document.getElementById("lifeos-modal-overlay");
+      if (ov) ov.remove();
+      render();
+      LifeOS.toast('Deleted "' + t.destination + '" and its calendar event');
+    });
+  }
+
+  // ---------- wiring ----------
+  document.getElementById("add-trip").addEventListener("click", function () { tripForm(null); });
+
+  var box = document.getElementById("trips");
+
+  function findTrip(el) {
+    var card = el.closest("[data-trip]");
+    if (!card) return null;
+    return trips.find(function (x) { return String(x.id) === card.dataset.trip; }) || null;
+  }
+
+  box.addEventListener("click", function (e) {
+    var actEl = e.target.closest("[data-act]");
+    if (!actEl) return;
+    var t = findTrip(actEl);
+    if (!t) return;
+    var act = actEl.dataset.act;
+    var card = actEl.closest("[data-trip]");
+
+    if (act === "toggle") {
+      // Ignore clicks that bubbled from the action buttons
+      if (e.target.closest('[data-act="edit"],[data-act="del"]')) return;
+      openId = openId === t.id ? null : t.id;
+      render(); return;
+    }
+    if (act === "edit") { tripForm(t); return; }
+    if (act === "del") { confirmDelete(t); return; }
+
+    if (act === "it-add") {
+      var inp = card.querySelector(".it-input"), daySel = card.querySelector(".it-day");
+      if (!inp.value.trim()) { LifeOS.toast("Type a plan first"); return; }
+      t.itinerary = t.itinerary || [];
+      t.itinerary.push({ day: +daySel.value || 1, text: inp.value.trim() });
+      save(); render(); return;
+    }
+    if (act === "it-rm") { t.itinerary.splice(+actEl.dataset.i, 1); save(); render(); return; }
+
+    if (act === "pk-add") {
+      var pin = card.querySelector(".pk-input");
+      if (!pin.value.trim()) { LifeOS.toast("Type an item first"); return; }
+      t.packing = t.packing || [];
+      if (t.packing.some(function (it) { return it.text.toLowerCase() === pin.value.trim().toLowerCase(); })) { LifeOS.toast("Already on the list"); return; }
+      t.packing.push({ text: pin.value.trim(), done: false });
+      save(); render(); return;
+    }
+    if (act === "pk-rm") { t.packing.splice(+actEl.dataset.i, 1); save(); render(); return; }
+
+    if (act === "ex-add") {
+      var dsc = card.querySelector(".ex-desc"), amt = card.querySelector(".ex-amt");
+      var val = parseFloat(amt.value);
+      if (!dsc.value.trim()) { LifeOS.toast("Describe the expense"); return; }
+      if (!(val > 0)) { LifeOS.toast("Enter a valid ₹ amount"); return; }
+      t.expenses = t.expenses || [];
+      t.expenses.push({ desc: dsc.value.trim(), amount: val });
+      save(); render(); return;
+    }
+    if (act === "ex-rm") { t.expenses.splice(+actEl.dataset.i, 1); save(); render(); return; }
+  });
+
+  box.addEventListener("change", function (e) {
+    var cb = e.target.closest('[data-act="pk-check"]');
+    if (!cb) return;
+    var t = findTrip(cb);
+    if (!t || !t.packing) return;
+    t.packing[+cb.dataset.i].done = cb.checked;
+    save(); render();
+  });
+
+  box.addEventListener("keydown", function (e) {
+    if (e.key !== "Enter") return;
+    var card = e.target.closest("[data-trip]");
+    if (!card) return;
+    if (e.target.classList.contains("it-input")) { e.preventDefault(); card.querySelector('[data-act="it-add"]').click(); }
+    if (e.target.classList.contains("pk-input")) { e.preventDefault(); card.querySelector('[data-act="pk-add"]').click(); }
+    if (e.target.classList.contains("ex-desc") || e.target.classList.contains("ex-amt")) { e.preventDefault(); card.querySelector('[data-act="ex-add"]').click(); }
+  });
+
+  document.addEventListener("DOMContentLoaded", render);
+  render();
+})();
+</script>
+</body>
+</html>
