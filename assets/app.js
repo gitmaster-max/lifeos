@@ -192,7 +192,7 @@
   const PARTNER_LINKS = {
     "Manipal Hospitals": "https://www.manipalhospitals.com",
     "Practo": "https://www.practo.com",
-    "Superhealth Hospitals": null,
+    "Superhealth Hospitals": "https://www.superhealth.co.in",
     "Dezerv": "https://www.dezerv.in",
     "INDmoney": "https://www.indmoney.com",
     "Ditto Insurance": "https://joinditto.in",
@@ -209,8 +209,6 @@
     "IGP": "https://www.igp.com",
     "Paisabazaar": "https://www.paisabazaar.com",
     "BankBazaar": "https://www.bankbazaar.com",
-    "Healthy Dine": null,
-    "FreshPrep": null,
     "BigBasket": "https://www.bigbasket.com",
     "Swiggy Instamart": "https://www.swiggy.com/instamart",
     "Blinkit": "https://blinkit.com",
