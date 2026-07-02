@@ -588,7 +588,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 document.addEventListener('DOMContentLoaded', () => {
   const main = document.querySelector('main');
-  const aff = document.getElementById('lifeos-affiliates');
   if (!main) return;
   const sec = document.createElement('section');
   sec.style.cssText = 'margin:40px 0 8px;font-family:Inter,sans-serif;max-width:1280px';
@@ -609,7 +608,7 @@ document.addEventListener('DOMContentLoaded', () => {
       '<p style="font-size:12.5px;color:#44474e;line-height:1.5;margin:0 0 10px">' + c[2] + '</p>' +
       '<span style="font-size:10px;font-weight:700;letter-spacing:.12em;color:#1d9c40">OPEN &rarr;</span></a>').join('') +
     '</div>';
-  main.insertBefore(sec, aff);
+  main.appendChild(sec);
 });
 </script>
 </body></html>

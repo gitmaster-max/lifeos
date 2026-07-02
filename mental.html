@@ -404,7 +404,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const main = document.querySelector('main');
   const sec = document.createElement('section');
   sec.style.cssText = 'margin:40px 40px 8px;font-family:Inter,sans-serif;max-width:1280px';
-  main.insertBefore(sec, document.getElementById('lifeos-affiliates'));
+  main.appendChild(sec);
   const FACES = { '1': 'Drained', '2': 'Low', '3': 'Steady', '4': 'Good', '5': 'Peak' };
   function render() {
     const m = LifeOS.store.get('moods', []);

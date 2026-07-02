@@ -256,33 +256,47 @@
       ["psychology", "Amaha", "Sustained high focus load this month — a professional check-in keeps performance durable.", "20% off first therapy session"],
     ],
   };
+  function initialsFor(name) {
+    const clean = name.replace(/[^A-Za-z0-9 ]/g, " ").trim();
+    let words = clean.split(/\s+/).filter(Boolean);
+    if (words.length === 1) words = clean.split(/(?=[A-Z])/).filter(Boolean);
+    if (words.length >= 2) return (words[0][0] + words[1][0]).toUpperCase();
+    return (clean.slice(0, 2) || "??").toUpperCase();
+  }
+  function colorFor(name) {
+    let hash = 0;
+    for (let i = 0; i < name.length; i++) hash = (hash * 31 + name.charCodeAt(i)) >>> 0;
+    return "hsl(" + (hash % 360) + ", 45%, 32%)";
+  }
+  function domainFor(url) {
+    try { return new URL(url).hostname.replace(/^www\./, ""); } catch (_) { return url; }
+  }
+  // Prominent right-side rail: fixed, independently scrollable, logo + real link per
+  // partner. Lives outside <main> entirely so it never fights each page's own layout —
+  // #lifeos-aff-rail's presence is what reserves space for it (see app.css :has() rule).
   function renderAffiliates() {
     const page = location.pathname.split("/").pop() || "index.html";
     const list = AFFILIATES[page];
-    const main = document.querySelector("main");
-    if (!list || !main) return;
-    const cards = list.map(a =>
-      '<div class="lifeos-aff-card">' +
-      '<div class="lifeos-aff-head"><span class="material-symbols-outlined">' + a[0] + "</span>" +
-      '<span class="lifeos-aff-name">' + a[1] + '</span><span class="lifeos-aff-chip">PARTNER</span></div>' +
-      '<p class="lifeos-aff-why">' + a[2] + "</p>" +
-      '<p class="lifeos-aff-benefit">' + a[3] + "</p>" +
-      '<button data-wired="1" class="lifeos-aff-cta" data-partner="' + a[1] + '">Explore offer <span class="material-symbols-outlined" style="font-size:15px">arrow_forward</span></button>' +
-      "</div>").join("");
-    const sec = document.createElement("section");
-    sec.id = "lifeos-affiliates";
-    sec.innerHTML =
-      '<div class="lifeos-aff-titlerow"><h3>Suggested for you</h3>' +
-      "<span>Curated from your current metrics - LifeOS may earn a referral fee</span></div>" +
-      '<div class="lifeos-aff-grid">' + cards + "</div>";
-    // Prominent placement: right below the page's own top bar, above module content.
-    // Some pages nest their sticky <header> inside <main> (skip past it); others keep
-    // it as a sibling before <main> (in which case main's first child is content).
-    const innerHeader = main.querySelector(":scope > header");
-    if (innerHeader) innerHeader.insertAdjacentElement("afterend", sec);
-    else main.insertBefore(sec, main.firstChild);
-    sec.querySelectorAll(".lifeos-aff-cta").forEach(b =>
-      b.addEventListener("click", () => openPartner(b.dataset.partner)));
+    if (!list) return;
+    const cards = list.map(function (a) {
+      const name = a[1], url = PARTNER_LINKS[name];
+      const tag = url ? "a" : "div";
+      const attrs = url ? ' href="' + url + '" target="_blank" rel="noopener"' : "";
+      return "<" + tag + ' class="lifeos-affr-card' + (url ? "" : " disabled") + '"' + attrs + '>' +
+        '<span class="lifeos-affr-logo" style="background:' + colorFor(name) + '">' + initialsFor(name) + "</span>" +
+        '<span class="lifeos-affr-body">' +
+        '<span class="lifeos-affr-name">' + name + "</span>" +
+        '<span class="lifeos-affr-why">' + a[2] + "</span>" +
+        '<span class="lifeos-affr-link">' + (url ? domainFor(url) + " &#8599;" : "Launching soon") + "</span>" +
+        "</span></" + tag + ">";
+    }).join("");
+    const rail = document.createElement("aside");
+    rail.id = "lifeos-aff-rail";
+    rail.innerHTML =
+      '<div class="lifeos-affr-title">Suggested for you</div>' +
+      '<div class="lifeos-affr-sub">Curated from your current metrics — LifeOS may earn a referral fee</div>' +
+      cards;
+    document.body.appendChild(rail);
   }
 
   // ---------- mobile nav ----------
