@@ -83,9 +83,18 @@
     </div>
   </header>
 
-  <main class="flex-1 p-6 max-w-[1280px] w-full">
-    <div id="cal-body" class="bg-white border border-outline-variant rounded-xl overflow-hidden"></div>
-    <p class="text-[11px] text-on-surface-variant mt-4">Personal only — vacations, dates, family visits, health appointments. Click any event to edit or remove it; click any empty slot to add one.</p>
+  <main class="flex-1 p-6 w-full flex gap-6 items-start">
+    <div class="flex-1 min-w-0">
+      <div id="cal-body" class="bg-white border border-outline-variant rounded-xl overflow-hidden"></div>
+      <p class="text-[11px] text-on-surface-variant mt-4">Personal only — vacations, dates, family visits, health appointments. Click any event to edit or remove it; click any empty slot to add one.</p>
+    </div>
+    <aside class="w-80 flex-none bg-white border border-outline-variant rounded-xl p-5 sticky top-[88px]">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-[12px] font-bold tracking-[.14em] text-primary uppercase">Today's Reminders</h3>
+        <button data-wired="1" id="rem-add" class="text-primary hover:text-secondary transition-colors" title="Add event for today"><span class="material-symbols-outlined text-[20px]">add_circle</span></button>
+      </div>
+      <div id="rem-list" class="space-y-2"></div>
+    </aside>
   </main>
 </div>
 
@@ -257,9 +266,27 @@
     body.innerHTML = html + "</div>";
   }
 
+  function renderReminders() {
+    var list = document.getElementById("rem-list");
+    var evs = eventsOn(iso(today0()));
+    if (!evs.length) {
+      list.innerHTML = '<p class="text-[12px] text-on-surface-variant italic py-4 text-center">Nothing planned for today.</p>';
+      return;
+    }
+    list.innerHTML = evs.map(function (e) {
+      var c = COLORS[e.type] || COLORS.personal;
+      var allDay = e.start === "00:00" && e.end === "23:59";
+      return '<div class="ev flex items-start gap-3 p-2.5 rounded-lg hover:bg-surface-container-low transition-colors cursor-pointer" data-ev="' + e.id + '">' +
+        '<span class="mt-1.5 flex-none" style="width:8px;height:8px;border-radius:99px;background:' + c + '"></span>' +
+        '<div class="min-w-0"><p class="text-[13px] font-semibold text-primary truncate">' + e.title + '</p>' +
+        '<p class="text-[11px] text-on-surface-variant mono">' + (allDay ? "All day" : fmtT(e.start) + " – " + fmtT(e.end)) + " · " + TYPE_NAMES[e.type] + "</p></div></div>";
+    }).join("");
+  }
+
   function render() {
     document.querySelectorAll("#cal-views .cal-btn").forEach(function (b) { b.classList.toggle("active", b.dataset.view === view); });
     ({ day: renderDay, week: renderWeek, month: renderMonth, year: renderYear })[view]();
+    renderReminders();
   }
 
   // ---------- event form ----------
@@ -308,6 +335,11 @@
 
   // ---------- wiring ----------
   document.getElementById("cal-add").addEventListener("click", function () { eventForm(null); });
+  document.getElementById("rem-add").addEventListener("click", function () { eventForm(null, iso(today0())); });
+  document.getElementById("rem-list").addEventListener("click", function (e) {
+    var evEl = e.target.closest("[data-ev]");
+    if (evEl) { var ev = events.find(function (x) { return String(x.id) === evEl.dataset.ev; }); if (ev) eventForm(ev); }
+  });
   document.getElementById("cal-today").addEventListener("click", function () { cursor = today0(); render(); });
   function step(dir) {
     if (view === "day") cursor.setDate(cursor.getDate() + dir);
