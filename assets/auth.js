@@ -132,20 +132,14 @@
   }
 
   function renderWidget() {
-    const nav = document.getElementById("lifeos-nav");
-    if (!nav) return;
-    let wrap = document.getElementById("lifeos-cloud-widget");
-    if (!wrap) {
-      wrap = document.createElement("div");
-      wrap.id = "lifeos-cloud-widget";
-      wrap.style.cssText = "padding:10px 12px;border-top:1px solid #e2e2e3";
-      const bottom = nav.querySelector(":scope > div:last-child");
-      nav.insertBefore(wrap, bottom);
-    }
+    // app.js's DOMContentLoaded listener (which mounts the topbar) is registered
+    // first on every page, so #lifeos-account-sync always exists by the time this runs.
+    const wrap = document.getElementById("lifeos-account-sync");
+    if (!wrap) return;
     const session = getSession();
     wrap.innerHTML = session
-      ? '<button data-wired="1" id="lifeos-cloud-btn" style="width:100%;text-align:left;background:none;border:none;padding:0;cursor:pointer;font-size:12px;color:#1d9c40;font-weight:600">&#9729; Synced as ' + session.user.email + "</button>"
-      : '<button data-wired="1" id="lifeos-cloud-btn" style="width:100%;text-align:left;background:none;border:none;padding:0;cursor:pointer;font-size:12px;color:#44474e;font-weight:600">&#9729; Sign in to sync across devices</button>';
+      ? '<button data-wired="1" id="lifeos-cloud-btn" class="lifeos-sync-btn synced">&#9729; Synced as ' + session.user.email + "</button>"
+      : '<button data-wired="1" id="lifeos-cloud-btn" class="lifeos-sync-btn">&#9729; Sign in to sync across devices</button>';
     document.getElementById("lifeos-cloud-btn").addEventListener("click", openAuthModal);
   }
 

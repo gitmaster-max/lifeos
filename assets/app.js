@@ -306,27 +306,6 @@
     document.body.appendChild(rail);
   }
 
-  // ---------- mobile nav ----------
-  function initMobileNav() {
-    const nav = document.getElementById("lifeos-nav");
-    if (!nav) return;
-    const btn = document.createElement("button");
-    btn.id = "lifeos-menu-btn";
-    btn.setAttribute("aria-label", "Menu");
-    btn.innerHTML = '<span class="material-symbols-outlined">menu</span>';
-    btn.dataset.wired = 1;
-    const bd = document.createElement("div");
-    bd.id = "lifeos-nav-backdrop";
-    document.body.append(btn, bd);
-    const toggle = (open) => {
-      nav.classList.toggle("open", open);
-      bd.classList.toggle("show", open);
-      btn.firstChild.textContent = open ? "close" : "menu";
-    };
-    btn.addEventListener("click", () => toggle(!nav.classList.contains("open")));
-    bd.addEventListener("click", () => toggle(false));
-  }
-
   // ---------- search & shortcuts ----------
   function initSearch() {
     document.querySelectorAll('input[placeholder*="earch"]').forEach(function (inp) {
@@ -399,63 +378,52 @@
     }
   }
 
-  // ---------- family account switcher ----------
-  function initFamily() {
-    const nav = document.getElementById("lifeos-nav");
-    if (!nav) return;
-    const bottom = nav.querySelector(":scope > div:last-child");
+  // ---------- top bar (replaces the old per-page sidebar) ----------
+  // A thin fixed strip above every page's own header: a way back to the Dashboard hub,
+  // plus an account button that folds family switching, cloud sync, settings and support
+  // into one panel instead of a dedicated 240px column for each.
+  function initTopbar() {
+    if (document.getElementById("lifeos-topbar")) return; // index.html etc. don't get one
+    const bar = document.createElement("div");
+    bar.id = "lifeos-topbar";
+    bar.innerHTML =
+      '<a href="dashboard.html" class="lifeos-topbar-home"><span class="material-symbols-outlined">apps</span>LifeOS</a>' +
+      '<button id="lifeos-account-btn" data-wired="1" aria-label="Account"><span class="material-symbols-outlined">account_circle</span></button>' +
+      '<div id="lifeos-account-panel"></div>';
+    document.body.prepend(bar);
+
+    const panel = document.getElementById("lifeos-account-panel");
     const members = [["VJ", "Vijay"], ["AS", "Ananya"], ["RK", "Papa"]];
     const cur = store.get("member", "Vijay");
-    const wrap = document.createElement("div");
-    wrap.id = "lifeos-family-widget";
-    wrap.style.cssText = "padding:14px 12px 10px;border-top:1px solid #e2e2e3;margin-top:8px";
-    wrap.innerHTML = '<div style="font-size:9px;font-weight:700;letter-spacing:.18em;color:#44474e;margin-bottom:8px">FAMILY ACCOUNT</div>' +
-      '<div style="display:flex;gap:8px">' + members.map(m =>
-        '<button data-wired="1" data-m="' + m[1] + '" title="' + m[1] + '" style="width:34px;height:34px;border-radius:99px;border:2px solid ' +
-        (m[1] === cur ? "#3dcc60" : "#e2e2e3") + ";background:" + (m[1] === cur ? "#002D40" : "#f3f3f4") +
-        ";color:" + (m[1] === cur ? "#fff" : "#44474e") + ';font-size:11px;font-weight:700;cursor:pointer">' + m[0] + "</button>").join("") +
-      '<button data-wired="1" data-m="+" title="Add member" style="width:34px;height:34px;border-radius:99px;border:1px dashed #d1d1d1;background:none;color:#44474e;cursor:pointer">+</button></div>';
-    nav.insertBefore(wrap, bottom);
-    wrap.querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
-      if (b.dataset.m === "+") { toast("Member invites arrive with user accounts"); return; }
+    panel.innerHTML =
+      '<div class="lifeos-account-label">Family account</div>' +
+      '<div class="lifeos-account-family">' + members.map(m =>
+        '<button data-wired="1" data-m="' + m[1] + '" title="' + m[1] + '" class="lifeos-fam-btn' + (m[1] === cur ? " active" : "") + '">' + m[0] + "</button>").join("") +
+      '<button data-wired="1" data-m="+" title="Add member" class="lifeos-fam-btn add">+</button></div>' +
+      '<div id="lifeos-account-sync"></div>' +
+      '<div class="lifeos-account-links">' +
+      '<a data-wired="1" href="#" id="lifeos-account-settings"><span class="material-symbols-outlined">settings</span>Settings</a>' +
+      '<a data-wired="1" href="#" id="lifeos-account-support"><span class="material-symbols-outlined">help</span>Support</a>' +
+      "</div>";
+
+    panel.querySelectorAll(".lifeos-fam-btn").forEach(b => b.addEventListener("click", () => {
+      if (b.dataset.m === "+") { toast("Member invites arrive with your LifeOS account"); return; }
       store.set("member", b.dataset.m);
       toast("Viewing " + b.dataset.m + "'s LifeOS");
-      wrap.querySelectorAll("button").forEach(x => {
-        if (x.dataset.m === "+") return;
-        const act = x.dataset.m === b.dataset.m;
-        x.style.borderColor = act ? "#3dcc60" : "#e2e2e3";
-        x.style.background = act ? "#002D40" : "#f3f3f4";
-        x.style.color = act ? "#fff" : "#44474e";
-      });
+      panel.querySelectorAll(".lifeos-fam-btn").forEach(x => x.classList.toggle("active", x.dataset.m === b.dataset.m));
     }));
-  }
+    document.getElementById("lifeos-account-settings").addEventListener("click", (e) => { e.preventDefault(); toast("Settings arrive with user accounts"); });
+    document.getElementById("lifeos-account-support").addEventListener("click", (e) => { e.preventDefault(); toast("Support: care@lifeos.in"); });
 
-  // ---------- collapsible sidebar ----------
-  function initSidebarCollapse() {
-    const nav = document.getElementById("lifeos-nav");
-    if (!nav) return;
-    const btn = document.createElement("button");
-    btn.id = "lifeos-nav-toggle";
-    btn.type = "button";
-    btn.dataset.wired = "1";
-    btn.setAttribute("aria-label", "Collapse sidebar");
-    btn.innerHTML = '<span class="material-symbols-outlined">chevron_left</span>';
-    nav.appendChild(btn);
-    function apply(collapsed) {
-      document.body.classList.toggle("lifeos-nav-collapsed", collapsed);
-      btn.querySelector(".material-symbols-outlined").textContent = collapsed ? "chevron_right" : "chevron_left";
-      btn.setAttribute("aria-label", collapsed ? "Expand sidebar" : "Collapse sidebar");
-    }
-    btn.addEventListener("click", function () {
-      const collapsed = !document.body.classList.contains("lifeos-nav-collapsed");
-      store.set("navCollapsed", collapsed);
-      apply(collapsed);
-    });
-    apply(!!store.get("navCollapsed", false));
+    const btn = document.getElementById("lifeos-account-btn");
+    btn.addEventListener("click", () => panel.classList.toggle("show"));
+    setTimeout(() => document.addEventListener("click", (e) => {
+      if (!panel.contains(e.target) && e.target !== btn && !btn.contains(e.target)) panel.classList.remove("show");
+    }), 0);
   }
 
   window.LifeOS = { store, toast, modal, form, quickEntry, notifications, palette, inr, openPartner };
   document.addEventListener("DOMContentLoaded", function () {
-    initSearch(); genericClicks(); initMobileNav(); initDeepLinks(); renderAffiliates(); initFamily(); initSidebarCollapse();
+    initSearch(); genericClicks(); initDeepLinks(); renderAffiliates(); initTopbar();
   });
 })();

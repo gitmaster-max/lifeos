@@ -122,37 +122,8 @@
 </head>
 <body class="bg-surface text-on-surface">
 <!-- Left Navigation Shell -->
-<aside id="lifeos-nav" class="fixed left-0 top-0 h-screen w-[240px] bg-white border-r border-outline-variant flex flex-col py-6 px-4 z-50" style="font-family:'Inter',sans-serif">
-<a href="index.html" class="block mb-7 px-3">
-<h1 class="text-2xl font-bold text-primary tracking-tight">LifeOS</h1>
-<p class="text-[9px] font-semibold text-on-surface-variant tracking-[0.2em] mt-1">PRECISION LIFE MANAGEMENT</p>
-</a>
-<nav class="flex-grow space-y-0.5 overflow-y-auto">
-<a class="flex items-center gap-3 px-4 py-2 text-primary font-semibold bg-surface-container-low rounded-lg" href="dashboard.html"><span class="material-symbols-outlined text-[19px]" style="font-variation-settings: 'FILL' 1;">dashboard</span><span class="text-[13.5px]">Dashboard</span></a>
-<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="health.html"><span class="material-symbols-outlined text-[19px]">monitor_heart</span><span class="text-[13.5px]">Health</span></a>
-<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="finance.html"><span class="material-symbols-outlined text-[19px]">payments</span><span class="text-[13.5px]">Finance</span></a>
-<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="budget.html"><span class="material-symbols-outlined text-[19px]">account_balance_wallet</span><span class="text-[13.5px]">Budget Planner</span></a>
-<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="vacation.html"><span class="material-symbols-outlined text-[19px]">flight_takeoff</span><span class="text-[13.5px]">Vacation Planner</span></a>
-<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="taxes.html"><span class="material-symbols-outlined text-[19px]">receipt_long</span><span class="text-[13.5px]">Taxes</span></a>
-<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="liabilities.html"><span class="material-symbols-outlined text-[19px]">request_quote</span><span class="text-[13.5px]">Liabilities</span></a>
-<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="nutrition.html"><span class="material-symbols-outlined text-[19px]">restaurant</span><span class="text-[13.5px]">Nutrition</span></a>
-<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="calendar.html"><span class="material-symbols-outlined text-[19px]">calendar_today</span><span class="text-[13.5px]">Calendar</span></a>
-<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="insurance.html"><span class="material-symbols-outlined text-[19px]">verified_user</span><span class="text-[13.5px]">Insurance</span></a>
-<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="mental.html"><span class="material-symbols-outlined text-[19px]">psychology</span><span class="text-[13.5px]">Mind</span></a>
-<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="nominees.html"><span class="material-symbols-outlined text-[19px]">family_restroom</span><span class="text-[13.5px]">Nominees</span></a>
-<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="family-map.html"><span class="material-symbols-outlined text-[19px]">account_tree</span><span class="text-[13.5px]">Family Tree</span></a>
-<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="around-me.html"><span class="material-symbols-outlined text-[19px]">explore</span><span class="text-[13.5px]">Around Me</span></a>
-<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="vault.html"><span class="material-symbols-outlined text-[19px]">folder_shared</span><span class="text-[13.5px]">Vault</span></a>
-</nav>
-<div class="pt-4 border-t border-outline-variant space-y-0.5">
-<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors" href="#">
-<span class="material-symbols-outlined text-[19px]">settings</span><span class="text-[13.5px]">Settings</span></a>
-<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors" href="#">
-<span class="material-symbols-outlined text-[19px]">help</span><span class="text-[13.5px]">Support</span></a>
-</div>
-</aside>
 <!-- Top Navigation Bar -->
-<header class="fixed top-0 left-[240px] right-0 h-16 bg-surface-container-lowest border-b border-outline-variant flex justify-between items-center px-10 z-40">
+<header class="fixed top-0 left-0 right-0 h-16 bg-surface-container-lowest border-b border-outline-variant flex justify-between items-center px-10 z-40">
 <div class="flex items-center gap-4">
 <span class="material-symbols-outlined text-on-surface-variant">search</span>
 <input class="bg-transparent border-none focus:ring-0 font-body-md text-on-surface-variant w-64 placeholder:text-on-surface-variant/50" placeholder="Command + K to search..." type="text"/>
@@ -169,7 +140,7 @@
 </div>
 </header>
 <!-- Main Content Canvas -->
-<main class="ml-[240px] mt-16 p-10 max-w-max-width-content mx-auto">
+<main class="mt-[108px] p-10 max-w-max-width-content mx-auto">
 <!-- Header -->
 <div class="mb-stack-lg">
 <h2 class="font-display-lg text-4xl font-bold text-primary mb-2">Systems Overview</h2>
@@ -178,6 +149,92 @@
 <p class="font-body-lg text-on-surface-variant">Optimal performance status: <span class="text-primary font-medium">Sustained</span>.</p>
 </div>
 </div>
+<!-- Hub: every module, one click away -->
+<section class="mb-stack-lg">
+<h2 class="text-[11px] font-semibold tracking-[0.2em] text-on-surface-variant uppercase mb-4">Everything</h2>
+<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+<a href="health.html" class="card block p-5 bg-white border border-outline-variant rounded-xl transition-all hover:border-primary hover:shadow-sm">
+<span class="material-symbols-outlined text-primary mb-3 block">monitor_heart</span>
+<h3 class="font-semibold text-primary text-[14px] mb-1">Health</h3>
+<p class="text-[12px] text-on-surface-variant">Vitals, labs, recovery</p>
+</a>
+<a href="finance.html" class="card block p-5 bg-white border border-outline-variant rounded-xl transition-all hover:border-primary hover:shadow-sm">
+<span class="material-symbols-outlined text-primary mb-3 block">payments</span>
+<h3 class="font-semibold text-primary text-[14px] mb-1">Finance</h3>
+<p class="text-[12px] text-on-surface-variant">Net worth, allocation</p>
+</a>
+<a href="budget.html" class="card block p-5 bg-white border border-outline-variant rounded-xl transition-all hover:border-primary hover:shadow-sm">
+<span class="material-symbols-outlined text-primary mb-3 block">account_balance_wallet</span>
+<h3 class="font-semibold text-primary text-[14px] mb-1">Budget Planner</h3>
+<p class="text-[12px] text-on-surface-variant">Give every rupee a job</p>
+</a>
+<a href="vacation.html" class="card block p-5 bg-white border border-outline-variant rounded-xl transition-all hover:border-primary hover:shadow-sm">
+<span class="material-symbols-outlined text-primary mb-3 block">flight_takeoff</span>
+<h3 class="font-semibold text-primary text-[14px] mb-1">Vacation Planner</h3>
+<p class="text-[12px] text-on-surface-variant">Trips, packing, budget</p>
+</a>
+<a href="taxes.html" class="card block p-5 bg-white border border-outline-variant rounded-xl transition-all hover:border-primary hover:shadow-sm">
+<span class="material-symbols-outlined text-primary mb-3 block">receipt_long</span>
+<h3 class="font-semibold text-primary text-[14px] mb-1">Taxes</h3>
+<p class="text-[12px] text-on-surface-variant">Old vs new regime</p>
+</a>
+<a href="liabilities.html" class="card block p-5 bg-white border border-outline-variant rounded-xl transition-all hover:border-primary hover:shadow-sm">
+<span class="material-symbols-outlined text-primary mb-3 block">request_quote</span>
+<h3 class="font-semibold text-primary text-[14px] mb-1">Liabilities</h3>
+<p class="text-[12px] text-on-surface-variant">Loans, EMIs, payoff</p>
+</a>
+<a href="nutrition.html" class="card block p-5 bg-white border border-outline-variant rounded-xl transition-all hover:border-primary hover:shadow-sm">
+<span class="material-symbols-outlined text-primary mb-3 block">restaurant</span>
+<h3 class="font-semibold text-primary text-[14px] mb-1">Nutrition</h3>
+<p class="text-[12px] text-on-surface-variant">Meals, macros, plate</p>
+</a>
+<a href="calendar.html" class="card block p-5 bg-white border border-outline-variant rounded-xl transition-all hover:border-primary hover:shadow-sm">
+<span class="material-symbols-outlined text-primary mb-3 block">calendar_today</span>
+<h3 class="font-semibold text-primary text-[14px] mb-1">Calendar</h3>
+<p class="text-[12px] text-on-surface-variant">Personal life calendar</p>
+</a>
+<a href="insurance.html" class="card block p-5 bg-white border border-outline-variant rounded-xl transition-all hover:border-primary hover:shadow-sm">
+<span class="material-symbols-outlined text-primary mb-3 block">verified_user</span>
+<h3 class="font-semibold text-primary text-[14px] mb-1">Insurance</h3>
+<p class="text-[12px] text-on-surface-variant">Policies, premiums</p>
+</a>
+<a href="mental.html" class="card block p-5 bg-white border border-outline-variant rounded-xl transition-all hover:border-primary hover:shadow-sm">
+<span class="material-symbols-outlined text-primary mb-3 block">psychology</span>
+<h3 class="font-semibold text-primary text-[14px] mb-1">Mind</h3>
+<p class="text-[12px] text-on-surface-variant">Focus, mood, recovery</p>
+</a>
+<a href="nominees.html" class="card block p-5 bg-white border border-outline-variant rounded-xl transition-all hover:border-primary hover:shadow-sm">
+<span class="material-symbols-outlined text-primary mb-3 block">family_restroom</span>
+<h3 class="font-semibold text-primary text-[14px] mb-1">Nominees</h3>
+<p class="text-[12px] text-on-surface-variant">Family-visible registry</p>
+</a>
+<a href="family-map.html" class="card block p-5 bg-white border border-outline-variant rounded-xl transition-all hover:border-primary hover:shadow-sm">
+<span class="material-symbols-outlined text-primary mb-3 block">account_tree</span>
+<h3 class="font-semibold text-primary text-[14px] mb-1">Family Tree</h3>
+<p class="text-[12px] text-on-surface-variant">Well-being at a glance</p>
+</a>
+<a href="around-me.html" class="card block p-5 bg-white border border-outline-variant rounded-xl transition-all hover:border-primary hover:shadow-sm">
+<span class="material-symbols-outlined text-primary mb-3 block">explore</span>
+<h3 class="font-semibold text-primary text-[14px] mb-1">Around Me</h3>
+<p class="text-[12px] text-on-surface-variant">Movies, events nearby</p>
+</a>
+<a href="vault.html" class="card block p-5 bg-white border border-outline-variant rounded-xl transition-all hover:border-primary hover:shadow-sm">
+<span class="material-symbols-outlined text-primary mb-3 block">folder_shared</span>
+<h3 class="font-semibold text-primary text-[14px] mb-1">Vault</h3>
+<p class="text-[12px] text-on-surface-variant">Records, IDs, DigiLocker</p>
+</a>
+<a href="plate.html" class="card block p-5 bg-white border border-outline-variant rounded-xl transition-all hover:border-primary hover:shadow-sm">
+<span class="material-symbols-outlined text-primary mb-3 block">pie_chart</span>
+<h3 class="font-semibold text-primary text-[14px] mb-1">Design Your Plate</h3>
+<p class="text-[12px] text-on-surface-variant">Portioned for your goal</p>
+</a>
+<a href="audit.html" class="card block p-5 bg-white border border-outline-variant rounded-xl transition-all hover:border-primary hover:shadow-sm">
+<span class="material-symbols-outlined text-primary mb-3 block">fact_check</span>
+<h3 class="font-semibold text-primary text-[14px] mb-1">Life Audit</h3>
+<p class="text-[12px] text-on-surface-variant">All your gaps, one report</p>
+</a>
+</div>
+</section>
 <div class="space-y-4 flex flex-col">
 <!-- 1. Meal Prep & Nutrition -->
 <section class="card-refinement rounded-xl overflow-hidden group">
