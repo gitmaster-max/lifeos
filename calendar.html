@@ -218,7 +218,7 @@
     var dISO = iso(cursor);
     title.textContent = DN[(cursor.getDay() + 6) % 7] + ", " + cursor.getDate() + " " + MN[cursor.getMonth()] + " " + cursor.getFullYear();
     body.innerHTML = allDayRow([dISO]) +
-      '<div id="cal-scroller" class="grid" style="grid-template-columns:64px 1fr;max-height:calc(100vh - 200px);overflow-y:auto">' +
+      '<div id="cal-scroller" class="grid mx-auto" style="grid-template-columns:64px 480px;max-height:calc(100vh - 200px);overflow-y:auto">' +
       "<div>" + gutter() + "</div><div class='border-l border-outline-variant/60'>" + hourCol(dISO) + "</div></div>";
     scrollToNow(document.getElementById("cal-scroller"));
   }

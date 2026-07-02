@@ -89,7 +89,7 @@
       <div class="fm-line-v h-8"></div>
       <div class="fm-line-h w-44"></div>
       <!-- Generation 2 -->
-      <div class="flex items-start">
+      <div class="relative flex items-start">
         <div class="flex flex-col items-center">
           <div class="fm-line-v h-8"></div>
           <div id="fm-node-vijay" class="fm-node" data-member="vijay"></div>
@@ -101,10 +101,10 @@
           <div class="fm-line-v h-8"></div>
           <div id="fm-node-ananya" class="fm-node" data-member="ananya"></div>
         </div>
-        <div class="flex flex-col items-center justify-center mt-8 px-3" style="padding-top:26px">
-          <div class="fm-add" id="fm-add" style="width:auto;padding:14px">
-            <span class="material-symbols-outlined text-[24px]">add</span>
-          </div>
+        <!-- Positioned outside the flex flow so it doesn't skew the couple's centering
+             under Papa's connector line above. -->
+        <div class="fm-add absolute" id="fm-add" style="left:100%; top:26px; margin-left:20px; width:auto; padding:14px">
+          <span class="material-symbols-outlined text-[24px]">add</span>
         </div>
       </div>
     </div>
