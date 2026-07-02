@@ -127,6 +127,7 @@
     ["dashboard", "Dashboard", "dashboard.html", "Systems overview"],
     ["monitor_heart", "Health", "health.html", "Biometrics & recovery"],
     ["payments", "Finance", "finance.html", "Net worth & allocation"],
+    ["receipt_long", "Taxes", "taxes.html", "Old vs new regime, worked out"],
     ["restaurant", "Nutrition", "nutrition.html", "Meals & macros"],
     ["calendar_today", "Calendar", "calendar.html", "Personal life calendar"],
     ["verified_user", "Insurance", "insurance.html", "Policies & premium reminders"],
@@ -214,6 +215,7 @@
     "Swiggy Instamart": "https://www.swiggy.com/instamart",
     "Blinkit": "https://blinkit.com",
     "Zepto": "https://www.zeptonow.com",
+    "Cleartax": "https://cleartax.in",
   };
   function openPartner(name) {
     const url = PARTNER_LINKS[name];
@@ -233,6 +235,9 @@
     "finance.html": [
       ["account_balance", "Dezerv", "Equity allocation drifted +3.1% past your target — get an expert-managed rebalance.", "Free portfolio review for LifeOS users"],
       ["trending_up", "INDmoney", "You hold US tech exposure — track US stocks, MFs & net worth in one place.", "Zero-commission US investing offer"],
+    ],
+    "taxes.html": [
+      ["receipt_long", "Cleartax", "Old vs new regime worked out — file your ITR before 31 July with CA-assisted review if you need it.", "20% off CA-assisted filing for LifeOS users"],
     ],
     "nutrition.html": [
       ["nutrition", "The Whole Truth", "You're 60g short of your 140g protein target most days — clean protein, no fine print.", "15% off first order for LifeOS members"],

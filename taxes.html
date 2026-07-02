@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LifeOS | Taxes</title>
+<meta name="description" content="Old regime vs new regime, worked out from your income and deductions — plus a filing deadline you won't miss."/>
+<meta name="theme-color" content="#002D40"/>
+<link href="assets/favicon.svg" rel="icon" type="image/svg+xml"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = { theme: { extend: { colors: {
+    surface: "#f9f9f9", "surface-container-lowest": "#ffffff", "surface-container-low": "#f3f3f4",
+    "surface-container-high": "#e8e8e9", primary: "#002D40", "on-primary": "#ffffff",
+    secondary: "#3dcc60", "on-secondary": "#002D40", "outline-variant": "#e2e2e3",
+    "on-surface": "#1a1c1e", "on-surface-variant": "#44474e", error: "#ba1a1a"
+  } } } }
+</script>
+<style>
+  body { font-family: 'Inter', sans-serif; background:#f9f9f9; color:#1a1c1e; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .tcard { background:#fff; border:1px solid #e2e2e3; border-radius:16px; }
+</style>
+<link href="assets/app.css" rel="stylesheet"/>
+</head>
+<body class="bg-surface text-on-surface">
+<aside id="lifeos-nav" class="fixed left-0 top-0 h-screen w-[240px] bg-white border-r border-outline-variant flex flex-col py-6 px-4 z-50" style="font-family:'Inter',sans-serif">
+<a href="index.html" class="block mb-7 px-3">
+<h1 class="text-2xl font-bold text-primary tracking-tight">LifeOS</h1>
+<p class="text-[9px] font-semibold text-on-surface-variant tracking-[0.2em] mt-1">PRECISION LIFE MANAGEMENT</p>
+</a>
+<nav class="flex-grow space-y-0.5 overflow-y-auto">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="dashboard.html"><span class="material-symbols-outlined text-[19px]">dashboard</span><span class="text-[13.5px]">Dashboard</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="health.html"><span class="material-symbols-outlined text-[19px]">monitor_heart</span><span class="text-[13.5px]">Health</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="finance.html"><span class="material-symbols-outlined text-[19px]">payments</span><span class="text-[13.5px]">Finance</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-primary font-semibold bg-surface-container-low rounded-lg" href="taxes.html"><span class="material-symbols-outlined text-[19px]" style="font-variation-settings: 'FILL' 1;">receipt_long</span><span class="text-[13.5px]">Taxes</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="liabilities.html"><span class="material-symbols-outlined text-[19px]">request_quote</span><span class="text-[13.5px]">Liabilities</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="nutrition.html"><span class="material-symbols-outlined text-[19px]">restaurant</span><span class="text-[13.5px]">Nutrition</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="calendar.html"><span class="material-symbols-outlined text-[19px]">calendar_today</span><span class="text-[13.5px]">Calendar</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="insurance.html"><span class="material-symbols-outlined text-[19px]">verified_user</span><span class="text-[13.5px]">Insurance</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="mental.html"><span class="material-symbols-outlined text-[19px]">psychology</span><span class="text-[13.5px]">Mind</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="nominees.html"><span class="material-symbols-outlined text-[19px]">family_restroom</span><span class="text-[13.5px]">Nominees</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="vault.html"><span class="material-symbols-outlined text-[19px]">folder_shared</span><span class="text-[13.5px]">Vault</span></a>
+</nav>
+<div class="pt-4 border-t border-outline-variant space-y-0.5">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[19px]">settings</span><span class="text-[13.5px]">Settings</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[19px]">help</span><span class="text-[13.5px]">Support</span></a>
+</div>
+</aside>
+
+<div class="ml-[240px] min-h-screen">
+  <header class="sticky top-0 z-40 h-16 px-10 bg-white border-b border-outline-variant flex justify-between items-center">
+    <h1 class="text-[19px] font-bold text-primary tracking-tight">Taxes</h1>
+    <button data-wired="1" id="edit-tax" class="flex items-center gap-2 px-5 py-2 bg-secondary text-on-secondary text-[11px] font-bold tracking-wider rounded-lg hover:brightness-95 transition-all">
+      <span class="material-symbols-outlined text-[16px]">edit</span> EDIT INCOME &amp; DEDUCTIONS
+    </button>
+  </header>
+
+  <main class="px-10 py-10 max-w-[1280px]">
+    <div class="mb-8">
+      <h2 class="text-4xl font-bold text-primary tracking-tight mb-2">Old regime or new? Know before you file.</h2>
+      <p class="text-[15px] text-on-surface-variant max-w-2xl">Enter your income once — LifeOS estimates tax under both regimes side by side and tells you which one wins.</p>
+    </div>
+
+    <div id="empty" class="tcard p-14 text-center mb-10">
+      <span class="material-symbols-outlined text-primary text-[40px] mb-3 block">receipt_long</span>
+      <h3 class="font-bold text-primary text-[18px] mb-2">Add your income to get started</h3>
+      <p class="text-[13px] text-on-surface-variant mb-6 max-w-md mx-auto">Everything stays on your device — LifeOS only computes an estimate, it never files anything on its own.</p>
+      <button data-wired="1" onclick="document.getElementById('edit-tax').click()" class="px-7 py-3 bg-primary text-on-primary text-[11px] font-bold tracking-widest rounded-lg hover:brightness-110 transition-all">ADD INCOME</button>
+    </div>
+
+    <div id="results" style="display:none">
+      <!-- Regime comparison -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+        <div class="tcard p-6" id="card-new">
+          <div class="flex items-center justify-between mb-3">
+            <p class="text-[11px] font-bold tracking-[.14em] text-on-surface-variant uppercase">New Regime</p>
+            <span id="badge-new" class="hidden text-[10px] font-bold tracking-[.1em] uppercase px-2.5 py-1 rounded-full" style="background:rgba(61,204,96,.18);color:#1d9c40">Recommended</span>
+          </div>
+          <p class="mono text-[32px] font-bold text-primary" id="tax-new">₹0</p>
+          <p class="text-[12px] text-on-surface-variant mt-1">Standard deduction only — most exemptions don't apply here.</p>
+        </div>
+        <div class="tcard p-6" id="card-old">
+          <div class="flex items-center justify-between mb-3">
+            <p class="text-[11px] font-bold tracking-[.14em] text-on-surface-variant uppercase">Old Regime</p>
+            <span id="badge-old" class="hidden text-[10px] font-bold tracking-[.1em] uppercase px-2.5 py-1 rounded-full" style="background:rgba(61,204,96,.18);color:#1d9c40">Recommended</span>
+          </div>
+          <p class="mono text-[32px] font-bold text-primary" id="tax-old">₹0</p>
+          <p class="text-[12px] text-on-surface-variant mt-1">Your 80C, 80D, NPS and home loan deductions apply here.</p>
+        </div>
+      </div>
+
+      <div class="rounded-xl p-5 mb-8 flex items-center justify-between flex-wrap gap-3" style="background:rgba(61,204,96,.07);border:1px solid rgba(61,204,96,.3)">
+        <p class="text-[14px] text-primary"><span class="font-bold" id="save-amt">—</span> <span id="save-text">saved by picking the better regime.</span></p>
+        <p class="text-[12px] text-on-surface-variant">Estimate includes 4% health &amp; education cess. Not tax advice — confirm with a CA before filing.</p>
+      </div>
+
+      <!-- Deductions breakdown -->
+      <div class="tcard p-6 mb-8">
+        <h3 class="font-bold text-primary text-[17px] mb-4">Deductions in use (Old Regime only)</h3>
+        <div id="deduction-rows" class="space-y-4"></div>
+      </div>
+    </div>
+
+    <!-- ITR filing deadline -->
+    <div class="tcard p-6 flex items-center justify-between flex-wrap gap-4">
+      <div class="flex items-center gap-4">
+        <span class="material-symbols-outlined text-primary bg-surface-container-low p-3 rounded-lg text-[24px]">event_upcoming</span>
+        <div>
+          <h3 class="font-bold text-primary text-[16px]">ITR filing deadline</h3>
+          <p class="text-[13px] text-on-surface-variant" id="itr-sub">31 July — for individuals without an audit requirement.</p>
+        </div>
+      </div>
+      <button data-wired="1" id="file-cleartax" class="px-5 py-2.5 bg-primary text-on-primary text-[11px] font-bold tracking-wider rounded-lg hover:brightness-110 transition-all">FILE WITH CLEARTAX</button>
+    </div>
+  </main>
+</div>
+
+<script src="assets/app.js"></script>
+<script src="assets/auth.js"></script>
+<script>
+(function () {
+  "use strict";
+  function inr(n) { return "₹" + Math.round(n).toLocaleString("en-IN"); }
+
+  // New regime (FY 2025-26): 0-4L nil, 4-8L 5%, 8-12L 10%, 12-16L 15%, 16-20L 20%, 20-24L 25%, >24L 30%
+  // Sec 87A rebate takes taxable income up to ₹12L to zero tax. Standard deduction ₹75,000.
+  function newRegimeTax(gross) {
+    var taxable = Math.max(0, gross - 75000);
+    if (taxable <= 1200000) return 0;
+    var bounds = [400000, 800000, 1200000, 1600000, 2000000, 2400000];
+    var rates = [0, 0.05, 0.10, 0.15, 0.20, 0.25, 0.30];
+    var tax = 0, prev = 0;
+    for (var i = 0; i < bounds.length; i++) {
+      if (taxable > bounds[i]) { tax += (bounds[i] - prev) * rates[i]; prev = bounds[i]; }
+      else { tax += (taxable - prev) * rates[i]; return Math.round(tax * 1.04); }
+    }
+    tax += (taxable - prev) * rates[6];
+    return Math.round(tax * 1.04);
+  }
+
+  // Old regime: 0-2.5L nil, 2.5-5L 5%, 5-10L 20%, >10L 30%. Sec 87A rebate up to ₹5L taxable.
+  // Standard deduction ₹50,000, plus 80C/80D/NPS/home-loan-interest deductions.
+  function oldRegimeTax(gross, deductions) {
+    var taxable = Math.max(0, gross - 50000 - deductions);
+    if (taxable <= 500000) return 0;
+    var bounds = [250000, 500000, 1000000];
+    var rates = [0, 0.05, 0.20, 0.30];
+    var tax = 0, prev = 0;
+    for (var i = 0; i < bounds.length; i++) {
+      if (taxable > bounds[i]) { tax += (bounds[i] - prev) * rates[i]; prev = bounds[i]; }
+      else { tax += (taxable - prev) * rates[i]; return Math.round(tax * 1.04); }
+    }
+    tax += (taxable - prev) * rates[3];
+    return Math.round(tax * 1.04);
+  }
+
+  var CAPS = {
+    c80c: { label: "Section 80C — ELSS, PPF, life insurance, home loan principal", cap: 150000 },
+    c80d: { label: "Section 80D — health insurance premiums", cap: 25000 },
+    nps: { label: "Section 80CCD(1B) — additional NPS contribution", cap: 50000 },
+    homeint: { label: "Section 24(b) — home loan interest (self-occupied)", cap: 200000 },
+  };
+
+  function profile() { return LifeOS.store.get("taxProfile", null); }
+  function saveProfile(p) { LifeOS.store.set("taxProfile", p); }
+
+  function render() {
+    var p = profile();
+    document.getElementById("empty").style.display = p ? "none" : "block";
+    document.getElementById("results").style.display = p ? "block" : "none";
+    if (!p) return;
+
+    var ded = Math.min(p.c80c || 0, CAPS.c80c.cap) + Math.min(p.c80d || 0, CAPS.c80d.cap) +
+      Math.min(p.nps || 0, CAPS.nps.cap) + Math.min(p.homeint || 0, CAPS.homeint.cap);
+    var taxNew = newRegimeTax(p.income);
+    var taxOld = oldRegimeTax(p.income, ded);
+
+    document.getElementById("tax-new").textContent = inr(taxNew);
+    document.getElementById("tax-old").textContent = inr(taxOld);
+    var newWins = taxNew <= taxOld;
+    document.getElementById("badge-new").classList.toggle("hidden", !newWins);
+    document.getElementById("badge-old").classList.toggle("hidden", newWins);
+    var diff = Math.abs(taxNew - taxOld);
+    document.getElementById("save-amt").textContent = inr(diff);
+    document.getElementById("save-text").textContent = diff
+      ? "saved by picking the " + (newWins ? "New" : "Old") + " Regime over the other."
+      : "— both regimes land at the same estimated tax.";
+
+    var rows = document.getElementById("deduction-rows");
+    rows.innerHTML = Object.keys(CAPS).map(function (k) {
+      var val = Math.min(p[k] || 0, CAPS[k].cap), pct = Math.round(val / CAPS[k].cap * 100);
+      return '<div>' +
+        '<div class="flex justify-between items-baseline mb-1">' +
+        '<span class="text-[13px] font-semibold text-primary">' + CAPS[k].label + '</span>' +
+        '<span class="mono text-[12px] text-on-surface-variant">' + inr(p[k] || 0) + ' / ' + inr(CAPS[k].cap) + '</span></div>' +
+        '<div class="h-1.5 bg-surface-container-high rounded-full overflow-hidden"><div class="h-full bg-secondary" style="width:' + pct + '%"></div></div></div>';
+    }).join("");
+  }
+
+  function daysToDeadline() {
+    var now = new Date(), y = now.getFullYear();
+    var deadline = new Date(y, 6, 31); // 31 July, month is 0-indexed
+    if (now > deadline) deadline = new Date(y + 1, 6, 31);
+    return Math.ceil((deadline - now) / 86400000);
+  }
+  var d = daysToDeadline();
+  document.getElementById("itr-sub").textContent = "31 July — " + d + " day" + (d === 1 ? "" : "s") + " left for individuals without an audit requirement.";
+
+  document.getElementById("edit-tax").addEventListener("click", function () {
+    var p = profile() || {};
+    LifeOS.form("Income & Deductions (Annual)", [
+      ["Gross annual income (₹)", "number", "e.g. 1800000", p.income || ""],
+      ["Section 80C — ELSS, PPF, insurance, etc. (₹)", "number", "up to ₹1,50,000", p.c80c || ""],
+      ["Section 80D — health insurance (₹)", "number", "up to ₹25,000", p.c80d || ""],
+      ["Section 80CCD(1B) — extra NPS (₹)", "number", "up to ₹50,000", p.nps || ""],
+      ["Section 24(b) — home loan interest (₹)", "number", "up to ₹2,00,000", p.homeint || ""],
+    ], function (v) {
+      var income = parseFloat(v.gross_annual_income);
+      if (!(income > 0)) { LifeOS.toast("Enter a valid gross annual income"); return; }
+      saveProfile({
+        income: income,
+        c80c: parseFloat(v.section_80c_elss_ppf_insurance_etc) || 0,
+        c80d: parseFloat(v.section_80d_health_insurance) || 0,
+        nps: parseFloat(v.section_80ccd_1b_extra_nps) || 0,
+        homeint: parseFloat(v.section_24_b_home_loan_interest) || 0,
+      });
+      render();
+      LifeOS.toast("Tax estimate updated");
+    }, "Save");
+  });
+
+  document.getElementById("file-cleartax").addEventListener("click", function () { LifeOS.openPartner("Cleartax"); });
+
+  document.addEventListener("DOMContentLoaded", render);
+  render();
+})();
+</script>
+</body>
+</html>
