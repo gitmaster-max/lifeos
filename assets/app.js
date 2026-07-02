@@ -133,6 +133,8 @@
     ["verified_user", "Insurance", "insurance.html", "Policies & premium reminders"],
     ["psychology", "Mind", "mental.html", "Focus & mental performance"],
     ["family_restroom", "Nominees", "nominees.html", "Family-visible nominee registry"],
+    ["account_tree", "Family Tree", "family-map.html", "Click anyone for a quick well-being insight"],
+    ["explore", "Around Me", "around-me.html", "Movies & events nearby"],
     ["add_circle", "Log a quick entry", "@entry", "Meal, workout, expense, note"],
     ["self_improvement", "Start breathing session", "mental.html#breathe", "60s box breathing"],
     ["pie_chart", "Design Your Plate", "plate.html", "Breakfast to dinner, portioned for you"],

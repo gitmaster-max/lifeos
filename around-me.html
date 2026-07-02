@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LifeOS | Around Me</title>
+<meta name="description" content="What's happening near you — movies, events and the map to get there."/>
+<meta name="theme-color" content="#002D40"/>
+<link href="assets/favicon.svg" rel="icon" type="image/svg+xml"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = { theme: { extend: { colors: {
+    surface: "#f9f9f9", "surface-container-lowest": "#ffffff", "surface-container-low": "#f3f3f4",
+    "surface-container-high": "#e8e8e9", primary: "#002D40", "on-primary": "#ffffff",
+    secondary: "#3dcc60", "on-secondary": "#002D40", "outline-variant": "#e2e2e3",
+    "on-surface": "#1a1c1e", "on-surface-variant": "#44474e", error: "#ba1a1a"
+  } } } }
+</script>
+<style>
+  body { font-family: 'Inter', sans-serif; background:#f9f9f9; color:#1a1c1e; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .amcard { background:#fff; border:1px solid #e2e2e3; border-radius:16px; }
+</style>
+<link href="assets/app.css" rel="stylesheet"/>
+</head>
+<body class="bg-surface text-on-surface">
+<aside id="lifeos-nav" class="fixed left-0 top-0 h-screen w-[240px] bg-white border-r border-outline-variant flex flex-col py-6 px-4 z-50" style="font-family:'Inter',sans-serif">
+<a href="index.html" class="block mb-7 px-3">
+<h1 class="text-2xl font-bold text-primary tracking-tight">LifeOS</h1>
+<p class="text-[9px] font-semibold text-on-surface-variant tracking-[0.2em] mt-1">PRECISION LIFE MANAGEMENT</p>
+</a>
+<nav class="flex-grow space-y-0.5 overflow-y-auto">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="dashboard.html"><span class="material-symbols-outlined text-[19px]">dashboard</span><span class="text-[13.5px]">Dashboard</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="health.html"><span class="material-symbols-outlined text-[19px]">monitor_heart</span><span class="text-[13.5px]">Health</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="finance.html"><span class="material-symbols-outlined text-[19px]">payments</span><span class="text-[13.5px]">Finance</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="taxes.html"><span class="material-symbols-outlined text-[19px]">receipt_long</span><span class="text-[13.5px]">Taxes</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="liabilities.html"><span class="material-symbols-outlined text-[19px]">request_quote</span><span class="text-[13.5px]">Liabilities</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="nutrition.html"><span class="material-symbols-outlined text-[19px]">restaurant</span><span class="text-[13.5px]">Nutrition</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="calendar.html"><span class="material-symbols-outlined text-[19px]">calendar_today</span><span class="text-[13.5px]">Calendar</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="insurance.html"><span class="material-symbols-outlined text-[19px]">verified_user</span><span class="text-[13.5px]">Insurance</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="mental.html"><span class="material-symbols-outlined text-[19px]">psychology</span><span class="text-[13.5px]">Mind</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="nominees.html"><span class="material-symbols-outlined text-[19px]">family_restroom</span><span class="text-[13.5px]">Nominees</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="family-map.html"><span class="material-symbols-outlined text-[19px]">account_tree</span><span class="text-[13.5px]">Family Tree</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-primary font-semibold bg-surface-container-low rounded-lg" href="around-me.html"><span class="material-symbols-outlined text-[19px]" style="font-variation-settings: 'FILL' 1;">explore</span><span class="text-[13.5px]">Around Me</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="vault.html"><span class="material-symbols-outlined text-[19px]">folder_shared</span><span class="text-[13.5px]">Vault</span></a>
+</nav>
+<div class="pt-4 border-t border-outline-variant space-y-0.5">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[19px]">settings</span><span class="text-[13.5px]">Settings</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[19px]">help</span><span class="text-[13.5px]">Support</span></a>
+</div>
+</aside>
+
+<div class="ml-[240px] min-h-screen">
+  <header class="sticky top-0 z-40 h-16 px-10 bg-white border-b border-outline-variant flex justify-between items-center gap-4">
+    <h1 class="text-[19px] font-bold text-primary tracking-tight">Around Me</h1>
+    <div class="flex items-center gap-2">
+      <span class="material-symbols-outlined text-[18px] text-on-surface-variant">location_on</span>
+      <input id="am-location" type="text" value="Whitefield, Bengaluru" class="bg-surface-container-low border-none rounded-lg px-3 py-1.5 text-[13px] font-semibold text-primary focus:ring-1 focus:ring-primary w-56"/>
+      <button data-wired="1" id="am-go" class="px-4 py-1.5 bg-primary text-white text-[11px] font-bold tracking-wider rounded-lg hover:brightness-110 transition-all">GO</button>
+    </div>
+  </header>
+
+  <main class="px-10 py-10 max-w-[1280px]">
+    <div class="mb-8">
+      <h2 class="text-4xl font-bold text-primary tracking-tight mb-2">What's happening near you.</h2>
+      <p class="text-[15px] text-on-surface-variant max-w-2xl">Movies, events and the map to get there — defaults to Whitefield, Bengaluru until LifeOS knows where you are.</p>
+    </div>
+
+    <div class="amcard overflow-hidden mb-8">
+      <iframe id="am-map" src="" class="w-full h-72 border-0" loading="lazy" title="Map of the area"></iframe>
+    </div>
+
+    <div class="rounded-xl p-4 mb-8 flex items-center gap-3" style="background:rgba(61,204,96,.08);border:1px solid rgba(61,204,96,.3)">
+      <span class="material-symbols-outlined text-[20px]" style="color:#1d9c40">info</span>
+      <p class="text-[12.5px] text-primary">Movies and events below are illustrative sample listings anchored to real venues — not a live feed yet. Wiring this up for real needs a licensed listings API (e.g. TMDB + a ticketing partner).</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <section>
+        <h3 class="text-xl font-bold text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined">movie</span> Movies Nearby</h3>
+        <div id="am-movies" class="space-y-3"></div>
+      </section>
+      <section>
+        <h3 class="text-xl font-bold text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined">celebration</span> Events Nearby</h3>
+        <div id="am-events" class="space-y-3"></div>
+      </section>
+    </div>
+  </main>
+</div>
+
+<script src="assets/app.js"></script>
+<script src="assets/auth.js"></script>
+<script>
+(function () {
+  "use strict";
+  var MOVIES = [
+    { title: "Kantara: Chapter 1", venue: "PVR, VR Bengaluru — Whitefield Road", time: "7:15 PM · 2D", rating: "U/A" },
+    { title: "Pushpa 3: The Rampage", venue: "Cinepolis, Nexus Shantiniketan", time: "9:40 PM · IMAX", rating: "U/A" },
+    { title: "Mission: Impossible — Legacy", venue: "PVR, VR Bengaluru — Whitefield Road", time: "6:00 PM · Gold Class", rating: "U/A" },
+  ];
+  var EVENTS = [
+    { title: "Whitefield Farmers' Market", venue: "Nexus Shantiniketan, open grounds", time: "Sat · 8:00 AM – 12:00 PM", tag: "Weekly" },
+    { title: "Startup Founders Meetup", venue: "ITPL Tech Park co-working space", time: "Thu · 6:30 PM", tag: "Networking" },
+    { title: "Open Mic Comedy Night", venue: "Microbrewery, Nexus Shantiniketan", time: "Fri · 8:30 PM", tag: "Live" },
+  ];
+
+  function mapUrl(place) { return "https://www.google.com/maps?q=" + encodeURIComponent(place) + "&output=embed"; }
+
+  function renderMovies() {
+    document.getElementById("am-movies").innerHTML = MOVIES.map(function (m) {
+      return '<div class="amcard p-4 flex items-center justify-between gap-3">' +
+        '<div><p class="font-bold text-primary text-[14px]">' + m.title + '</p>' +
+        '<p class="text-[12px] text-on-surface-variant mt-0.5">' + m.venue + '</p>' +
+        '<p class="text-[11px] text-on-surface-variant mono mt-1">' + m.time + '</p></div>' +
+        '<span class="text-[10px] font-bold text-on-surface-variant border border-outline-variant rounded px-2 py-1">' + m.rating + '</span>' +
+        '</div>';
+    }).join("");
+  }
+  function renderEvents() {
+    document.getElementById("am-events").innerHTML = EVENTS.map(function (e) {
+      return '<div class="amcard p-4 flex items-center justify-between gap-3">' +
+        '<div><p class="font-bold text-primary text-[14px]">' + e.title + '</p>' +
+        '<p class="text-[12px] text-on-surface-variant mt-0.5">' + e.venue + '</p>' +
+        '<p class="text-[11px] text-on-surface-variant mono mt-1">' + e.time + '</p></div>' +
+        '<span class="text-[10px] font-bold text-white bg-secondary rounded px-2 py-1" style="color:#002D40">' + e.tag + '</span>' +
+        '</div>';
+    }).join("");
+  }
+
+  function setLocation(loc) {
+    document.getElementById("am-map").src = mapUrl(loc);
+    LifeOS.store.set("aroundMeLocation", loc);
+  }
+
+  document.getElementById("am-go").addEventListener("click", function () {
+    var v = document.getElementById("am-location").value.trim();
+    if (v) { setLocation(v); LifeOS.toast("Showing what's around " + v); }
+  });
+  document.getElementById("am-location").addEventListener("keydown", function (e) {
+    if (e.key === "Enter") document.getElementById("am-go").click();
+  });
+
+  var saved = LifeOS.store.get("aroundMeLocation", "Whitefield, Bengaluru");
+  document.getElementById("am-location").value = saved;
+  setLocation(saved);
+  renderMovies();
+  renderEvents();
+})();
+</script>
+</body>
+</html>

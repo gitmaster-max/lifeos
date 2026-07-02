@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LifeOS | Family Tree</title>
+<meta name="description" content="Your family tree — click anyone for a quick read on their financial, physical and mental well-being."/>
+<meta name="theme-color" content="#002D40"/>
+<link href="assets/favicon.svg" rel="icon" type="image/svg+xml"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = { theme: { extend: { colors: {
+    surface: "#f9f9f9", "surface-container-lowest": "#ffffff", "surface-container-low": "#f3f3f4",
+    "surface-container-high": "#e8e8e9", primary: "#002D40", "on-primary": "#ffffff",
+    secondary: "#3dcc60", "on-secondary": "#002D40", "outline-variant": "#e2e2e3",
+    "on-surface": "#1a1c1e", "on-surface-variant": "#44474e", error: "#ba1a1a"
+  } } } }
+</script>
+<style>
+  body { font-family: 'Inter', sans-serif; background:#f9f9f9; color:#1a1c1e; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .fm-score { display:flex; flex-direction:column; align-items:center; padding:14px 8px; border-radius:12px; background:#f3f3f4; }
+  .fm-node {
+    background:#fff; border:1px solid #e2e2e3; border-radius:16px; padding:18px 22px;
+    display:flex; flex-direction:column; align-items:center; gap:8px; cursor:pointer; width:150px;
+    transition: box-shadow .2s ease, border-color .2s ease, transform .15s ease;
+  }
+  .fm-node:hover { border-color:#002D40; box-shadow:0 6px 20px rgba(0,45,64,.1); transform:translateY(-2px); }
+  .fm-avatar { width:52px; height:52px; border-radius:99px; background:#002D40; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:16px; }
+  .fm-line-v { width:2px; background:#d1d5db; }
+  .fm-line-h { height:2px; background:#d1d5db; }
+  .fm-add {
+    border:1.5px dashed #d1d5db; border-radius:16px; width:150px; padding:18px 22px;
+    display:flex; flex-direction:column; align-items:center; gap:8px; cursor:pointer; color:#9aa0a6;
+    transition: border-color .2s ease, color .2s ease;
+  }
+  .fm-add:hover { border-color:#002D40; color:#002D40; }
+</style>
+<link href="assets/app.css" rel="stylesheet"/>
+</head>
+<body class="bg-surface text-on-surface">
+<aside id="lifeos-nav" class="fixed left-0 top-0 h-screen w-[240px] bg-white border-r border-outline-variant flex flex-col py-6 px-4 z-50" style="font-family:'Inter',sans-serif">
+<a href="index.html" class="block mb-7 px-3">
+<h1 class="text-2xl font-bold text-primary tracking-tight">LifeOS</h1>
+<p class="text-[9px] font-semibold text-on-surface-variant tracking-[0.2em] mt-1">PRECISION LIFE MANAGEMENT</p>
+</a>
+<nav class="flex-grow space-y-0.5 overflow-y-auto">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="dashboard.html"><span class="material-symbols-outlined text-[19px]">dashboard</span><span class="text-[13.5px]">Dashboard</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="health.html"><span class="material-symbols-outlined text-[19px]">monitor_heart</span><span class="text-[13.5px]">Health</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="finance.html"><span class="material-symbols-outlined text-[19px]">payments</span><span class="text-[13.5px]">Finance</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="taxes.html"><span class="material-symbols-outlined text-[19px]">receipt_long</span><span class="text-[13.5px]">Taxes</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="liabilities.html"><span class="material-symbols-outlined text-[19px]">request_quote</span><span class="text-[13.5px]">Liabilities</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="nutrition.html"><span class="material-symbols-outlined text-[19px]">restaurant</span><span class="text-[13.5px]">Nutrition</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="calendar.html"><span class="material-symbols-outlined text-[19px]">calendar_today</span><span class="text-[13.5px]">Calendar</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="insurance.html"><span class="material-symbols-outlined text-[19px]">verified_user</span><span class="text-[13.5px]">Insurance</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="mental.html"><span class="material-symbols-outlined text-[19px]">psychology</span><span class="text-[13.5px]">Mind</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="nominees.html"><span class="material-symbols-outlined text-[19px]">family_restroom</span><span class="text-[13.5px]">Nominees</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-primary font-semibold bg-surface-container-low rounded-lg" href="family-map.html"><span class="material-symbols-outlined text-[19px]" style="font-variation-settings: 'FILL' 1;">account_tree</span><span class="text-[13.5px]">Family Tree</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="around-me.html"><span class="material-symbols-outlined text-[19px]">explore</span><span class="text-[13.5px]">Around Me</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="vault.html"><span class="material-symbols-outlined text-[19px]">folder_shared</span><span class="text-[13.5px]">Vault</span></a>
+</nav>
+<div class="pt-4 border-t border-outline-variant space-y-0.5">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[19px]">settings</span><span class="text-[13.5px]">Settings</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[19px]">help</span><span class="text-[13.5px]">Support</span></a>
+</div>
+</aside>
+
+<div class="ml-[240px] min-h-screen">
+  <header class="sticky top-0 z-40 h-16 px-10 bg-white border-b border-outline-variant flex justify-between items-center">
+    <h1 class="text-[19px] font-bold text-primary tracking-tight">Family Tree</h1>
+    <span class="text-[11px] text-on-surface-variant mono">3 members · last updated just now</span>
+  </header>
+
+  <main class="px-10 py-10 max-w-[1400px]">
+    <div class="mb-10">
+      <h2 class="text-4xl font-bold text-primary tracking-tight mb-2">Your family, at a glance.</h2>
+      <p class="text-[15px] text-on-surface-variant max-w-2xl">Click anyone in the tree for a quick read on their financial, physical and mental well-being.</p>
+    </div>
+
+    <div class="flex flex-col items-center">
+      <!-- Generation 1 -->
+      <div id="fm-node-papa" class="fm-node" data-member="papa"></div>
+      <div class="fm-line-v h-8"></div>
+      <div class="fm-line-h w-44"></div>
+      <!-- Generation 2 -->
+      <div class="flex items-start">
+        <div class="flex flex-col items-center">
+          <div class="fm-line-v h-8"></div>
+          <div id="fm-node-vijay" class="fm-node" data-member="vijay"></div>
+        </div>
+        <div class="flex flex-col items-center justify-center mt-8 px-3" style="padding-top:26px">
+          <span class="material-symbols-outlined text-[18px]" style="color:#e8945a">favorite</span>
+        </div>
+        <div class="flex flex-col items-center">
+          <div class="fm-line-v h-8"></div>
+          <div id="fm-node-ananya" class="fm-node" data-member="ananya"></div>
+        </div>
+        <div class="flex flex-col items-center justify-center mt-8 px-3" style="padding-top:26px">
+          <div class="fm-add" id="fm-add" style="width:auto;padding:14px">
+            <span class="material-symbols-outlined text-[24px]">add</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="assets/app.js"></script>
+<script src="assets/auth.js"></script>
+<script>
+(function () {
+  "use strict";
+  var MEMBERS = {
+    vijay: {
+      id: "vijay", name: "Vijay", initials: "VJ", relation: "You",
+      financial: { score: 82, label: "On track", note: "Net worth ₹10.4 Cr, allocation drifted +3.1% from target" },
+      physical: { score: 78, label: "Strong", note: "HRV 78ms, recovery trending up 3 nights running" },
+      mental: { score: 70, label: "Elevated load", note: "High cognitive load detected — a recovery session is queued" },
+    },
+    ananya: {
+      id: "ananya", name: "Ananya", initials: "AS", relation: "Spouse",
+      financial: { score: 74, label: "Building", note: "Emergency fund at 60% of the 6-month target" },
+      physical: { score: 88, label: "Excellent", note: "10,000+ step streak, 14 days running" },
+      mental: { score: 91, label: "Steady", note: "Consistently well-rested, no flagged dips this month" },
+    },
+    papa: {
+      id: "papa", name: "Papa", initials: "RK", relation: "Father",
+      financial: { score: 95, label: "Secure", note: "Debt-free, pension and FDs fully mapped to nominees" },
+      physical: { score: 58, label: "Needs attention", note: "BP borderline on last two readings — annual checkup overdue" },
+      mental: { score: 80, label: "Good", note: "Active social calendar, stable mood check-ins" },
+    },
+  };
+
+  function scoreColor(s) { return s >= 80 ? "#1d9c40" : s >= 60 ? "#e8945a" : "#ba1a1a"; }
+
+  function nodeHTML(m) {
+    return '<div class="fm-avatar">' + m.initials + '</div>' +
+      '<p class="font-bold text-primary text-[14px] leading-tight text-center">' + m.name + '</p>' +
+      '<p class="text-[10.5px] text-on-surface-variant uppercase tracking-wide">' + m.relation + '</p>';
+  }
+
+  function renderTree() {
+    Object.keys(MEMBERS).forEach(function (id) {
+      var el = document.getElementById("fm-node-" + id);
+      el.innerHTML = nodeHTML(MEMBERS[id]);
+      el.addEventListener("click", function () { openInsights(MEMBERS[id]); });
+    });
+    document.getElementById("fm-add").addEventListener("click", function () {
+      LifeOS.toast("Family invites arrive with your LifeOS account");
+    });
+  }
+
+  function insightRow(label, icon, d) {
+    return '<div class="flex items-start gap-4 py-3 border-b border-outline-variant last:border-b-0">' +
+      '<div class="fm-score" style="min-width:64px">' +
+      '<span class="material-symbols-outlined text-[18px]" style="color:' + scoreColor(d.score) + '">' + icon + '</span>' +
+      '<span class="mono font-bold text-[18px]" style="color:' + scoreColor(d.score) + '">' + d.score + '</span>' +
+      '</div>' +
+      '<div><p class="text-[13px] font-bold text-primary uppercase tracking-wide">' + label + ' — ' + d.label + '</p>' +
+      '<p class="text-[13px] text-on-surface-variant mt-0.5">' + d.note + '</p></div></div>';
+  }
+
+  function openInsights(m) {
+    LifeOS.modal(m.name + " — Quick Insight",
+      '<div style="margin:-4px 0 12px;font-size:12px;color:#44474e">' + m.relation + '</div>' +
+      insightRow("Financial", "payments", m.financial) +
+      insightRow("Physical", "monitor_heart", m.physical) +
+      insightRow("Mental", "psychology", m.mental));
+  }
+
+  document.addEventListener("DOMContentLoaded", renderTree);
+  renderTree();
+})();
+</script>
+</body>
+</html>

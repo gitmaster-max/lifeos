@@ -50,6 +50,8 @@
 <a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="insurance.html"><span class="material-symbols-outlined text-[19px]">verified_user</span><span class="text-[13.5px]">Insurance</span></a>
 <a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="mental.html"><span class="material-symbols-outlined text-[19px]">psychology</span><span class="text-[13.5px]">Mind</span></a>
 <a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="nominees.html"><span class="material-symbols-outlined text-[19px]">family_restroom</span><span class="text-[13.5px]">Nominees</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="family-map.html"><span class="material-symbols-outlined text-[19px]">account_tree</span><span class="text-[13.5px]">Family Tree</span></a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="around-me.html"><span class="material-symbols-outlined text-[19px]">explore</span><span class="text-[13.5px]">Around Me</span></a>
 <a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="vault.html"><span class="material-symbols-outlined text-[19px]">folder_shared</span><span class="text-[13.5px]">Vault</span></a>
 </nav>
 <div class="pt-4 border-t border-outline-variant space-y-0.5">
@@ -205,12 +207,18 @@
     return chips ? '<div class="px-3 py-2 border-b border-outline-variant/60 bg-surface-container-low/40">' + chips + "</div>" : "";
   }
 
+  function scrollToNow(scroller) {
+    var now = new Date(), nm = now.getHours() * 60 + now.getMinutes();
+    var target = Math.max(0, (nm - HOUR0 * 60) / 60 * HPX - scroller.clientHeight / 2);
+    scroller.scrollTop = target;
+  }
   function renderDay() {
     var dISO = iso(cursor);
     title.textContent = DN[(cursor.getDay() + 6) % 7] + ", " + cursor.getDate() + " " + MN[cursor.getMonth()] + " " + cursor.getFullYear();
     body.innerHTML = allDayRow([dISO]) +
-      '<div class="grid" style="grid-template-columns:64px 1fr;max-height:66vh;overflow-y:auto">' +
+      '<div id="cal-scroller" class="grid" style="grid-template-columns:64px 1fr;max-height:calc(100vh - 200px);overflow-y:auto">' +
       "<div>" + gutter() + "</div><div class='border-l border-outline-variant/60'>" + hourCol(dISO) + "</div></div>";
+    scrollToNow(document.getElementById("cal-scroller"));
   }
   function renderWeek() {
     var ws = weekStart(cursor), days = [];
@@ -224,8 +232,9 @@
           '<p class="mono text-[15px] font-bold ' + (isT ? "text-white bg-primary rounded-full w-7 h-7 leading-7 mx-auto" : "text-primary") + '">' + d.getDate() + "</p></div>";
       }).join("") + "</div>";
     body.innerHTML = head + allDayRow(days.map(iso)) +
-      '<div class="grid" style="grid-template-columns:64px repeat(7,1fr);max-height:62vh;overflow-y:auto"><div>' + gutter() + "</div>" +
+      '<div id="cal-scroller" class="grid" style="grid-template-columns:64px repeat(7,1fr);max-height:calc(100vh - 240px);overflow-y:auto"><div>' + gutter() + "</div>" +
       days.map(function (d) { return "<div class='border-l border-outline-variant/60'>" + hourCol(iso(d)) + "</div>"; }).join("") + "</div>";
+    scrollToNow(document.getElementById("cal-scroller"));
   }
   function renderMonth() {
     title.textContent = MN[cursor.getMonth()] + " " + cursor.getFullYear();
