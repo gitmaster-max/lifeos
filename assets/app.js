@@ -270,7 +270,12 @@
       '<div class="lifeos-aff-titlerow"><h3>Suggested for you</h3>' +
       "<span>Curated from your current metrics - LifeOS may earn a referral fee</span></div>" +
       '<div class="lifeos-aff-grid">' + cards + "</div>";
-    main.appendChild(sec);
+    // Prominent placement: right below the page's own top bar, above module content.
+    // Some pages nest their sticky <header> inside <main> (skip past it); others keep
+    // it as a sibling before <main> (in which case main's first child is content).
+    const innerHeader = main.querySelector(":scope > header");
+    if (innerHeader) innerHeader.insertAdjacentElement("afterend", sec);
+    else main.insertBefore(sec, main.firstChild);
     sec.querySelectorAll(".lifeos-aff-cta").forEach(b =>
       b.addEventListener("click", () => openPartner(b.dataset.partner)));
   }
@@ -376,6 +381,7 @@
     const members = [["VJ", "Vijay"], ["AS", "Ananya"], ["RK", "Papa"]];
     const cur = store.get("member", "Vijay");
     const wrap = document.createElement("div");
+    wrap.id = "lifeos-family-widget";
     wrap.style.cssText = "padding:14px 12px 10px;border-top:1px solid #e2e2e3;margin-top:8px";
     wrap.innerHTML = '<div style="font-size:9px;font-weight:700;letter-spacing:.18em;color:#44474e;margin-bottom:8px">FAMILY ACCOUNT</div>' +
       '<div style="display:flex;gap:8px">' + members.map(m =>
@@ -398,8 +404,32 @@
     }));
   }
 
+  // ---------- collapsible sidebar ----------
+  function initSidebarCollapse() {
+    const nav = document.getElementById("lifeos-nav");
+    if (!nav) return;
+    const btn = document.createElement("button");
+    btn.id = "lifeos-nav-toggle";
+    btn.type = "button";
+    btn.dataset.wired = "1";
+    btn.setAttribute("aria-label", "Collapse sidebar");
+    btn.innerHTML = '<span class="material-symbols-outlined">chevron_left</span>';
+    nav.appendChild(btn);
+    function apply(collapsed) {
+      document.body.classList.toggle("lifeos-nav-collapsed", collapsed);
+      btn.querySelector(".material-symbols-outlined").textContent = collapsed ? "chevron_right" : "chevron_left";
+      btn.setAttribute("aria-label", collapsed ? "Expand sidebar" : "Collapse sidebar");
+    }
+    btn.addEventListener("click", function () {
+      const collapsed = !document.body.classList.contains("lifeos-nav-collapsed");
+      store.set("navCollapsed", collapsed);
+      apply(collapsed);
+    });
+    apply(!!store.get("navCollapsed", false));
+  }
+
   window.LifeOS = { store, toast, modal, form, quickEntry, notifications, palette, inr, openPartner };
   document.addEventListener("DOMContentLoaded", function () {
-    initSearch(); genericClicks(); initMobileNav(); initDeepLinks(); renderAffiliates(); initFamily();
+    initSearch(); genericClicks(); initMobileNav(); initDeepLinks(); renderAffiliates(); initFamily(); initSidebarCollapse();
   });
 })();
