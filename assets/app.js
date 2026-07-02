@@ -63,7 +63,8 @@
       } else if (f[1] === "textarea") {
         html += '<textarea data-i="' + i + '" rows="3"></textarea>';
       } else {
-        html += '<input data-i="' + i + '" type="' + f[1] + '"' + (f[2] ? ' placeholder="' + f[2] + '"' : "") + "/>";
+        const val = f[3] !== undefined && f[3] !== null ? String(f[3]).replace(/"/g, "&quot;") : "";
+        html += '<input data-i="' + i + '" type="' + f[1] + '"' + (f[2] ? ' placeholder="' + f[2] + '"' : "") + (val ? ' value="' + val + '"' : "") + "/>";
       }
       html += "</div>";
     });
@@ -209,6 +210,10 @@
     "BankBazaar": "https://www.bankbazaar.com",
     "Healthy Dine": null,
     "FreshPrep": null,
+    "BigBasket": "https://www.bigbasket.com",
+    "Swiggy Instamart": "https://www.swiggy.com/instamart",
+    "Blinkit": "https://blinkit.com",
+    "Zepto": "https://www.zeptonow.com",
   };
   function openPartner(name) {
     const url = PARTNER_LINKS[name];
